@@ -1,0 +1,1 @@
+Header set Content-Security-Policy "default-src 'none'; script-src 'self' www.google-analytics.com; style-src 'self' maxcdn.bootstrapcdn.com fonts.googleapis.com; font-src themes.googleusercontent.com maxcdn.bootstrapcdn.com;"

@@ -1,0 +1,41 @@
+body {
+padding-top: 20px;
+padding-bottom: 40px;
+}
+
+
+
+.jumbotron {
+margin: 60px 0;
+text-align: center;
+}
+.jumbotron h1 {
+font-size: 72px;
+line-height: 1;
+}
+.jumbotron .btn {
+font-size: 21px;
+padding: 14px 24px;
+}
+
+.jumbotron .preso {
+	font-size: 21px;
+	text-align:left;
+	margin: 20px 10px;
+}
+
+/* Supporting marketing content */
+.marketing {
+margin: 60px 0;
+}
+.marketing p + h4 {
+margin-top: 28px;
+}
+
+code { white-space:nowrap; }
+
+#acct_main { padding-top: 50px; max-width:90%; }
+.prop { text-align:right; font-weight:bold;}
+
+
+.footer { clear:both; }
