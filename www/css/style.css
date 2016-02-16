@@ -39,3 +39,5 @@ code { white-space:nowrap; }
 
 
 .footer { clear:both; }
+
+#browserTestWell { content:"CSP Blocked" }

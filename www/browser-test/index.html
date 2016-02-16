@@ -29,10 +29,10 @@
 
       <div class="jumbotron">
         <h1>Content Security Policy Browser Test</h1>
-		      
+		    <div id="userAgent"></div>
       </div>
 
-      <h2>JavaScript CSP Browser Test</h2>
+      <h2>JavaScript CSP Browser Test <small><span class="label label-primary">CSP Level 1</span></small></h2>
       <p>Note this test requires that you have JavaScript Enabled</p>
 
       <div class="alert alert-success" id="jsNode"><h3><span class="glyphicon glyphicon-ok"></span> CSP Supported</h3> If you can read this, then the inline JavaScript below this line did not execute.</div>
@@ -40,28 +40,56 @@
         //if CSP is supported this will not run
         window.onload=function(){
             var jsNode = document.getElementById("jsNode");
-            jsNode.innerHTML = "<h3>CSP Not Supported</h3> Your browser does not support CSP, the inline script executed and replaced this div content";
+            jsNode.innerHTML = "<h3> CSP Not Supported</h3> Your browser does not support CSP, the inline script executed and replaced this div content";
             jsNode.className = "alert alert-danger";
         };
       </script>
+      <pre>
+&lt;script&gt;
+  //if CSP is supported this will not run
+  window.onload=function(){
+      var jsNode = document.getElementById("jsNode");
+      jsNode.innerHTML = "&lt;h3&gt; CSP Not Supported&lt;/h3&gt; Your browser does not support CSP, the inline script executed and replaced this div content";
+      jsNode.className = "alert alert-danger";
+  };
+&lt;/script&gt;
+      </pre>
 
-      <h2>Image CSP Browser Test</h2>
+      <h2>Image CSP Browser Test <small><span class="label label-primary">CSP Level 1</span></small></h2>
       <p>This test attempts to load an image: http://www.placecage.com/c/200/300 </p>
-      <div class="alert alert-success">
-        <img src="http://www.placecage.com/c/200/300" alt="CSP Should Block This Image From Loading" onload="this.parent.className='alert alert-danger'">
+      <pre>&lt;img src="http://www.placecage.com/c/200/200" alt="CSP Should Block This Image From Loading" id="cspImg"&gt;</pre>
+      <div class="well" id="browserTestWell">
+        <img src="http://www.placecage.com/c/200/200" alt="CSP Should Block This Image From Loading" id="cspImg">
       </div>
-
-      <p>If you see a green box above then the image loading failed (presumably due to CSP, but it could also fail for other reasons such as the server being down).</p>
       
+      <p>If you see a gray box above then the image loading failed (presumably due to CSP, but it could also fail for other reasons such as the server being down).</p>
+      
+      <h2>JavaScript Hash Test <small><span class="label label-primary">CSP Level 2</span></small></h2>
+      <p>CSP Level 2 does allow execution of inline scripts if a Hash is present in the <code>script-src</code> directive.</p>
+      <div class="alert alert-danger" id="hashNode"><h3>CSP Level 2 Inline Hash Not Supported</h3></div>
+      <script>
+        window.addEventListener('load', function() {
+          var hashNode = document.getElementById('hashNode');
+          var jsNode = document.getElementById("jsNode");
+          if (jsNode.className == 'alert alert-danger') {
+            return;
+          }
+          hashNode.className='alert alert-success';
+          hashNode.innerHTML = '<h3><span class="glyphicon glyphicon-ok"></span> CSP Level 2 Inline Hash Supported</h3>';
+        });
+      </script>
+
+
+
 	 
 		<div class="footer">
-        <p><a href="https://foundeo.com/">&copy; Foundeo Inc.</a> 2012-2013 - <a href="https://foundeo.com/contact/" rel="nofollow">Contact Us</a></p>
+        <p><a href="https://foundeo.com/">&copy; Foundeo Inc.</a> 2012-2016 - <a href="https://foundeo.com/contact/" rel="nofollow">Contact Us</a></p>
       </div>
 
     </div> <!-- /container -->
 	
   
 	   <script src="../js/google-analytics.js"></script>
-	
+	   <script src="../js/browser-test.js"></script>
   </body>
 </html>
