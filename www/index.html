@@ -7,12 +7,12 @@
     <meta name="description" content="Content Security Policy Reference Guide and Examples">
     <meta name="author" content="Foundeo Inc.">
 
-    
+
 	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/readable/bootstrap.min.css" rel="stylesheet" />
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 	<link href="css/style.css" rel="stylesheet" />
-    
-    
+
+
   </head>
 
   <body>
@@ -34,16 +34,16 @@
       <div class="jumbotron">
         <h1>Content Security Policy Reference</h1>
         <p class="lead">The <em>new</em> <code>Content-Security-Policy</code> HTTP response header helps you reduce XSS risks on modern browsers by declaring what dynamic resources are allowed to load via a HTTP Header.</p>
-        
+
       </div>
-	 
-	  <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fcontent-security-policy.com%2F" rel="nofollow" class="btn btn-primary"><i class="fa fa-twitter"></i> Tweet</a> 
+
+	  <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fcontent-security-policy.com%2F" rel="nofollow" class="btn btn-primary"><i class="fa fa-twitter"></i> Tweet</a>
 	  <a href="https://github.com/foundeo/content-security-policy.com/" class="btn btn-default"><i class="fa fa-github"></i> Edit on Github</a>
       <hr>
 
       <div class="marketing">
-        
-         
+
+
 
           <h2>Browser Support</h2>
           <table class="table table-bordered">
@@ -59,20 +59,18 @@
 			<tbody>
 				<tr>
 					<td><code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span></td>
-					<td>
-						36+ <small title="36-38 missing plugin-types child-src frame-ancestors base-uri and form-action directives. 39 implemented frame-ancestors">Partial July 2014</small><br>
-						40+ <small>Full January 2015</small></td>
+					<td>40+ <small>Full January 2015</small></td>
 					<td>31+ <small title="36+ is missing the plugin-types and child-src directives"><em>Partial</em><br>July 2014</small></td>
 					<td>-</td>
 					<td>-</td>
-				</tr>		
+				</tr>
 				<tr>
 					<td><code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span></td>
 					<td>25+</td>
 					<td>23+</td>
 					<td>7+</td>
 					<td>Edge build 10240+</td>
-				</tr>				
+				</tr>
 				<tr>
 					<td><code>X-Content-Security-Policy</code> <span class="label label-warning">Deprecated</span></td>
 					<td>-</td>
@@ -89,15 +87,15 @@
 				</tr>
 			</tbody>
           </table>
-		  
+
 		  <p>Sources: <a href="http://caniuse.com/contentsecuritypolicy">caniuse.com/contentsecuritypolicy</a>, <a href="http://caniuse.com/contentsecuritypolicy2">caniuse.com/contentsecuritypolicy2</a> &amp; <a href="https://hacks.mozilla.org/2013/05/content-security-policy-1-0-lands-in-firefox-aurora/">Mozilla</a></p>
 		  <p>Try our <a href="browser-test/">CSP Browser Test</a> to test your browser.</p>
-        
+
       </div>
 
 
 	  <hr />
-	  
+
 	  <h2>Directive Reference</h2>
 	  <p>The <code>Content-Security-Policy</code> header value is made up of one or more directives (defined below), multiple directives are separated with a semicolon <code>;</code></p>
 	  <p>This documentation is provided based on the <a href="http://www.w3.org/TR/2012/CR-CSP-20121115/">Content Security Policy 1.0 W3C Candidate Recommendation</a></p>
@@ -114,7 +112,7 @@
 				<td><code>default-src</code></td>
 				<td><code>'self' cdn.example.com</code></td>
 				<td>
-					The <code>default-src</code> is the default policy for loading content such as JavaScript, Images, CSS, Font's, AJAX requests, Frames, HTML5 Media 
+					The <code>default-src</code> is the default policy for loading content such as JavaScript, Images, CSS, Font's, AJAX requests, Frames, HTML5 Media
 					<br /><br />
 					See the <a href="#source_list">Source List Reference</a> for possible values.
 				</td>
@@ -130,64 +128,64 @@
 				<td><code>style-src</code></td>
 				<td><code>'self' css.example.com</code></td>
 				<td>
-					Defines valid sources of stylesheets.  
+					Defines valid sources of stylesheets.
 				</td>
 			</tr>
 			<tr>
 				<td><code>img-src</code></td>
 				<td><code>'self' img.example.com</code></td>
 				<td>
-					Defines valid sources of images.  
+					Defines valid sources of images.
 				</td>
 			</tr>
 			<tr>
 				<td><code>connect-src</code></td>
 				<td><code>'self'</code></td>
 				<td>
-					Applies to <code>XMLHttpRequest</code> (AJAX), <code>WebSocket</code> or <code>EventSource</code>. If not allowed the browser emulates a <code>400</code> HTTP status code.  
+					Applies to <code>XMLHttpRequest</code> (AJAX), <code>WebSocket</code> or <code>EventSource</code>. If not allowed the browser emulates a <code>400</code> HTTP status code.
 				</td>
 			</tr>
 			<tr>
 				<td><code>font-src</code></td>
 				<td><code>font.example.com</code></td>
 				<td>
-					Defines valid sources of fonts.  
+					Defines valid sources of fonts.
 				</td>
 			</tr>
 			<tr>
 				<td><code>object-src</code></td>
 				<td><code>'self'</code></td>
 				<td>
-					Defines valid sources of plugins, eg <code>&lt;object&gt;</code>, <code>&lt;embed&gt;</code> or <code>&lt;applet&gt;</code>.  
+					Defines valid sources of plugins, eg <code>&lt;object&gt;</code>, <code>&lt;embed&gt;</code> or <code>&lt;applet&gt;</code>.
 				</td>
 			</tr>
 			<tr>
 				<td><code>media-src</code></td>
 				<td><code>media.example.com</code></td>
 				<td>
-					Defines valid sources of audio and video, eg HTML5 <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code> elements.  
+					Defines valid sources of audio and video, eg HTML5 <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code> elements.
 				</td>
 			</tr>
 			<tr>
 				<td><code>frame-src</code></td>
 				<td><code>'self'</code></td>
 				<td>
-					Defines valid sources for loading frames.  
+					Defines valid sources for loading frames.
 				</td>
 			</tr>
 			<tr>
 				<td><code>sandbox</code></td>
 				<td><code>allow-forms allow-scripts</code></td>
 				<td>
-					Enables a sandbox for the requested resource similar to the <code>iframe</code> <code>sandbox</code> attribute. The sandbox applies a same origin policy, prevents popups, plugins and script execution is blocked. 
-					You can keep the sandbox value empty to keep all restrictions in place, or add values: <code>allow-forms</code> <code>allow-same-origin</code> <code>allow-scripts</code>, and <code>allow-top-navigation</code> 
+					Enables a sandbox for the requested resource similar to the <code>iframe</code> <code>sandbox</code> attribute. The sandbox applies a same origin policy, prevents popups, plugins and script execution is blocked.
+					You can keep the sandbox value empty to keep all restrictions in place, or add values: <code>allow-forms</code> <code>allow-same-origin</code> <code>allow-scripts</code>, and <code>allow-top-navigation</code>
 				</td>
 			</tr>
 			<tr>
 				<td><code>report-uri</code></td>
 				<td><code>/some-report-uri</code></td>
 				<td>
-					Instructs the browser to POST a reports of policy failures to this URI. You can also append <code>-Report-Only</code> to the HTTP header name to instruct the browser to only send reports (does not block anything). 
+					Instructs the browser to POST a reports of policy failures to this URI. You can also append <code>-Report-Only</code> to the HTTP header name to instruct the browser to only send reports (does not block anything).
 				</td>
 			</tr>
 		</tbody>
@@ -256,25 +254,25 @@
 			</tr>
 		</tbody>
 	  </table>
-	  
+
 	  <h2>Content-Security-Policy Examples</h2>
 	  <p>Here a few common scenarios for content security policies:</p>
 	  <h4>Allow everything but only from the same origin</h4>
 	  <pre>default-src 'self';</pre>
-	  
+
 	  <h4>Only Allow Scripts from the same origin</h4>
 	  <pre>script-src 'self';</pre>
 
 	  <h4>Allow Google Analytics, Google AJAX CDN and Same Origin</h4>
 	  <pre>script-src 'self' www.google-analytics.com ajax.googleapis.com;</pre>
-	  
+
 	  <h4>Starter Policy</h4>
 	  <p>This policy allows images, scripts, AJAX, and CSS from the same origin, and does not allow any other resources to load (eg object, frame, media, etc). It is a good starting point for many sites.</p>
 	  <pre>default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self';</pre>
-	  	
+
 
       <hr />
-	  
+
 	  <h2 id="errors">Content-Security-Policy Error Messages</h2>
 	  <p>In Chrome when a Content Security Policy Script Violation happens you get a message like this one in the <em>Chrome Developer Tools</em>:</p>
 	  <pre>Refused to load the script '<em>script-uri</em>' because it violates the following Content Security Policy directive: "<em>your CSP directive</em>".</pre>
@@ -291,7 +289,7 @@
 	  <p>In your <code>server {}</code> block add:</p>
 	  <pre>add_header Content-Security-Policy "default-src 'self';";</pre>
 	  <p>You can also append <code>always</code> to the end to ensure that nginx sends the header reguardless of response code.</p>
-	  <h3 id="iis">IIS Content-Security-Policy Header</h3> 
+	  <h3 id="iis">IIS Content-Security-Policy Header</h3>
 	  <p>You can use the HTTP Response Headers GUI in IIS Manager or add the following to your web.config:</p>
 	  <pre>&lt;system.webServer&gt;
 	&lt;httpProtocol&gt;<strong>
@@ -317,9 +315,9 @@
       </div>
 
     </div> <!-- /container -->
-	
+
 	<script src="js/google-analytics.js"></script>
-	
+
   </body>
 </html>
 
