@@ -269,12 +269,34 @@
 
       <hr />
 	  
-	  <h2>Content-Security-Policy Error Messages</h2>
+	  <h2 id="errors">Content-Security-Policy Error Messages</h2>
 	  <p>In Chrome when a Content Security Policy Script Violation happens you get a message like this one in the <em>Chrome Developer Tools</em>:</p>
 	  <pre>Refused to load the script '<em>script-uri</em>' because it violates the following Content Security Policy directive: "<em>your CSP directive</em>".</pre>
 	  <p>In Firefox you might see messages like this in the <em>Web Developer Tools</em>:</p>
 	  <pre>Content Security Policy: A violation occurred for a report-only CSP policy ("An attempt to execute inline scripts has been blocked"). The behavior was allowed, and a CSP report was sent.</pre>
-	  <h2>CSP Resources</h2>
+
+	  <h2 id="server">Server Side Configuration</h2>
+
+	  <p>Any server side programming environment should allow you to send back a custom HTTP response header. You can also use your web server to send back the header.</p>
+	  <h3 id="apache">Apache Content-Security-Policy Header</h3>
+	  <p>Add the following to your <code>httpd.conf</code> in your <code>VirtualHost</code> or in an <code>.htaccess</code> file:</p>
+	  <pre>Header set Content-Security-Policy "default-src 'self';"</pre>
+	  <h3 id="nginx">Nginx Content-Security-Policy Header</h3>
+	  <p>In your <code>server {}</code> block add:</p>
+	  <pre>add_header Content-Security-Policy "default-src 'self';";</pre>
+	  <p>You can also append <code>always</code> to the end to ensure that nginx sends the header reguardless of response code.</p>
+	  <h3 id="iis">IIS Content-Security-Policy Header</h3> 
+	  <p>You can use the HTTP Response Headers GUI in IIS Manager or add the following to your web.config:</p>
+	  <pre>&lt;system.webServer&gt;
+	&lt;httpProtocol&gt;<strong>
+		&lt;customHeaders&gt;
+			&lt;add name="Content-Security-Policy" value="default-src 'self';" /&gt;
+		&lt;/customHeaders&gt;</strong>
+	&lt;/httpProtocol&gt;
+&lt;/system.webServer&gt;
+</pre>
+
+	  <h2 id="resources">CSP Resources</h2>
 	  <p>Want more info on CSP, checkout these links:</p>
 	  <ul>
 	  	<li><a href="http://www.w3.org/TR/CSP/">CSP 1.0 Spec</a></li>
