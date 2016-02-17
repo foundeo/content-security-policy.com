@@ -158,10 +158,17 @@
           </td>
         </tr>
         <tr>
-          <td><code>frame-src</code></td>
+          <td><code>child-src</td>
           <td><code>'self'</code></td>
           <td>
-            Defines valid sources for loading frames.
+            Defines valid sources for web wokers and nested browsing contexts loaded using elements such as <code>&lt;frame&gt;</code> and <code>&lt;iframe&gt;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>frame-src </code><span class="label label-warning">Deprecated</span></td>
+          <td><code>'self'</code></td>
+          <td>
+            Defines valid sources for loading frames. <code>child-src</code> is preferred over this deprecated directive.
           </td>
         </tr>
         <tr>
