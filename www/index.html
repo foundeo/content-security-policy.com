@@ -158,13 +158,6 @@
           </td>
         </tr>
         <tr>
-          <td><code>child-src</td>
-          <td><code>'self'</code></td>
-          <td>
-            Defines valid sources for web wokers and nested browsing contexts loaded using elements such as <code>&lt;frame&gt;</code> and <code>&lt;iframe&gt;</code>
-          </td>
-        </tr>
-        <tr>
           <td><code>frame-src </code><span class="label label-warning">Deprecated</span></td>
           <td><code>'self'</code></td>
           <td>
@@ -185,7 +178,35 @@
           <td>
             Instructs the browser to POST a reports of policy failures to this URI. You can also append <code>-Report-Only</code> to the HTTP header name to instruct the browser to only send reports (does not block anything).
           </td>
-          </tr>
+        </tr>
+        <tr>
+          <td><code>child-src</td>
+          <td><code>'self'</code></td>
+          <td>
+            <span class="label label-success">CSP Level 2</span> Defines valid sources for web wokers and nested browsing contexts loaded using elements such as <code>&lt;frame&gt;</code> and <code>&lt;iframe&gt;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>form-action</td>
+          <td><code>'self'</code></td>
+          <td>
+            <span class="label label-success">CSP Level 2</span> Defines valid sources that can be used as a HTML <code>&lt;form&gt;</code> action.
+          </td>
+        </tr>
+        <tr>
+          <td><code>frame-ancestors</td>
+          <td><code>'none'</code></td>
+          <td>
+            <span class="label label-success">CSP Level 2</span> Defines valid sources for embedding the resource using <code>&lt;frame&gt;</code> <code>&lt;iframe&gt;</code> <code>&lt;object&gt;</code> <code>&lt;embed&gt;</code> <code>&lt;applet&gt;</code>. Setting this directive to <code>'none'</code> should be roughly equivalent to <code>X-Frame-Options: DENY</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>plugin-types</td>
+          <td><code>application/pdf</code></td>
+          <td>
+            <span class="label label-success">CSP Level 2</span> Defines valid MIME types for plugins invoked via  <code>&lt;object&gt;</code> and <code>&lt;embed&gt;</code>. To load an <code>&lt;applet&gt;</code> you must specify <code>application/x-java-applet</code>.
+          </td>
+        </tr>
         </tbody>
       </table>
       <hr>
@@ -299,7 +320,7 @@
       <h2 id="resources">CSP Resources</h2>
       <p>Want more info on CSP, checkout these links:</p>
       <ul>
-        <li><a href="http://www.w3.org/TR/CSP/">CSP 1.0 Spec</a></li>
+        <li><a href="http://www.w3.org/TR/CSP1/">CSP 1.0 Spec</a></li>
         <li><a href="http://www.w3.org/TR/CSP2/">CSP Level 2 Spec <em>(W3C Candidate Recommendation, 21 July 2015)</em></a></a></li>
         <li><a href="presentations/">CSP Presentations / Slides</a></li>
       </ul>
