@@ -103,9 +103,15 @@
           <td><code>default-src</code></td>
           <td><code>'self' cdn.example.com</code></td>
           <td>
-            The <code>default-src</code> is the default policy for loading content such as JavaScript, Images, CSS, Font's, AJAX requests, Frames, HTML5 Media
-            <br /><br />
+            The <code>default-src</code> is the default policy for loading content such as JavaScript, Images, CSS, Font's, AJAX requests, Frames, HTML5 Media.
+            
             See the <a href="#source_list">Source List Reference</a> for possible values.
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE Edge"></i> 12+</span>
           </td>
         </tr>
         <tr>
@@ -113,6 +119,12 @@
           <td><code>'self' js.example.com</code></td>
           <td>
             Defines valid sources of JavaScript.
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE Edge"></i> 12+</span>
           </td>
         </tr>
         <tr>
@@ -120,6 +132,12 @@
           <td><code>'self' css.example.com</code></td>
           <td>
             Defines valid sources of stylesheets.
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE Edge"></i> 12+</span>
           </td>
         </tr>
         <tr>
@@ -127,6 +145,12 @@
           <td><code>'self' img.example.com</code></td>
           <td>
             Defines valid sources of images.
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE Edge"></i> 12+</span>
           </td>
         </tr>
         <tr>
@@ -134,6 +158,12 @@
           <td><code>'self'</code></td>
           <td>
             Applies to <code>XMLHttpRequest</code> (AJAX), <code>WebSocket</code> or <code>EventSource</code>. If not allowed the browser emulates a <code>400</code> HTTP status code.
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE Edge"></i> 12+</span>
           </td>
         </tr>
         <tr>
@@ -141,6 +171,12 @@
           <td><code>font.example.com</code></td>
           <td>
             Defines valid sources of fonts.
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE Edge"></i> 12+</span>
           </td>
         </tr>
         <tr>
@@ -148,6 +184,12 @@
           <td><code>'self'</code></td>
           <td>
             Defines valid sources of plugins, eg <code>&lt;object&gt;</code>, <code>&lt;embed&gt;</code> or <code>&lt;applet&gt;</code>.
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE Edge"></i> 12+</span>
           </td>
         </tr>
         <tr>
@@ -155,13 +197,20 @@
           <td><code>media.example.com</code></td>
           <td>
             Defines valid sources of audio and video, eg HTML5 <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code> elements.
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE Edge"></i> 12+</span>
           </td>
         </tr>
         <tr>
-          <td><code>frame-src </code><span class="label label-warning">Deprecated</span></td>
+          <td><code>frame-src </code></td>
           <td><code>'self'</code></td>
           <td>
             Defines valid sources for loading frames. <code>child-src</code> is preferred over this deprecated directive.
+            <br><br><span class="label label-warning">Deprecated</span>
           </td>
         </tr>
         <tr>
@@ -170,6 +219,12 @@
           <td>
             Enables a sandbox for the requested resource similar to the <code>iframe</code> <code>sandbox</code> attribute. The sandbox applies a same origin policy, prevents popups, plugins and script execution is blocked.
             You can keep the sandbox value empty to keep all restrictions in place, or add values: <code>allow-forms</code> <code>allow-same-origin</code> <code>allow-scripts</code>, and <code>allow-top-navigation</code>
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE"></i> 10+</span>
           </td>
         </tr>
         <tr>
@@ -177,34 +232,55 @@
           <td><code>/some-report-uri</code></td>
           <td>
             Instructs the browser to POST a reports of policy failures to this URI. You can also append <code>-Report-Only</code> to the HTTP header name to instruct the browser to only send reports (does not block anything).
+            <br><br>
+            <span class="label label-success">CSP Level 1</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 25+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 23+</span>
+            <span class="label label-default"><i class="fa fa-safari" title="Safari"></i> 7+</span>
+            <span class="label label-default"><i class="fa fa-edge" title="IE Edge"></i> 12+</span>
           </td>
         </tr>
         <tr>
           <td><code>child-src</td>
           <td><code>'self'</code></td>
           <td>
-            <span class="label label-success">CSP Level 2</span> Defines valid sources for web wokers and nested browsing contexts loaded using elements such as <code>&lt;frame&gt;</code> and <code>&lt;iframe&gt;</code>
+            Defines valid sources for web wokers and nested browsing contexts loaded using elements such as <code>&lt;frame&gt;</code> and <code>&lt;iframe&gt;</code>
+            <br><br>
+            <span class="label label-success">CSP Level 2</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 40+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 45+</span>
           </td>
         </tr>
         <tr>
           <td><code>form-action</td>
           <td><code>'self'</code></td>
           <td>
-            <span class="label label-success">CSP Level 2</span> Defines valid sources that can be used as a HTML <code>&lt;form&gt;</code> action.
+            Defines valid sources that can be used as a HTML <code>&lt;form&gt;</code> action.
+            <br><br>
+            <span class="label label-success">CSP Level 2</span>
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 40+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 36+</span>
           </td>
         </tr>
         <tr>
           <td><code>frame-ancestors</td>
           <td><code>'none'</code></td>
           <td>
-            <span class="label label-success">CSP Level 2</span> Defines valid sources for embedding the resource using <code>&lt;frame&gt;</code> <code>&lt;iframe&gt;</code> <code>&lt;object&gt;</code> <code>&lt;embed&gt;</code> <code>&lt;applet&gt;</code>. Setting this directive to <code>'none'</code> should be roughly equivalent to <code>X-Frame-Options: DENY</code>
+            Defines valid sources for embedding the resource using <code>&lt;frame&gt;</code> <code>&lt;iframe&gt;</code> <code>&lt;object&gt;</code> <code>&lt;embed&gt;</code> <code>&lt;applet&gt;</code>. Setting this directive to <code>'none'</code> should be roughly equivalent to <code>X-Frame-Options: DENY</code>
+            <br><br>
+            <span class="label label-success">CSP Level 2</span> 
+            <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 40+</span>
+            <span class="label label-default"><i class="fa fa-firefox" title="Firefox"></i> 33+</span>
           </td>
         </tr>
         <tr>
           <td><code>plugin-types</td>
           <td><code>application/pdf</code></td>
           <td>
-            <span class="label label-success">CSP Level 2</span> Defines valid MIME types for plugins invoked via  <code>&lt;object&gt;</code> and <code>&lt;embed&gt;</code>. To load an <code>&lt;applet&gt;</code> you must specify <code>application/x-java-applet</code>.
+             Defines valid MIME types for plugins invoked via  <code>&lt;object&gt;</code> and <code>&lt;embed&gt;</code>. To load an <code>&lt;applet&gt;</code> you must specify <code>application/x-java-applet</code>.
+             <br><br>
+             <span class="label label-success">CSP Level 2</span>
+             <span class="label label-default"><i class="fa fa-chrome" title="Chrome"></i> 40+</span>
           </td>
         </tr>
         </tbody>
@@ -324,7 +400,8 @@
         <li><a href="http://www.w3.org/TR/CSP2/">CSP Level 2 Spec <em>(W3C Candidate Recommendation, 21 July 2015)</em></a></a></li>
         <li><a href="presentations/">CSP Presentations / Slides</a></li>
         <li><a href="https://hacks.mozilla.org/2016/02/implementing-content-security-policy/">Mozilla Tutorial: Implementing Content Security Policy</a></li>
-        
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives">Mozilla MDN Docs</a></li>
+
       </ul>
 
       <div class="footer">
