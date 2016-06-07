@@ -41,3 +41,10 @@ code { white-space:nowrap; }
 .footer { clear:both; }
 
 #browserTestWell { content:"CSP Blocked" }
+
+@media (max-width: 540px) {
+	code { white-space: normal; }
+}
+@media (max-width: 440px) {
+	code { font-size: 9pt; }
+}

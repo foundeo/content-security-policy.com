@@ -37,14 +37,14 @@
 
       <div class="marketing">
         <h2>Browser Support</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive">
           <thead>
             <tr>
               <th>Header</th>
-              <th><i class="fa fa-chrome"></i> Chrome</th>
-              <th><i class="fa fa-firefox"></i> FireFox</th>
-              <th><i class="fa fa-safari"></i> Safari</th>
-              <th><i class="fa fa-edge"></i> Internet Explorer</th>
+              <th><i class="fa fa-chrome"></i><span class="hidden-xs"> Chrome</span></th>
+              <th><i class="fa fa-firefox"></i><span class="hidden-xs"> FireFox</span></th>
+              <th><i class="fa fa-safari"></i><span class="hidden-xs"> Safari</span></th>
+              <th><i class="fa fa-edge"></i><span class="hidden-xs"> Internet Explorer</span></th>
             </tr>
           </thead>
           <tbody>
@@ -90,7 +90,7 @@
       <p>The <code>Content-Security-Policy</code> header value is made up of one or more directives (defined below), multiple directives are separated with a semicolon <code>;</code></p>
       <p>This documentation is provided based on the <a href="http://www.w3.org/TR/2012/CR-CSP-20121115/">Content Security Policy 1.0 W3C Candidate Recommendation</a></p>
 
-      <table class="table table-bordered">
+      <table class="table table-bordered table-responsive">
         <thead>
           <tr>
             <th>Directive</th>
@@ -288,7 +288,7 @@
       <hr>
       <h2 id="source_list">Source List Reference</h2>
       <p>All of the directives that end with <code>-src</code> support similar values known as a source list. Multiple source list values can be space separated with the exception of <code>'none'</code> which should be the only value..</p>
-      <table class="table table-bordered">
+      <table class="table table-bordered table-responsive">
         <thead>
           <tr>
             <th>Source Value</th>
@@ -318,8 +318,8 @@
             <td>Allows loading resources via the data scheme (eg Base64 encoded images).</td>
           </tr>
           <tr>
-            <td><code><em>domain.example.com</em></code></td>
-            <td><code>img-src img.example.com</code></td>
+            <td><code><em><span class="hidden-xs">domain.</span>example.com</em></code></td>
+            <td><code>img-src <span class="hidden-xs">domain.</span>example.com</code></td>
             <td>Allows loading resources from the specified domain name.</td>
           </tr>
           <tr>
@@ -328,8 +328,8 @@
             <td>Allows loading resources from the any subdomain under <code><em>example.com</em></code>.</td>
           </tr>
           <tr>
-            <td><code><em>https://img.example.com</em></code></td>
-            <td><code>img-src https://img.example.com</code></td>
+            <td><code><em>https://cdn.com</em></code></td>
+            <td><code>img-src https://cdn.com</code></td>
             <td>Allows loading resources only over HTTPS matching the given domain.</td>
           </tr>
           <tr>
