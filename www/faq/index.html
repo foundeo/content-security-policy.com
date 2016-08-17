@@ -33,7 +33,7 @@
       <p>One common problem is that you forgot to wrap the hash in single quotes. So this header would fail:</p>
       <pre>Content-Security-Policy: script-src js.example.com sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ=;</pre>
       <p>But if you warp your hash with single quotes it will work:</p>
-      <pre>Content-Security-Policy: script-src js.example.com `sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ=;`</pre>
+      <pre>Content-Security-Policy: script-src js.example.com 'sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ=;'</pre>
       <p>Another common reason the script hash is not working would be that you changed the script and have the wrong hash. In that case you can use Chrome developer tools to see what the hash should be.</p>
 
       <h3>What CSP policy is required for Google Analytics?</h3>
