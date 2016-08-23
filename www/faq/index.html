@@ -32,12 +32,12 @@
       <p>First make sure your browser supports CSP Level 2, you can use our <a href="../browser-test/">CSP Browser Test</a> to check.</p>
       <p>One common problem is that you forgot to wrap the hash in single quotes. So this header would fail:</p>
       <pre>Content-Security-Policy: script-src js.example.com sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ=;</pre>
-      <p>But if you warp your hash with single quotes it will work:</p>
+      <p>But if you wrap your hash with single quotes it will work:</p>
       <pre>Content-Security-Policy: script-src js.example.com 'sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ=;'</pre>
       <p>Another common reason the script hash is not working would be that you changed the script and have the wrong hash. In that case you can use Chrome developer tools to see what the hash should be.</p>
 
       <h3>What CSP policy is required for Google Analytics?</h3>
-      <p>First, inline scripts do not execute when CSP is enabled, so you will have to move the code wihtin the script tags to its own file. Another option is to add the hash (CSP Level 2) of the script to your script-src header. Whatever you do, do not add <code>unsafe-inline</code> to support google analytics, that pretty much defeats the purpose of CSP.</p>
+      <p>First, inline scripts do not execute when CSP is enabled, so you will have to move the code within the script tags to its own file. Another option is to add the hash (CSP Level 2) of the script to your script-src header. Whatever you do, do not add <code>unsafe-inline</code> to support google analytics, that pretty much defeats the purpose of CSP.</p>
       <p>Google Analytics will try to load a tiny image, so you will need <code>img-src www.google-analytics.com</code></p>
       <p>Now assuming you have moved your script to a file on the same origin, your header might look like this:</p>
       <pre>default-src 'none';script-src 'self' www.google-analytics.com;img-src www.google-analytics.com;</pre>
