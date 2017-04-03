@@ -345,12 +345,22 @@
           <tr>
             <td><code>'unsafe-inline'</code></td>
             <td><code>script-src 'unsafe-inline'</code></td>
-            <td>Allows use of inline source elements such as style attribute, onclick, or script tag bodies (depends on the context of the source it is applied to)</td>
+            <td>Allows use of inline source elements such as style attribute, onclick, or script tag bodies (depends on the context of the source it is applied to) and <code>javascript:</code> URIs</td>
           </tr>
           <tr>
             <td><code>'unsafe-eval'</code></td>
             <td><code>script-src 'unsafe-eval'</code></td>
             <td>Allows unsafe dynamic code evaluation such as JavaScript <code>eval()</code></td>
+          </tr>
+          <tr>
+            <td>nonce</td>
+            <td><code>script-src 'nonce-2726c7f26c'</code></td>
+            <td>Allows specific inline script or style element that have the same <code>nonce</code> has attribute (<code>&lt;script nonce=&quot;2726c7f26c&quot;&gt;alert(&quot;hello&quot;);&lt;/script&gt;</code>)</td>
+          </tr>
+          <tr>
+            <td>hash</td>
+            <td><code>script-src 'sha256-qznLcsROx4GACP2dm0UCKCzCG+HiZ1guq6ZZDob/Tng='</code> (will allow external source code: <code>alert(&quot;Hello, world.&quot;);</code>)</td>
+            <td>Allows specific external script or style source code that checksum match. Doesn't work for <code>javascript:</code> URIs</td>
           </tr>
         </tbody>
       </table>
