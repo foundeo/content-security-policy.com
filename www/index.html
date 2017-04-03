@@ -355,12 +355,12 @@
           <tr>
             <td><code>'nonce-'</code></td>
             <td><code>script-src 'nonce-2726c7f26c'</code></td>
-            <td>Allows specific inline script or style element that have the same <code>nonce</code> has attribute <code>&lt;script nonce=&quot;2726c7f26c&quot;&gt;alert(&quot;hello&quot;);&lt;/script&gt;</code></td>
+            <td>Allows <code>script</code> or <code>style</code> tag to execute if the <code>nonce</code> attribute value matches the header value. For example: <code>&lt;script nonce=&quot;2726c7f26c&quot;&gt;alert(&quot;hello&quot;);&lt;/script&gt;</code></td>
           </tr>
           <tr>
             <td><code>'sha256-'</td>
             <td><code>script-src 'sha256-qzn<em>...</em>ng='</code></td>
-            <td>Allows specific external script or style source code that checksum match. Doesn't work for <code>javascript:</code> URIs. For example: <small><code>sha256-qznLcsROx4GACP2dm0UCKCzCG+HiZ1guq6ZZDob/Tng=</code></small> will allow <code>alert(&quot;Hello, world.&quot;);</code></td>
+            <td>Allow a specific script or style to execute if it matches the hash. Doesn't work for <code>javascript:</code> URIs. For example: <small><code>sha256-qznLcsROx4GACP2dm0UCKCzCG+HiZ1guq6ZZDob/Tng=</code></small> will allow <code>alert(&quot;Hello, world.&quot;);</code></td>
           </tr>
         </tbody>
       </table>
