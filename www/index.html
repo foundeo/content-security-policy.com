@@ -391,7 +391,7 @@
       <pre>Refused to load the script '<em>script-uri</em>' because it violates the following Content Security Policy directive: "<em>your CSP directive</em>".</pre>
       <p>In Firefox you might see messages like this in the <em>Web Developer Tools</em>:</p>
       <pre>Content Security Policy: A violation occurred for a report-only CSP policy ("An attempt to execute inline scripts has been blocked"). The behavior was allowed, and a CSP report was sent.</pre>
-      <p>In addition to a console message, the browser will fire a <code>securitypolicyviolation</code> event on the window. See <a href="https://www.w3.org/TR/CSP2/#firing-securitypolicyviolationevent-events">https://www.w3.org/TR/CSP2/#firing-securitypolicyviolationevent-events</a>.
+      <p>In addition to a console message, a <code>securitypolicyviolation</code> event is fired on the window. See <a href="https://www.w3.org/TR/CSP2/#firing-securitypolicyviolationevent-events">https://www.w3.org/TR/CSP2/#firing-securitypolicyviolationevent-events</a>.
 
       <h2 id="server">Server Side Configuration</h2>
 
