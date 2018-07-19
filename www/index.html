@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Content Security Policy CSP Reference &amp; Examples</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -309,7 +309,7 @@
           <tr>
             <td><code>*</code></td>
             <td><code>img-src *</code></td>
-            <td>Wildcard, allows any URL except data: blob: filesystem: schemes.</td>
+            <td>Wildcard, allows any URL except data: blob: filesystem: schemes. Does not allow inline scripts unless 'unsafe-inline' is specified.</td>
           </tr>
           <tr>
             <td><code>'none'</code></td>
