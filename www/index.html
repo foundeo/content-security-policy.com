@@ -93,7 +93,7 @@
 
       <h2 id="directive">Directive Reference</h2>
       <p>The <code>Content-Security-Policy</code> header value is made up of one or more directives (defined below), multiple directives are separated with a semicolon <code>;</code></p>
-      <p>This documentation is provided based on the <a href="http://www.w3.org/TR/2012/CR-CSP-20121115/">Content Security Policy 1.0 W3C Candidate Recommendation</a></p>
+      <p>This documentation is provided based on the Content Security Policy Level 2 <a href="https://www.w3.org/TR/CSP2/">W3C Recommendation</a>, and the CSP Level 3 <a href="https://www.w3.org/TR/CSP3/">W3C Working Draft</a></p>
 
       <table class="table table-bordered table-responsive">
         <thead>
@@ -211,11 +211,11 @@
           </td>
         </tr>
         <tr>
-          <td><code>frame-src </code></td>
+          <td><code>frame-src</code></td>
           <td><code>'self'</code></td>
           <td>
-            Defines valid sources for loading frames. <code>child-src</code> is preferred over this deprecated directive.
-            <br><br><span class="label label-warning">Deprecated</span>
+            Defines valid sources for loading frames. In CSP Level 2 <code>frame-src</code> was deprecated in favor of the <code>child-src</code> directive. CSP Level 3, has <em>undeprecated</em> <code>frame-src</code> and it will continue to defer to <code>child-src</code> if not present.
+            <br><br><span class="label label-success">CSP Level 1</span>
           </td>
         </tr>
         <tr>
@@ -236,7 +236,7 @@
           <td><code>report-uri</code></td>
           <td><code>/some-report-uri</code></td>
           <td>
-            Instructs the browser to POST reports of policy failures to this URI. You can also append <code>-Report-Only</code> to the HTTP header name to instruct the browser to only send reports (does not block anything).
+            Instructs the browser to POST a reports of policy failures to this URI. You can also append <code>-Report-Only</code> to the HTTP header name to instruct the browser to only send reports (does not block anything). This directive is deprecated in CSP Level 3 in favor of the <code>report-to</code> directive.
             <br><br>
             <span class="label label-success">CSP Level 1</span>
             <span class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> 25+</span>
@@ -290,6 +290,38 @@
              <span class="label label-success">CSP Level 2</span>
              <span class="label label-default" title="Chrome 40+ - January 2015"><i class="fa fa-chrome"></i> 40+</span>
              <span class="label label-default" title="Edge 15+ - January 2017"><i class="fa fa-edge"></i> 15+</span>
+          </td>
+        </tr>
+        <tr>
+          <td><code>report-to</td>
+          <td><code>groupName</code></td>
+          <td>
+            Defines a <em>reporting group</em> name defined by a <code>Report-To</code> HTTP response header. See the <a href="https://w3c.github.io/reporting/">Reporting API</a> for more info.
+            <br><br>
+            <span class="label label-success">CSP Level 3</span> 
+            <span class="label label-default" title="Chrome 70+ - October 2018"><i class="fa fa-chrome"></i> 70+</span>
+          </td>
+        </tr>
+        <tr>
+          <td><code>worker-src</td>
+          <td><code>'none'</code></td>
+          <td>
+            Restricts the URLs which may be loaded as a Worker, SharedWorker or ServiceWorker.
+            <br><br>
+            <span class="label label-success">CSP Level 3</span> 
+            <span class="label label-default" title="Chrome 59+ - June 2017"><i class="fa fa-chrome"></i> 59+</span>
+            <span class="label label-default" title="Firefox 58+ - September 2017"><i class="fa fa-firefox"></i> 58+</span>
+          </td>
+        </tr>
+        <tr>
+          <td><code>manifest-src</td>
+          <td><code>'none'</code></td>
+          <td>
+            Restricts the URLs that application manifests can be loaded.
+            <br><br>
+            <span class="label label-success">CSP Level 3</span> 
+            <span class="label label-default" title="Chrome 59+ - June 2017"><i class="fa fa-chrome"></i> 59+</span>
+            <span class="label label-default" title="Firefox 58+ - September 2017"><i class="fa fa-firefox"></i> 58+</span>
           </td>
         </tr>
         </tbody>
@@ -357,14 +389,25 @@
             <td>Allows unsafe dynamic code evaluation such as JavaScript <code>eval()</code></td>
           </tr>
           <tr>
-            <td><code>'nonce-'</code></td>
-            <td><code>script-src 'nonce-2726c7f26c'</code></td>
-            <td>Allows <code>script</code> or <code>style</code> tag to execute if the <code>nonce</code> attribute value matches the header value. For example: <code>&lt;script nonce=&quot;2726c7f26c&quot;&gt;alert(&quot;hello&quot;);&lt;/script&gt;</code></td>
+            <td><code>'sha256-'</code></td>
+            <td><code>script-src 'sha256-xyz...'</code></td>
+            <td>Allows an inline script or CSS to execute if its hash matches the specified hash in the header. Currently supports SHA256, SHA384 or SHA512.  <span class="label label-success">CSP Level 2</span> </td>
           </tr>
           <tr>
-            <td><code>'sha256-'</td>
-            <td><code>script-src 'sha256-qzn<em>...</em>ng='</code></td>
-            <td>Allow a specific script or style to execute if it matches the hash. Doesn't work for <code>javascript:</code> URIs. For example: <small><code>sha256-qznLcsROx4GACP2dm0UCKCzCG+HiZ1guq6ZZDob/Tng=</code></small> will allow <code>alert('Hello, world.');</code></td>
+            <td><code>'nonce-'</code></td>
+            <td><code>script-src 'nonce-r@nd0m'</code></td>
+            <td>Allows an inline script or CSS to execute if the script (eg: <code>&lt;script nonce="r@nd0m"&gt;</code>) tag contains a nonce attribute matching the nonce specifed in the CSP header. The nonce should be a secure random string, and should not be reused. <span class="label label-success">CSP Level 2</span> </td>
+          </tr>
+          <tr>
+            <td><code>'strict-dynamic'</code></td>
+            <td><code>script-src 'strict-dynamic'</code></td>
+            <td>Enables an allowed script to load additional scripts via non-"parser-inserted" script elements (for example <code>document.createElement('script');</code> is allowed).  <span class="label label-success">CSP Level 3</span> </td>
+          </tr>
+          <tr>
+            <td><code>'unsafe-hashes'</code></td>
+            <td><code>script-src 'unsafe-hashes' 'sha256-abc...'</code></td>
+            <td>Allows you to enable scripts in event handlers (eg <code>onclick</code>). Does not apply to <code>javascript:</code> or inline <code>&lt;script&gt;</code>  <span class="label label-success">CSP Level 3</span> </td>
+
           </tr>
         </tbody>
       </table>
@@ -425,7 +468,7 @@
       </ul>
 
       <div class="footer">
-        <p><a href="https://foundeo.com/">&copy; Foundeo Inc.</a> 2012-2016 - <a href="https://foundeo.com/contact/" rel="nofollow">Contact Us</a></p>
+        <p><a href="https://foundeo.com/">&copy; Foundeo Inc.</a> 2012-2020 - <a href="https://foundeo.com/contact/" rel="nofollow">Contact Us</a></p>
       </div>
     </div> <!-- /container -->
 
