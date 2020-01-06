@@ -12,7 +12,7 @@
     
   </head>
 
-  <body>
+  <body onload="runUnsafeHashNode()">
 
     <div class="container">
 
@@ -84,7 +84,7 @@
 
       <h2>JavaScript Unsafe Hashes Test <small><span class="label label-primary">CSP Level 3</span></small></h2>
       <p>CSP Level 3 unsafe-hashes within <code>script-src</code> directive.</p>
-      <div class="alert alert-danger" id="unsafeHashNode" onload="runUnsafeHashNode()"><h3>CSP Level 3 Inline Hash Not Supported</h3></div>
+      <div class="alert alert-danger" id="unsafeHashNode"><h3>CSP Level 3 Inline Hash Not Supported</h3></div>
 
 	 
 		<div class="footer">
