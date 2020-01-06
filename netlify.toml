@@ -1,0 +1,8 @@
+[build]
+  publish = "www/"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' www.google-analytics.com 'sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ='; style-src 'self' https://maxcdn.bootstrapcdn.com https://fonts.googleapis.com; font-src https://fonts.gstatic.com https://maxcdn.bootstrapcdn.com; img-src www.google-analytics.com;"
