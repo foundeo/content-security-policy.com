@@ -1,3 +1,3 @@
-www/_site/
-www/node_modules/
-www/package-lock.json
+package-lock.json
+_site/
+node_modules/

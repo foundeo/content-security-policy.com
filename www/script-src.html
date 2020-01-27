@@ -30,7 +30,7 @@ script-src 'self' https://js.example.com;
   runInlineScript();
 &lt;/script&gt;
 </pre>
-<p>Blocked because inline scripts are blocked by default, you have to use hashes or a nonce (CSP Level 2) to get allow inline scripts to run.</p>
+<p>Blocked because inline scripts are blocked by default, you have to use hashes or a <a href="/nonce/" title="CSP with Nonce">nonce</a> (CSP Level 2) to get allow inline scripts to run.</p>
 <pre>
 &lt;button onClick="runInlineScript();"&gt;
   All JS Event Handlers Blocked
@@ -53,5 +53,6 @@ script-src 'self' https://js.example.com;
 	<h4>Not Supported</h4>
 	<div class="label label-default" title="IE - Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
 </div>
-<p>The CSP <code>script-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1). However some features such as hashes and nonce were introduced in CSP Level 2. Support for these features is still very good.</p>
+<br>
+<p>The CSP <code>script-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1). However some features such as hashes and <a href="/nonce/" title="CSP with nonce">nonce</a> were introduced in CSP Level 2. Support for these features is still very good.</p>
 <p>Internet Explorer 11 and below do not support the <code>script-src</code> directive. This means that IE11 will simply ignore the policy and allow any script to run (as if a policy had not been set at all).</p>

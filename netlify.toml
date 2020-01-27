@@ -1,6 +1,6 @@
 [build]
   publish = "_site/"
-  command = "eleventy --input ./www/ --output ./_site"
+  command = "eleventy"
 [[headers]]
   for = "/*"
   [headers.values]
