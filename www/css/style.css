@@ -37,6 +37,7 @@ code { white-space:nowrap; }
 #acct_main { padding-top: 50px; max-width:90%; }
 .prop { text-align:right; font-weight:bold;}
 
+.bs .label { display:inline; font-size: large; padding: 8px; margin: 60px 3px; }
 
 .footer { clear:both; }
 

@@ -1,0 +1,57 @@
+---
+title: script-src CSP Directive
+layout: layout
+---
+<div class="jumbotron">
+	<h1>The <code>script-src</code> Directive</h1>
+	<div class="lead">The <code>script-src</code> <strong>Content Security Policy</strong> (CSP) directive controls the loading and execution of JavaScript.</div>
+</div>
+<h2>Example Policy</h2>
+<p>Assume a <code>Content-Security-Policy</code> header is set with the following policy:</p>
+<pre>
+script-src 'self' https://js.example.com;
+</pre>
+<h4>Allows</h4>
+<p>With the above CSP policy, the following <strong>are allowed to load and execute</strong> in the browser:</p>
+<pre>
+&lt;!-- allowed by 'self' --&gt;
+&lt;script src="/js/some-file.js"&gt;&lt;/script&gt;
+&lt;!-- allowed by https://js.example.com --&gt;
+&lt;script src="https://js.example.com/file.js"&gt;&lt;/script&gt;
+</pre>
+<h4>Blocks</h4>
+<p>The <em>Example Policy</em> above will <strong>block the following from loading or executing</strong> in the browser:</p>
+<pre>
+&lt;script src="https://attacker.example.com/file.js"&gt;&lt;/script&gt;
+</pre>
+<p>Blocked because <code>attacker.example.com</code> is not in the source list.</p>
+<pre>
+&lt;script&gt;
+  runInlineScript();
+&lt;/script&gt;
+</pre>
+<p>Blocked because inline scripts are blocked by default, you have to use hashes or a nonce (CSP Level 2) to get allow inline scripts to run.</p>
+<pre>
+&lt;button onClick="runInlineScript();"&gt;
+  All JS Event Handlers Blocked
+&lt;/button&gt;
+</pre>
+<p>The execution of all JS event handlers from inline HTML markup are blocked default, <code>onclick</code>, <code>onload</code>, <code>onmouseover</code>, <code>onsubmit</code>, etc.</p>
+<pre>
+&lt;a href="javascript:runInlineScript();"&gt;Won't Run&lt;/a&gt;
+</pre>
+<h2>Browser Support for <code>script-src</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported</h4>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i>Chrome 25+ (February 2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i>Firefox 23+ (August 2013)</div><br><br>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (October 2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> IE Edge 12+ (July 2015)</div>
+	<br>
+	<h4>Not Supported</h4>
+	<div class="label label-default" title="IE - Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<p>The CSP <code>script-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1). However some features such as hashes and nonce were introduced in CSP Level 2. Support for these features is still very good.</p>
+<p>Internet Explorer 11 and below do not support the <code>script-src</code> directive. This means that IE11 will simply ignore the policy and allow any script to run (as if a policy had not been set at all).</p>
