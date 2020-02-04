@@ -1,0 +1,18 @@
+---
+title: Content-Security-Policy Examples
+layout: layout
+date: Last Modified
+nav: examples
+---
+
+<div class="jumbotron">
+	<h1>Content Security Policy Examples</h1>
+	<div class="lead">Various examples on how to work with CSP.</div>
+</div>
+
+<h2>CSP Examples</h2>
+<ul>
+{%- for ex in collections.examples -%}
+  <li><a href="{{ex.url}}">{{ ex.data.title }}</a> - {{ ex.data.description }}</li>
+{%- endfor -%}
+</ul>

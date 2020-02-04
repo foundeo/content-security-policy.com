@@ -1,0 +1,21 @@
+---
+title: Add Content-Security-Policy header with htaccess
+description: Using an Apache CSP header via a htaccess file.
+layout: layout
+date: Last Modified
+tags: examples
+nav: examples
+---
+<div class="jumbotron">
+	<h1>Adding a <code>CSP</code> header with <code>htaccess</code></h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header using an Apache <code>.htaccess</code> file.</div>
+</div>
+<h2>Example htaccess file</h2>
+<p>Let's suppose we want to add a <a href="https://content-security-policy.com/" title="CSP Reference">CSP policy</a> to our site using the following:</p>
+<pre>
+Header add Content-Security-Policy "default-src 'self';"
+</pre>
+<p>Your policy will go inside the double quotes in the example above.</p>
+<h2>What goes inside a CSP policy?</h2>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
+

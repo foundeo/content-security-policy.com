@@ -1,0 +1,27 @@
+---
+title: Content-Security-Policy Meta http-equiv Example
+description: Adding a CSP Policy to a HTML meta tag
+layout: layout
+date: Last Modified
+tags: examples
+---
+<div class="jumbotron">
+	<h1>Example a <code>CSP</code> header with a <code>meta</code> tag</h1>
+	<div class="lead">Let's add a <code>Content-Security-Policy</code> HTTP response header to a HTML page using a <code>meta</code> file.</div>
+</div>
+<h2>Example meta tag</h2>
+<p>Let's suppose we want to add a <a href="https://content-security-policy.com/" title="CSP Reference">CSP policy</a> to our site using the following HTML:</p>
+<pre>
+&lt;meta http-equiv="Content-Security-Policy" content="default-src 'self'"&gt;
+</pre>
+<p>Your policy will go inside the <code>content</code> attribute of the <code>meta</code> tag. The header name <code>Content-Security-Policy</code> should go inside the <code>http-equiv</code> attribute of the <code>meta</code> tag.</p>
+<p>The <code>meta</code> tag should go inside a <code>head</code> tag. The CSP policy only applies to content found after the <code>meta</code> tag is processed, so you should keep it towards the top of your document, or at least before any dynamically generated content.</p>
+<h2>Why doesn't <code>report-uri</code> work in a CSP meta tag?</h2>
+<p>This is not supported, further the <code>Content-Security-Policy-Report-Only</code> header cannot be used in a <code>meta</code> tag either.</p>
+<h2>Does <code>frame-ancestors</code> or <code>sandbox</code> work in a CSP meta policy?</h2>
+<p>According to the CSP spec, <code>frame-ancestors</code> and <code>sandbox</code> are also not supported inside a <code>meta</code> tag.</p>
+<h2>Should I use <code>meta</code> or a HTTP Response Header?</h2>
+<p>The <code>meta</code> support is handy when you can't set a HTTP response header, but in most cases using a HTTP response header is a stronger approach.</p>
+<h2>What goes inside a CSP policy?</h2>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
+

@@ -45,15 +45,15 @@ script-src 'self' https://js.example.com;
 <div class="bs">
 	<div class="label label-success">CSP Level 1</div>
 	<br><br>
-	<h4>Supported</h4>
-	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i>Chrome 25+ (February 2013)</div>
-	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i>Firefox 23+ (August 2013)</div><br><br>
-	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (October 2013)</div>
-	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> IE Edge 12+ (July 2015)</div>
-	<br>
-	<h4>Not Supported</h4>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
 	<div class="label label-default" title="IE - Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
 </div>
 <br>
-<p>The CSP <code>script-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1). However some features such as hashes and <a href="/nonce/" title="CSP with nonce">nonce</a> were introduced in CSP Level 2. Support for these features is still very good.</p>
+<p>The CSP <code>script-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1). However some features such as hashes and <a href="/nonce/" title="CSP with nonce">nonces</a> were introduced in CSP Level 2. Support for these features is still very good.</p>
 <p>Internet Explorer 11 and below do not support the <code>script-src</code> directive. This means that IE11 will simply ignore the policy and allow any script to run (as if a policy had not been set at all).</p>

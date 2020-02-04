@@ -1,0 +1,23 @@
+---
+title: Content-Security-Policy Java Examples
+description: How to add a content security policy header in a Java application.
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>CSP Java Example</h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header using an Apache <code>.htaccess</code> file.</div>
+</div>
+<h2>Example CSP Header with Java</h2>
+<p>By referencing the HTTP Servlet API, we can use the <code>addHeader</code> method of the <code>HttpServletResponse</code> object.</p>
+<pre>
+response.addHeader("Content-Security-Policy", "default-src 'self'");
+</pre>
+<h2>Another way to go</h2>
+
+<p>Your policy will go inside the second argument of the <code>addHeader</code> method in the example above.</p>
+<h2>What goes inside a CSP policy?</h2>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>

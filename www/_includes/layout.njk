@@ -1,5 +1,6 @@
 ---
 title: Content Security Policy CSP Reference & Examples
+description: Content Security Policy Reference Guide and Examples
 nav: reference
 ---
 <!DOCTYPE html>
@@ -8,7 +9,7 @@ nav: reference
     <meta charset="utf-8">
     <title>{{ title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Content Security Policy Reference Guide and Examples">
+    <meta name="description" content="{{ description }}">
     <meta name="author" content="Foundeo Inc.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/readable/bootstrap.min.css" integrity="sha256-M4BawzpX2gZqpVcQ1m+1u+phtpgCuUP8wgn+fDlFPR8=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css" integrity="sha256-CCsHNqNAiVDlD9ZaCQkhAD/oPYnsbjCEVJoB1d+p6FQ=" crossorigin="anonymous" />
@@ -20,14 +21,13 @@ nav: reference
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-          <li {% if nav == "reference" %} class="active"{% endif %}><a href="/">CSP Reference</a></li>
-          <li><a href="/faq/" {% if nav == "faq" %} class="active"{% endif %} title="CSP FAQ">FAQ</a></li>
-          <li><a href="/browser-test/" {% if nav == "test" %} class="active"{% endif %} title="CSP Browser Test">Browser Test</a></li>
-          <li><a href="/presentations/" {% if nav == "presentations" %} class="active"{% endif %} title="CSP Presentations">Presentations</a></li>
+          <li {% if nav === "reference" %} class="active"{% endif %}><a href="/">CSP Reference</a></li>
+          <li {% if nav === "faq" %} class="active"{% endif %}><a href="/faq/" title="CSP FAQ">FAQ</a></li>
+          <li{% if nav === "test" %} class="active"{% endif %}><a href="/browser-test/" title="CSP Browser Test">Browser Test</a></li>
+          <li{% if nav === "examples" %} class="active"{% endif %}><a href="/examples/" title="CSP Examples">Examples</a></li>
         </ul>
-        <h3 class="muted">Content Security Policy (CSP)<br> Quick Reference Guide</h3>
+        <h3 class="muted">Content Security Policy (CSP)<br> {% if nav === "examples" %} Examples {% else %} Quick Reference Guide {% endif %}</h3>
       </div>
-
       <hr>
 
       {{ content | safe }}
