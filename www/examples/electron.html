@@ -1,0 +1,26 @@
+---
+title: Electron Content Security Policy Example
+description: Create a CSP Policy to work around the electron security warning.
+layout: layout
+date: Last Modified
+nav: examples
+---
+<h2>Example Electron Content-Security-Policy warning</h2>
+<p>If you don't set a Content-Security-Policy in your electron app, You might see a message like this in the developer tools console:</p>
+<blockquote>
+	<strong>Electron Security Warning (Insecure Content-Security-Policy)</strong>
+	<br>
+	This renderer process has either no Content Security
+	    Policy set or a policy with "unsafe-eval" enabled. This exposes users of
+	    this app to unnecessary security risks.
+	<br>
+	For more information and help, consult
+	https://electronjs.org/docs/tutorial/security.
+	This warning will not show up
+	once the app is packaged.
+</blockquote>
+
+<h2>Adding a Content-Security-Policy to Electron Apps</h2>
+<p>Probably one of the easier ways to do this is to use the <a href="/examples/meta/" title="CSP in Meta Tag">HTML Meta Tag to add a Content Security Policy</a>.</p>
+<p>For example:</p>
+<pre>&lt;meta http-equiv="Content-Security-Policy" content="default-src 'self'"&gt;</pre>

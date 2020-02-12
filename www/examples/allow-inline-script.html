@@ -1,0 +1,38 @@
+---
+title: CSP Allow Inline Scripts
+description: Create a CSP Policy that allows execution of inline scripts.
+layout: layout
+date: Last Modified
+nav: examples
+---
+
+<div class="jumbotron">
+	<h1>CSP Inline Scripts</h1>
+	<div class="lead">When you enable CSP, it will block inline scripts, but there are some ways that you can allow inline scripts and still use Content Security Policy.</div>
+</div>
+
+<h2>Allow Inline Scripts using a Nonce</h2>
+
+<p>One of the easiest ways to allow inline scripts when using CSP is to use a <a href="/nonce/" title="CSP Nonce">nonce</a>. A <a href="/nonce/" title="CSP Nonce">nonce</a> is just a random, single use string value that you add to your <code>Content-Security-Policy</code> header, like so:
+<pre>
+script-src js-cdn.example.com 'nonce-r@nd0m';
+</pre>
+<p>Assuming our nonce value is <code>r@nd0m</code> (you need to randomly generate a new nonce for every HTTP request), we can now use an inline script tag like this:</p>
+<pre>
+&lt;script nonce="r@nd0m"&gt;
+	doSomething();
+&lt;/script&gt;
+</pre>
+
+<h2>Allow Inline Scripts using a Hash</h2>
+<p>A second approach to allow inline scripts is to use a hash, with this approach you compute the hash of your JavaScript code, and put the value in our CSP policy:</p>
+<pre>
+script-src js-cdn.example.com 'sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ='
+</pre>
+<blockquote>
+	<strong>Tip:</strong> your browser developer tools console might compute the hash for you and output it in the console when inline scripts are blocked by CSP.</blockquote>
+</blockquote>
+
+<h2>Other methods</h2>
+<p>The <code>unsafe-inline</code> source list value can be used to allow inline scripts, but this also defeats much of the purpose of CSP.</p>
+<p>CSP Level 3 (newest browsers) support a source list value: <code>unsafe-hashes</code> which can be used to allow inline script in javascript event handlers (eg <code>onclick</code> or <code>onmouseover</code>, etc).</p>
