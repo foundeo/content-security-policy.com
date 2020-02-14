@@ -1,0 +1,26 @@
+---
+title: Content-Security-Policy PHP Examples
+description: How to add a content security policy header with PHP.
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>CSP PHP Example</h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header in PHP.</div>
+</div>
+<h2>Example CSP Header with Java</h2>
+<p>By using the PHP <code>header()</code> function we can </p>
+<pre>
+&lt;php?
+	header("Content-Security-Policy: default-src 'self'");
+?&gt;
+</pre>
+
+<h2>What goes inside a CSP policy?</h2>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
+
+<h2>Another Option for PHP</h2>
+<p>Another option is to use a web server mechanism to add a HTTP response header, such as a <a href="/examples/htaccess">htaccess</a> file.</p>
