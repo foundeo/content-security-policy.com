@@ -22,6 +22,8 @@ tags: examples
 <p>According to the CSP spec, <code>frame-ancestors</code> and <code>sandbox</code> are also not supported inside a <code>meta</code> tag.</p>
 <h2>Should I use <code>meta</code> or a HTTP Response Header?</h2>
 <p>The <code>meta</code> support is handy when you can't set a HTTP response header, but in most cases using a HTTP response header is a stronger approach.</p>
+<h2>Do all directives work inside a meta tag?</h2>
+<p>No, some directives may not work in a meta tag, for example the <a href="/frame-ancestors/"><code>frame-ancestors</code></a> directive cannot be used inside a meta tag.</p>
 <h2>What goes inside a CSP policy?</h2>
 <p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
 

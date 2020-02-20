@@ -224,7 +224,7 @@ layout: layout
           </td>
         </tr>
         <tr>
-          <td><code>child-src</td>
+          <td><code>child-src</code></td>
           <td><code>'self'</code></td>
           <td>
             Defines valid sources for web workers and nested browsing contexts loaded using elements such as <code>&lt;frame&gt;</code> and <code>&lt;iframe&gt;</code>
@@ -236,7 +236,7 @@ layout: layout
           </td>
         </tr>
         <tr>
-          <td><code>form-action</td>
+          <td><code>form-action</code></td>
           <td><code>'self'</code></td>
           <td>
             Defines valid sources that can be used as a HTML <code>&lt;form&gt;</code> action.
@@ -248,7 +248,7 @@ layout: layout
           </td>
         </tr>
         <tr>
-          <td><code>frame-ancestors</td>
+          <td><a href="/frame-ancestors/"><code>frame-ancestors</code></a></td>
           <td><code>'none'</code></td>
           <td>
             Defines valid sources for embedding the resource using <code>&lt;frame&gt;</code> <code>&lt;iframe&gt;</code> <code>&lt;object&gt;</code> <code>&lt;embed&gt;</code> <code>&lt;applet&gt;</code>. Setting this directive to <code>'none'</code> should be roughly equivalent to <code>X-Frame-Options: DENY</code>
@@ -260,7 +260,7 @@ layout: layout
           </td>
         </tr>
         <tr>
-          <td><code>plugin-types</td>
+          <td><code>plugin-types</code></td>
           <td><code>application/pdf</code></td>
           <td>
              Defines valid MIME types for plugins invoked via  <code>&lt;object&gt;</code> and <code>&lt;embed&gt;</code>. To load an <code>&lt;applet&gt;</code> you must specify <code>application/x-java-applet</code>.
@@ -271,7 +271,7 @@ layout: layout
           </td>
         </tr>
         <tr>
-          <td><code>report-to</td>
+          <td><code>report-to</code></td>
           <td><code>groupName</code></td>
           <td>
             Defines a <em>reporting group</em> name defined by a <code>Report-To</code> HTTP response header. See the <a href="https://w3c.github.io/reporting/">Reporting API</a> for more info.
@@ -281,7 +281,7 @@ layout: layout
           </td>
         </tr>
         <tr>
-          <td><code>worker-src</td>
+          <td><code>worker-src</code></td>
           <td><code>'none'</code></td>
           <td>
             Restricts the URLs which may be loaded as a Worker, SharedWorker or ServiceWorker.
@@ -292,7 +292,7 @@ layout: layout
           </td>
         </tr>
         <tr>
-          <td><code>manifest-src</td>
+          <td><code>manifest-src</code></td>
           <td><code>'none'</code></td>
           <td>
             Restricts the URLs that application manifests can be loaded.
@@ -303,7 +303,7 @@ layout: layout
           </td>
         </tr>
         <tr>
-          <td><code>navigate-to</td>
+          <td><code>navigate-to</code></td>
           <td><code>example.com</code></td>
           <td>
             Restricts the URLs that the document may navigate to by any means. For example when a link is clicked, a form is submitted, or <code>window.location</code> is invoked. If <code>form-action</code> is present then this directive is ignored for form submissions. <a href="https://www.chromestatus.com/features/6457580339593216" rel="nofollow">Implementation Status</a>
