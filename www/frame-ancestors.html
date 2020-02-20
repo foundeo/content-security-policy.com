@@ -8,7 +8,7 @@ date: Last Modified
 	<h1><code>frame-ancestors</code> with CSP</h1>
 	<div class="lead">The <code>frame-ancestors</code> directive allows you to specify which parent URLs can frame the current resource.</div>
 </div>
-<h2>An Example <code>frame-ancestors</code> Policy</h2>
+<h2>An Example frame-ancestors Policy</h2>
 <p>The most common way to use the <code>frame-ancestors</code> directive is to block </p>
 <pre>
 frame-ancestors 'none'
@@ -22,15 +22,15 @@ frame-ancestors 'none'
 <p>Now suppose we want to allow https://a.example.com and https://b.example.com to frame our page, we can specify it like this:</p>
 <pre>frame-ancestors https://a.example.com https://b.example.com</pre>
 
-<h2>What does <code>frame-ancestors</code> apply to?</h2>
+<h2>What does frame-ancestors apply to?</h2>
 <p>In addition to <code>frame</code> and <code>iframe</code> the <code>frame-ancestors</code> directive also applies to <code>applet</code>, <code>embed</code> and <code>object</code>tags.</p>
 
-<h2>Can <code>frame-ancestors</code> be used in a meta tag?</h2>
+<h2>Can frame-ancestors be used in a meta tag?</h2>
 <p>No, you cannot use the <code>frame-ancestors</code> directive from a <a href="/examples/meta/">Content-Security-Policy meta tag</a>. It must be specified as part of a <code>Content-Security-Policy</code> header.</p>
 
-<h2>Is <code>frame-ancestors</code> covered by the <code>default-src</code> directive?</h2>
+<h2>Is frame-ancestors covered by the default-src directive?</h2>
 <p>No, the <code>frame-ancestors</code> does not inherit from the <code>default-src</code> directive, you need to explicitly specify it in your <code>Content-Security-Policy</code> header.</p> 
 
 <h2><code>frame-ancestors</code> Browser Support</h2>
-<p>The <code>nonce</code> source list directive was added to CSP Level 2. This means that support has existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
+<p>The <code>frame-ancestors</code>  directive was added to CSP Level 2. This means that support has existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
 <p>It is not supported at all in Internet Explorer, you need to use the Edge browser instead.</p>
