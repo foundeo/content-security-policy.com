@@ -1,0 +1,59 @@
+---
+title: font-src Content Security Policy Directive
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>The <code>font-src</code> Directive</h1>
+	<div class="lead">The <code>font-src</code> <strong>Content Security Policy</strong> (CSP) directive controls the loading and execution of JavaScript.</div>
+</div>
+<h2>Example Policy</h2>
+<p>Assume a <code>Content-Security-Policy</code> header is set with the following policy:</p>
+<pre>
+font-src 'self' https://cdn.example.com;
+</pre>
+<h4>Allows</h4>
+<p>With the above CSP policy, fonts can be loaded from the same origin (via the 'self' source list value), or via URLs starting with: <code>https://cdn.example.com</code>
+<pre>
+@font-face {
+  font-family: 'MyLocalFont';
+  src: url('/fonts/font.ttf');
+}
+@font-face {
+  font-family: 'ExternalFont';
+  src: url('https://cdn.example.com/fonts/font.ttf');
+}
+</pre>
+<h4>Blocks</h4>
+<p>The above policy will block any font not same origin or via <code>https://cdn.example.com</code>, so the following would be blocked:</p>
+<pre>
+@font-face {
+  font-family: 'BlockedByCSP';
+  src: url('https://other.example.com/fonts/font.ttf');
+}
+</pre>
+<h4>Inherits from default-src</h4>
+<p>If you don't specify a <code>font-src</code> but do specify a <code>default-src</code> CSP directive, then the value of <code>default-src</code> will be used as the policy for <code>font-src</code>. So for example if you had the following policy:</p>
+<pre>default-src 'none'</pre>
+<p>When you try to load a font via a CSS <code>@font-face</code> you would get an error like this in the console:</p>
+<blockquote>
+	Refused to load the font '&lt;url&gt;' because it violates the following content security policy directive: "default-src 'none'". note that 'font-src' was not explicitly set, so 'default-src' is used as a fallback.
+</blockquote>
+
+
+<h2>Browser Support for <code>font-src</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+	<div class="label label-default" title="IE - Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>The CSP <code>font-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1).</p>
+<p>Internet Explorer 11 and below do not support the <code>font-src</code> directive. This means that IE11 will simply ignore the policy and allow fonts to load from anywhere (as if a policy had not been set at all).</p>
