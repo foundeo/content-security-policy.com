@@ -1,0 +1,36 @@
+---
+title: Using Google Fonts with a Content-Security-Policy
+description: Create a CSP Policy to that works with google fonts.
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+
+<div class="jumbotron">
+	<h1>Example Using Google Fonts with a Content-Security-Policy</h1>
+	<div class="lead pacifico">Find out what directives are needed to use google fonts with a content security policy (CSP)?</div>
+</div>
+<p>You're going to need to specify at least two CSP directives, the <a href="/style-src/"><code>style-src</code></a> and the <a href="/font-src/"><code>font-src</code></a> directive.</p>
+<h2>The style-src directive</h2>
+<p>Google fonts is typically served via a link tag, you might load a stylesheet such as:</p>
+<pre>&lt;link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet"&gt;</pre>
+<p>In order for <code>Content-Security-Policy</code> to even load this CSS file, you will need to add <code>fonts.googleapis.com</code> to your <code>style-src</code> directive.</p>
+<p>Your policy might look like this:</p>
+<pre>style-src fonts.googleapis.com</pre>
+<p>Without such a policy, we would get an error in our browser, for example:</p>
+<blockquote>
+	Refused to load the stylesheet 'https://fonts.googleapis.com/css' because it violates the following Content Security Policy directive: "default-src 'self'". Note that 'style-src-elem' was not explicitly set, so 'default-src' is used as a fallback.
+</blockquote>
+<h2>The font-src directive</h2>
+<p>Next we need to use a <a href="/font-src/"><code>font-src</code></a> directive to allow the actual font-face source file. In the case of Google fonts these font files are served from <code>fonts.gstatic.com</code>, this means we need the following in our content security policy:</p>
+<pre>font-src fonts.gstatic.com</pre>
+<p>Without this we might get an error in the console such as:</p>
+<blockquote>
+	Refused to load the font 'https://fonts.gstatic.com/s/font-name/v16/file-name.woff2' because it violates the following Content Security Policy directive: "default-src 'self'". Note that 'font-src' was not explicitly set, so 'default-src' is used as a fallback.
+</blockquote>
+<h2>Putting it all together</h2>
+<p>A full <a href="/" title="Content-Security-Policy"><code>Content-Security-Policy</code> header</a> for Google Fonts might look like this:</p>
+<pre>Content-Security-Policy: default-src 'self';font-src fonts.gstatic.com;style-src fonts.googleapis.com</pre>
+

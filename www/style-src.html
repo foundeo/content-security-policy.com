@@ -1,0 +1,56 @@
+---
+title: style-src Content-Security-Policy Directive Explained
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>The <code>style-src</code> Directive</h1>
+	<div class="lead">The <code>style-src</code> <strong>Content Security Policy</strong> (CSP) directive controls the loading and execution of CSS styles and stylesheets.</div>
+</div>
+<h2>Example Policy</h2>
+<p>Assume a <code>Content-Security-Policy</code> header is set with the following policy:</p>
+<pre>
+style-src 'self' https://css.example.com;
+</pre>
+<h4>Allows</h4>
+<p>With the above CSP policy, the following <strong>are allowed to load and execute</strong> in the browser:</p>
+<pre>
+&lt;!-- allowed by 'self' --&gt;
+&lt;link href="/style/some-file.css" rel="stylesheet"&gt;
+&lt;!-- allowed by https://css.example.com --&gt;
+&lt;link href="https://css.example.com/some-file.css" rel="stylesheet"&gt;
+</pre>
+<h4>Blocks</h4>
+<p>The <em>Example Policy</em> above will <strong>block the following from loading or executing</strong> in the browser:</p>
+<pre>
+&lt;link href="https://attacker.example.com/file.css"&gt;
+</pre>
+<p>Blocked because <code>attacker.example.com</code> is not in the source list of the <code>style-src</code> directive.</p>
+<pre>
+&lt;style&gt;
+  .red { color:red; }
+&lt;/style&gt;
+</pre>
+<p>Blocked because inline scripts are blocked by default, you have to use hashes or a <a href="/nonce/" title="CSP with Nonce">nonce</a> (CSP Level 2) to get allow inline scripts to run.</p>
+<pre>
+&lt;div style="color:red"&gt;
+  All Inline style CSS is blocked by default
+&lt;/button&gt;
+</pre>
+
+<h2>Browser Support for <code>style-src</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+	<div class="label label-default" title="IE - Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>The CSP <code>style-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1). However some features such as hashes and <a href="/nonce/" title="CSP with nonce">nonces</a> were introduced in CSP Level 2. Support for these features is still very good.</p>
+<p>Internet Explorer 11 and below do not support the <code>style-src</code> directive. This means that IE11 will simply ignore the policy and allow any script to run (as if a policy had not been set at all).</p>

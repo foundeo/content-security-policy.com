@@ -31,6 +31,11 @@ frame-ancestors 'none'
 <h2>Is frame-ancestors covered by the default-src directive?</h2>
 <p>No, the <code>frame-ancestors</code> does not inherit from the <code>default-src</code> directive, you need to explicitly specify it in your <code>Content-Security-Policy</code> header.</p> 
 
+<h2>What happens when it is blocked?</h2>
+<p>You might see an error message in the developer tools console such when you try to load a page in a frame, or iframe that is not allowed by the <code>frame-ancestors</code> policy, such as:</p>
+<blockquote>
+	[Error] Refused to load &lt;url&gt; because it does not appear in the frame-ancestors directive of the content security policy.
+</blockquote>
 <h2>frame-ancestors Browser Support</h2>
 <p>The <code>frame-ancestors</code>  directive was added to CSP Level 2. This means that support has existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
 <p>It is not supported at all in Internet Explorer, you need to use the Edge browser instead.</p>
