@@ -53,4 +53,4 @@ style-src 'self' https://css.example.com;
 </div>
 <br>
 <p>The CSP <code>style-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1). However some features such as hashes and <a href="/nonce/" title="CSP with nonce">nonces</a> were introduced in CSP Level 2. Support for these features is still very good.</p>
-<p>Internet Explorer 11 and below do not support the <code>style-src</code> directive. This means that IE11 will simply ignore the policy and allow any script to run (as if a policy had not been set at all).</p>
+<p>Internet Explorer 11 and below do not support the <code>style-src</code> directive. This means that IE11 will simply ignore the policy and allow any stylesheet or CSS to load (as if no Content-Security-Policy header was set at all).</p>

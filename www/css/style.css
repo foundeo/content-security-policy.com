@@ -18,6 +18,9 @@ font-size: 21px;
 padding: 14px 24px;
 }
 
+h5 { text-transform: uppercase; margin-bottom:1px; font-size:13px; color: gray; }
+.pd { padding-left: 28px; }
+
 .jumbotron .preso {
 	font-size: 21px;
 	text-align:left;
@@ -46,6 +49,14 @@ code { white-space:nowrap; }
 .pacifico { 
 	font-family: 'Pacifico', monospace;
 }
+
+.email-signup {
+	background-color: #FFFFD5;
+	padding: 40px;
+	border-top: 6px solid yellow;
+	margin-top: 30px;
+}
+.email-signup h3 { margin-top: 8px; }
 
 @media (max-width: 540px) {
 	code { white-space: normal; }
