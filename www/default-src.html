@@ -1,0 +1,46 @@
+---
+title: default-src Content Security Policy Directive
+layout: layout
+date: Last Modified
+---
+
+<div class="jumbotron">
+	<h1>The <code>default-src</code> Directive</h1>
+	<div class="lead">The <code>default-src</code> <strong>Content Security Policy</strong> (CSP) directive allows you to specify the default or fallback resources that can be loaded (or fetched) on the page (such as <a href="/script-src/"><code>script-src</code></a>, or <a href="/style-src/"><code>style-src</code></a>, etc.)</div>
+</div>
+
+<h2>The <code>default-src</code> directive is a fallback</h2>
+<p>You will often see <code>default-src</code> referred to as a <em>fallback</em> for other directives. For example, if you <em>DO</em> specify a <code>default-src</code>, but <em>DO NOT</em> specify a <a href="/style-src/"><code>style-src</code></a> directive, then the value you specified for <code>default-src</code> will be used for as the <code>style-src</code> policy.</p>
+<p>For example if your Content-Security-Policy is specified as:</p>
+<pre>default-src 'self' cdn.example.com</pre>
+<p>Then the <code>script-src</code> policy will implicitly be <code>'self' cdn.example.com</code>
+<h2>Which directives fallback to <code>default-src</code>?</h2>
+<p>All <em>CSP fetch directives</em> fallback to the <code>default-src</code> directive. For example the following directives will fallback to <code>default-src</code>:</p>
+<ul>
+	<li><a href="/script-src/"><code>script-src</code></a></li>
+	<li><a href="/style-src/"><code>style-src</code></a></li>
+	<li><a href="/font-src/"><code>font-src</code></a></li>
+	<li><code>img-src</code></li>
+	<li><code>connect-src</code></li>
+	<li><code>worker-src</code></li>
+	<li><code>object-src</code></li>
+	<li><code>media-src</code></li>
+	<li><code>manifest-src</code></li>
+	<li><code>frame-src</code></li>
+	<li><code>prefetch-src</code></li>
+	<li><code>child-src</code></li>
+</ul>
+<h2>Which directives DO NOT fallback to <code>default-src</code>?</h2>
+<p>Directives that are not <em>fetch directives</em> do not fallback to the default source policy. Here are a few CSP directives that do not fallback to <code>default-src</code>:</p>
+<ul>
+	<li><code>base-uri</code></li>
+	<li><code>form-action</code></li>
+	<li><a href="/frame-ancestors/"><code>frame-ancestors</code></a></li>
+	<li><code>report-uri</code></li>
+	<li><code>sandbox</code></li>
+</ul>
+<h2>Do the directives inherit from <code>default-src</code>?</h2>
+<p>If you specify the following policy:</p>
+<pre>default-src 'self';script-src js.example.com;</pre>
+<p>The <code>script-src</code> element does not inherit <code>'self'</code> from the <code>default-src</code>, the <code>script-src</code> policy if specified overwrites the <code>default-src</code> policy for the given directive.</p>
+<p>The policy for <code>style-src</code>, <code>img-src</code>, etc. would still fall back to the default policy  (<code>'self'</code>).</p>
