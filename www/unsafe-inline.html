@@ -1,0 +1,37 @@
+---
+title: unsafe-inline in Content-Security-Policy
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>The <code>unsafe-inline</code> Source List Keyword</h1>
+	<div class="lead">The <code>unsafe-inline</code> <strong>Content Security Policy</strong> (CSP) keyword allows the execution of inline scripts or styles.</div>
+</div>
+<h2>Warning</h2>
+<p class="lead">Except for one very specific case, you should avoid using the <code>unsafe-inline</code> keyword in your CSP policy. As you might guess it is generally unsafe to use <code>unsafe-inline</code>.</p>
+<p>The <code>unsafe-inline</code> keyword annuls most of the security benefits that <code>Content-Security-Policy</code> provide. </p>
+<h2>What should you use instead of unsafe-inline?</h2>
+<p>When you want to <a href="/examples/allow-inline-script/">allow inline scripts or styles</a> on a page that uses CSP, there two much better options: <a href="/nonce/">nonce</a> or <a href="/hash/">hash</a>.</p>
+
+<h2>When is it ok to use unsafe-inline?</h2>
+<p>It is only ok to use <code>unsafe-inline</code> when it is combined with the <code>strict-dynamic</code> directive. On browsers that support <code>strict-dynamic</code> (CSP Level 3+), the <code>unsafe-inline</code> is ignored, and provides a route to backwards compatibility on browsers that support CSP Level 2 or lower.</p>
+<p>In other words, you should only use it if you really know what you are doing!</p>
+
+
+
+<h2>Browser Support for <code>unsafe-inline</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+	<div class="label label-default" title="IE - Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>The CSP <code>unsafe-inline</code> source list keyword has been part of the Content Security Policy Specification since the first version of it (CSP Level 1).</p>
+<p>Internet Explorer 11 and below do not support the <code>unsafe-inline</code> directive. This means that IE11 will simply ignore the policy and allows the execution of script or css as if no policy existed.</p>

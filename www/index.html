@@ -13,62 +13,58 @@ layout: layout
       <a href="https://github.com/foundeo/content-security-policy.com/" class="btn btn-default"><i class="fa fa-github"></i> Edit on GitHub</a>
       <hr>
 
+      <h2>What is Content-Security-Policy?</h2>
+      <p>Content-Security-Policy is the name of a HTTP response header that modern browsers use to enhance the security of the document (or web page). The Content-Security-Policy header allows you to restrict how resources such as JavaScript, CSS, or pretty much anything that the browser loads.</p>
+      <p>Although it is primarily used as a HTTP response header, you can also apply it via a <a href="/examples/meta/">meta tag</a>.</p>
+      <h2>What types of attacks does Content-Security-Policy help mitigate?</h2>
+      <p >CSP was first designed to reduce the attack surface of Cross Site Scripting (XSS) attacks, later versions of the spec also protect against other forms of attack such as Click Jacking.</p>
+
+
       <div class="marketing">
-        <h2>Browser Support</h2>
-        <table class="table table-bordered table-responsive">
-          <thead>
-            <tr>
-              <th>Header</th>
-              <th><i class="fa fa-chrome"></i><span class="hidden-xs"> Chrome</span></th>
-              <th><i class="fa fa-firefox"></i><span class="hidden-xs"> FireFox</span></th>
-              <th><i class="fa fa-safari"></i><span class="hidden-xs"> Safari</span></th>
-              <th><i class="fa fa-internet-explorer"></i><span class="hidden-xs"> IE</span></th>
-              <th><i class="fa fa-edge"></i><span class="hidden-xs"> Edge</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span></td>
-              <td>40+ <small>Full January 2015</small></td>
-              <td>31+ <small title="45+ is missing the plugin-types directive"><em>Partial</em><br>July 2014</small></td>
-              <td>10+</td>
-              <td>-</td>
-              <td>Edge 15+ Parital, 76+ Full</td>
-            </tr>
-            <tr>
-              <td><code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span></td>
-              <td>25+</td>
-              <td>23+</td>
-              <td>7+</td>
-              <td>-</td>
-              <td>Edge 12 build 10240+</td>
-            </tr>
-            <tr>
-              <td><code>X-Content-Security-Policy</code> <span class="label label-warning">Deprecated</span></td>
-              <td>-</td>
-              <td>4+</td>
-              <td>-</td>
-              <td>10+ <small title="only sandbox directive is partiall supported"><em>Limited</em></small> </td>
-              <td>12+ <small title="only sandbox directive is partiall supported"><em>Limited</em></small> </td>
-            </tr>
-            <tr>
-              <td><code>X-Webkit-CSP</code> <span class="label label-warning">Deprecated</span></td>
-              <td>14+</td>
-              <td>-</td>
-              <td>6+</td>
-              <td>-</td>
-              <td>-</td>
-            </tr>
-          </tbody>
-        </table>
+        <h2>CSP Browser Support</h2>
+        <div>Content Security Policy is supported by all the major modern browsers, and has been for many years. It is not supported in Internet Explorer.</div>
+
+        <h3><i class="fa fa-chrome"></i> Chrome</h3>
+        <div class="pd">
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Chrome 40+ <small>Full Support Since January 2015</small><br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Chrome 25+<br>
+          <code>X-Webkit-CSP</code> <span class="label label-warning">Deprecated</span> - Chrome 14-24
+        </div>
+
+        <h3><i class="fa fa-firefox"></i> FireFox</h3>
+        <div class="pd">
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - FireFox 31+ <small title="45+ is missing the plugin-types directive"><em>Partial Support</em> since July 2014</small><br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - FireFox 23+ <small>Full Support</small><br>
+          <code>X-Content-Security-Policy</code> <span class="label label-warning">Deprecated</span> - FireFox 4-22
+        </div>
+
+        <h3><i class="fa fa-safari"></i> Safari</h3>
+        <div class="pd">
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Safari 10+<br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Safari 7+<br>
+          <code>X-Webkit-CSP</code> <span class="label label-warning">Deprecated</span> - Safari 6
+        </div>
+
+        <h3><i class="fa fa-edge"></i> Edge</h3>
+        <div class="pd">
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Edge 15+ Partial, 76+ Full<br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Edge 12+<br>
+        </div>
+
+        <h3><i class="fa fa-internet-explorer"></i> Internet Explorer</h3>
+        <div class="pd">
+          <code>X-Content-Security-Policy</code> <span class="label label-warning">Deprecated</span> - IE 10-11 support <code>sandbox</code> only
+        </div>
+
+        <br>
 
         <p>Sources: <a href="http://caniuse.com/contentsecuritypolicy">caniuse.com/contentsecuritypolicy</a>, <a href="http://caniuse.com/contentsecuritypolicy2">caniuse.com/contentsecuritypolicy2</a> &amp; <a href="https://hacks.mozilla.org/2013/05/content-security-policy-1-0-lands-in-firefox-aurora/">Mozilla</a></p>
         <p>Try our <a href="browser-test/">CSP Browser Test</a> to test your browser.</p>
         <p>Note: It is known that having both <code>Content-Security-Policy</code> and <code>X-Content-Security-Policy</code> or <code>X-Webkit-CSP</code> causes unexpected behaviours on certain versions of browsers. Please avoid using deprecated <code>X-*</code> headers.</p>
       </div>
 
-      <hr>
 
+      
       <h2 id="directive">CSP Directive Reference</h2>
       <p>The <code>Content-Security-Policy</code> header value is made up of one or more directives (defined below), multiple directives are separated with a semicolon <code>;</code></p>
       <p>This documentation is provided based on the Content Security Policy Level 2 <a href="https://www.w3.org/TR/CSP2/">W3C Recommendation</a>, and the CSP Level 3 <a href="https://www.w3.org/TR/CSP3/">W3C Working Draft</a></p>
@@ -337,7 +333,7 @@ layout: layout
             <td>Allows loading resources only over HTTPS on any domain.</td>
           </tr>
           <tr>
-            <td><code>'unsafe-inline'</code></td>
+            <td><a href="/unsafe-inline/"><code>'unsafe-inline'</code></a></td>
             <td><code>script-src 'unsafe-inline'</code></td>
             <td>Allows use of inline source elements such as style attribute, onclick, or script tag bodies (depends on the context of the source it is applied to) and <code>javascript:</code> URIs</td>
           </tr>
@@ -347,7 +343,7 @@ layout: layout
             <td>Allows unsafe dynamic code evaluation such as JavaScript <code>eval()</code></td>
           </tr>
           <tr>
-            <td><code>'sha256-'</code></td>
+            <td><a href="/hash/"><code>'sha256-'</code></a></td>
             <td><code>script-src 'sha256-xyz...'</code></td>
             <td>Allows an inline script or CSS to execute if its hash matches the specified hash in the header. Currently supports SHA256, SHA384 or SHA512.  <span class="label label-success">CSP Level 2</span> </td>
           </tr>

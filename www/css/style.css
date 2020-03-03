@@ -60,7 +60,10 @@ code { white-space:nowrap; }
 
 @media (max-width: 540px) {
 	code { white-space: normal; }
+	.jumbotron h1 { font-size: 60px; }
+	.masthead h3 { font-size: 20px; }
+	ul.nav li a { font-size: 14px; padding: 8px; }
 }
 @media (max-width: 440px) {
-	code { font-size: 9pt; }
+	td code { font-size: 9pt; }
 }

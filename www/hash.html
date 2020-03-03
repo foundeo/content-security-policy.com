@@ -1,0 +1,29 @@
+---
+title: Using a hash in CSP
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>Using a <code>hash</code> with CSP</h1>
+	<div class="lead">A <code>hash</code> of a script or style can be used to allow it . </div>
+</div>
+<h2>CSP Hash Example</h2>
+<p>Using a <code>hash</code> is one way to allow the execution of inline scripts in a Content Security Policy (CSP). Here's how one might use it with the CSP with JavaScript:</p>
+<p>Suppose we have the following script on our page:
+<pre>
+&lt;script&gt;doSomething();&lt;/script&gt;
+</pre>
+<p>If you compute the SHA-256 hash of our entire JavaScript code block, in our case it is just: <code>doSomething();</code> you will get the value:</p>
+<pre>RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=</pre>
+<p>Finally we can add the hash to our <a href="/script-src/">script-src</a> directive to allow it to execute via our Content-Security-Policy header:</p>
+<pre>
+script-src 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';</pre>
+</pre>
+<h2>What CSP hash algorithms are supported?</h2>
+<p>The CSP Level 2 specification allows <code>sha256</code>, <code>sha384</code>, and <code>sha512</code>
+<h2>How do you generate the hash?</h2>
+<p>The easiest way to generate it is to just open the developer tools console and it will output what the expected hash of your script was in the console error message.</p>
+<p>You can also use tools such as openssl to generate it, whitespace is not ignored.</p>
+<h2>CSP Hash Browser Support</h2>
+<p>The <code>hash</code> source list directive was added to CSP Level 2. This means that support has existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
+<p>It is not supported at all in Internet Explorer, you need to use the Edge browser instead.</p>
