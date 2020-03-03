@@ -24,6 +24,8 @@ script-src 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';</pre>
 <h2>How do you generate the hash?</h2>
 <p>The easiest way to generate it is to just open the developer tools console and it will output what the expected hash of your script was in the console error message.</p>
 <p>You can also use tools such as openssl to generate it, whitespace is not ignored.</p>
+<p>Here is an example using openssl, which will be installed by default on most mac or linux systems:</p>
+<pre>echo -n 'doSomething();' | openssl sha256 -binary | openssl base64</pre>
 <h2>CSP Hash Browser Support</h2>
 <p>The <code>hash</code> source list directive was added to CSP Level 2. This means that support has existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
 <p>It is not supported at all in Internet Explorer, you need to use the Edge browser instead.</p>
