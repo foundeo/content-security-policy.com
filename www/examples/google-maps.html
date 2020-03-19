@@ -1,0 +1,40 @@
+---
+title: Google Maps with a Content-Security-Policy
+description: Create a CSP Policy to that works with google maps.
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>Example Using Google Maps with a Content-Security-Policy</h1>
+	<div class="lead">How to create a content security policy (CSP) that works with Google Maps.</div>
+</div>
+<p>You're going to need to specify at least two CSP directives, the <a href="/script-src/"><code>style-src</code></a> and the <a href="/img-src/"><code>img-src</code></a> directive.</p>
+<h2>The script-src directive</h2>
+<p>In order for the Google Maps JavaScript to load we need to allow the domain <code>maps.googleapi.com</code> in our policy:</p>
+<p>Your policy might look like this:</p>
+<pre>script-src maps.googleapis.com</pre>
+<p>Without such a policy, we would get an error in our browser, for example:</p>
+<blockquote>
+	Content Security Policy: The page's settings blocked the loading of a resource at <em>https://maps.googleapis.com/maps/api/js?key=...</em> ("script-src")
+</blockquote>
+<h2>The img-src directive</h2>
+<p>You will notice that the images loaded may differ depening on what type of map you are using. You may see something like this in your network log:</p>
+<ul>
+	<li><code>maps.gstatic.com</code> - loads various img assets for the map such as cross hair curors, a plain marker, the google logo, etc.</li>
+	<li><code>maps.googleapis.com</code> - loads tiles of the map</li>
+	<li><code>data:image/svg+xml</code> - several resources are loaded as SVG using data URIs</li>
+	<li><code>khms0.googleapis.com</code> - load satalite images for the map. We will use <code>*.googleapis.com</code> in our policy to allow all similar domains.</li>
+	<li><code>geo0.ggpht.com</code> - loads street view images, this could be from a few different similar subdomains so we will use <code>*.ggpht.com</code> in our content security policy.</li>
+</ul> 
+<pre>img-src data: maps.gstatic.com *.googleapis.com *.ggpht</pre>
+<p>Without this we might get an error in the console such as:</p>
+<blockquote>
+	Refused to load the img 'https://maps.googleapis.com/...' because it violates the following Content Security Policy directive: "img-src 'self'".
+</blockquote>
+<h2>Putting it all together</h2>
+<p>A full <a href="/" title="Content-Security-Policy"><code>Content-Security-Policy</code> header</a> that works with Google Maps might look like this:</p>
+<pre>Content-Security-Policy: default-src 'self';script-src maps.googleapis.com;img-src data: maps.gstatic.com *.googleapis.com *.ggpht</pre>
+
