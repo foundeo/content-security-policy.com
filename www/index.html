@@ -58,7 +58,7 @@ layout: layout
 
         <br>
 
-        <p>Sources: <a href="http://caniuse.com/contentsecuritypolicy">caniuse.com/contentsecuritypolicy</a>, <a href="http://caniuse.com/contentsecuritypolicy2">caniuse.com/contentsecuritypolicy2</a> &amp; <a href="https://hacks.mozilla.org/2013/05/content-security-policy-1-0-lands-in-firefox-aurora/">Mozilla</a></p>
+        
         <p>Try our <a href="browser-test/">CSP Browser Test</a> to test your browser.</p>
         <p>Note: It is known that having both <code>Content-Security-Policy</code> and <code>X-Content-Security-Policy</code> or <code>X-Webkit-CSP</code> causes unexpected behaviours on certain versions of browsers. Please avoid using deprecated <code>X-*</code> headers.</p>
       </div>
@@ -241,6 +241,15 @@ layout: layout
         <span class="label label-default" title="Chrome 40+ - January 2015"><i class="fa fa-chrome"></i> 40+</span>
         <span class="label label-default" title="Edge 15+ - January 2017"><i class="fa fa-edge"></i> 15+</span>
       </div>
+      <h3><code>base-uri</code></h3>
+      <div class="pd">
+        <p>Defines a set of allowed URLs which can be used in the <code>src</code> attribute of a HTML <code>base</code> tag.</p>
+        <h5>Example base-uri Policy</h5>
+        <pre>base-uri 'self';</pre>
+        <span class="label label-success">CSP Level 2</span>
+        <span class="label label-default" title="Chrome 40+ - January 2015"><i class="fa fa-chrome"></i> 40+</span>
+        <span class="label label-default" title="Edge 15+ - January 2017"><i class="fa fa-edge"></i> 15+</span>
+      </div>
 
       <h3><code>report-to</code></h3>
       <div class="pd">
@@ -378,8 +387,8 @@ layout: layout
       <pre>script-src 'self' www.google-analytics.com ajax.googleapis.com;</pre>
 
       <h4>Starter Policy</h4>
-      <p>This policy allows images, scripts, AJAX, and CSS from the same origin, and does not allow any other resources to load (eg object, frame, media, etc). It is a good starting point for many sites.</p>
-      <pre>default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self';</pre>
+      <p>This policy allows images, scripts, AJAX, form actions, and CSS from the same origin, and does not allow any other resources to load (eg object, frame, media, etc). It is a good starting point for many sites.</p>
+      <pre>default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self';base-uri 'self';form-action 'self'</pre>
 
       <hr>
 
@@ -388,7 +397,7 @@ layout: layout
       <pre>Refused to load the script '<em>script-uri</em>' because it violates the following Content Security Policy directive: "<em>your CSP directive</em>".</pre>
       <p>In Firefox you might see messages like this in the <em>Web Developer Tools</em>:</p>
       <pre>Content Security Policy: A violation occurred for a report-only CSP policy ("An attempt to execute inline scripts has been blocked"). The behavior was allowed, and a CSP report was sent.</pre>
-      <p>In addition to a console message, a <code>securitypolicyviolation</code> event is fired on the window. See <a href="https://www.w3.org/TR/CSP2/#firing-securitypolicyviolationevent-events">https://www.w3.org/TR/CSP2/#firing-securitypolicyviolationevent-events</a>.
+      <p>In addition to a console message, a <code>securitypolicyviolation</code> event is fired on the window. See <a href="https://www.w3.org/TR/CSP2/#firing-securitypolicyviolationevent-events" rel="nofollow">https://www.w3.org/TR/CSP2/#firing-securitypolicyviolationevent-events</a>.
 
       <h2 id="server">Server Side Configuration</h2>
 
@@ -410,14 +419,5 @@ layout: layout
   &lt;/httpProtocol&gt;
 &lt;/system.webServer&gt;</pre>
 
-      <h2 id="resources">CSP Resources</h2>
-      <p>Want more info on CSP, checkout these links:</p>
-      <ul>
-        <li><a href="http://www.w3.org/TR/CSP1/">CSP 1.0 Spec</a></li>
-        <li><a href="http://www.w3.org/TR/CSP2/">CSP Level 2 Spec <em>(W3C Candidate Recommendation, 21 July 2015)</em></a></a></li>
-        <li><a href="presentations/">CSP Presentations / Slides</a></li>
-        <li><a href="https://hacks.mozilla.org/2016/02/implementing-content-security-policy/">Mozilla Tutorial: Implementing Content Security Policy</a></li>
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives">Mozilla MDN Docs</a></li>
-
-      </ul>
+      
 
