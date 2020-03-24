@@ -1,0 +1,33 @@
+---
+title: Netlify Content-Security-Policy Example
+description: How to add a content security policy headers to a Netlify site
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>Netlify Example</h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header to your Netlify site.</div>
+</div>
+<h2>Netlify Example CSP Header</h2>
+<p>The easiest way to add headers to your Netlify site is to add the <code>Content-Security-Policy</code> header to your <code>netlify.toml</code> file under the <code>[[headers]]</code> and then under <code>[headers.values]</code></p>
+<pre>
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self';"
+</pre>
+<p>In the above example we are simply setting a policy:</p>
+<pre>default-src 'self';</pre>
+<p>Chances are you will need something more involved than that</p>
+<h2>What goes inside a Content Security Policy?</h2>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
+
+<h2>Another Option for Netlify</h2>
+<p>Instead of using <code>netlify.toml</code> you can instead place a file named <code>_headers</code> in the publish directory of your site. The syntax for that file might look like this:</p>
+<pre>
+/*
+  Content-Security-Policy: default-src 'self';
+</pre>
