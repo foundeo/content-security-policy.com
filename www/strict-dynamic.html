@@ -1,0 +1,47 @@
+---
+title: strict-dynamic Explained
+description: How to use strict-dynamic in a Content Security Policy.
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1><code>strict-dynamic</code> in CSP</h1>
+	<div class="lead">The <code>strict-dynamic</code> source list keyword allows you to simplify your CSP policy by favoring <a href="/hash/">hashes</a> and <a href="/nonce/">nonces</a> over domain host lists.</div>
+</div>
+<h2>A strict-dynamic Example</h2>
+<p>Here is an example <code>Content-Security-Policy</code> that uses <code>strict-dynamic</code>:</p>
+<pre>
+script-src 'nonce-r@nd0m' 'strict-dynamic';default-src 'self';
+</pre>
+<p>Now we can simply use a nonce to load our scripts:</p>
+<pre>
+&lt;script src="/script-loader.js" nonce="r@nd0m"&gt;&lt;/script&gt;
+</pre>
+<p>The key super power of <code>strict-dynamic</code> is that it will allow <code>/script-loader.js</code> to load additional scripts via <em>non-"parser-inserted"</em> script elements.</p>
+<p>So how do you create a <em>non-"parser-inserted"</em> script element? Here's an example:</p>
+<pre>
+	var s = document.createElement('script');
+	s.src = "https://cdn.example.com/some-script-you-need.min.js";
+	document.body.appendChild(s);
+</pre>
+<p>You can also use other mechanisms to create a script loader, such as webpack, RequireJS, head.js, yepnope.js, etc.</p>
+<h2>Dealing with Unsupported Browsers</h2>
+<p>Since this is a new feature of CSP (CSP Level 3), if someone is using an older browser that may only have CSP Level 2 support, using the above policy the request to load a script from <code>cdn.example.com</code> would be blocked. Support for <a href="/nonce/">nonce</a> would still work in CSP Level 2 browsers, but not in CSP Level 1. </p>
+<p>Thankfully the authors of CSP Level 3 considered this, and have a clever workaround. When <code>strict-dynamic</code> is used, browsers that support it will ignore the following source list expressions:</p>
+<ul>
+	<li><code><a href="/unsafe-inline/">'unsafe-inline'</a></code></li>
+	<li><code>'unsafe-eval'</code></li>
+	<li><code>'self'</code>
+	<li><code>http:</code> or <code>https:</code> host based source lists</li>
+</ul>
+<p>So our script can be made backwards compatable by doing something like this:</p>
+<pre>script-src 'nonce-r@nd0m' 'strict-dynamic' https: 'self';default-src 'self';</pre>
+<p>Above we have added 'self' to allow loading of <code>/script-loader.js</code> and we have added <code>https:</code> to allow loading of <code>https://cdn.example.com/some-script-you-need.min.js</code></p>
+<p>You may notice that by adding <code>https:</code> we are allowing any domain to load a script, you could be more specific if you wanted to. In our example the following would be better:</p>
+<pre>script-src 'nonce-r@nd0m' 'strict-dynamic' cdn.example.com 'self';default-src 'self';</pre>
+<p>If we had an <a href="/examples/allow-inline-script/">inline script block</a> then we could consider adding <code>'unsafe-inline'</code> to the policy to allow it to load on CSP Level 1 Browsers. You'll need to balance the compexity of your policy vs the bredth of browsers that you want to support.</p>
+<h2>What directives support strict-dynamic?</h2>
+<p>You can use <code>strict-dynamic</code> in a <a href="/script-src/">script-src</a> or <a href="/default-src/">default-src</a> directive. When it is in the default-src it only applies to loading of scripts.</p>
+<h2>Browser Support for strict-dynamic</h2>
+<p>The <code>strict-dynamic</code>  directive was added to CSP Level 3. It is currenlty only supported in Chrome and Firefox.</p>
+<p>It is not supported at all in Internet Explorer, you need to use the Edge browser instead.</p>

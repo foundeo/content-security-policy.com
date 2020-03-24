@@ -14,7 +14,7 @@ date: Last Modified
 <p>When you want to <a href="/examples/allow-inline-script/">allow inline scripts or styles</a> on a page that uses CSP, there two much better options: <a href="/nonce/">nonce</a> or <a href="/hash/">hash</a>.</p>
 
 <h2>When is it ok to use unsafe-inline?</h2>
-<p>It is only ok to use <code>unsafe-inline</code> when it is combined with the <code>strict-dynamic</code> directive. On browsers that support <code>strict-dynamic</code> (CSP Level 3+), the <code>unsafe-inline</code> is ignored, and provides a route to backwards compatibility on browsers that support CSP Level 2 or lower.</p>
+<p>It is only ok to use <code>unsafe-inline</code> when it is combined with the <a href="/strict-dynamic/"><code>strict-dynamic</code> directive</a>. On browsers that support <code>strict-dynamic</code> (CSP Level 3+), the <code>unsafe-inline</code> is ignored, and provides a route to backwards compatibility on browsers that support CSP Level 2 or lower.</p>
 <p>In other words, you should only use it if you really know what you are doing!</p>
 
 
