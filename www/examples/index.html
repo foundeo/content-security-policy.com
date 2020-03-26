@@ -9,8 +9,15 @@ nav: examples
 	<h1>Content Security Policy Examples</h1>
 	<div class="lead">Various examples on how to work with CSP.</div>
 </div>
+<p>Here's a simple example of a <code>Content-Security-Policy</code> header:</p>
+<pre>Content-Security-Policy: default-src 'self'; img-src 'self' cdn.example.com;</pre>
+<p>In this example CSP policy you find two CSP directives: <a href="/default-src/"><code>default-src</code></a> and <a href="/img-src/"><code>img-src</code></a>.</p>
+<p>The <a href="/default-src/"><code>default-src</code></a> directive restricts what URLs resources can be fetched from the document that set the <code>Content-Security-Policy</code> header. This includes images (<a href="/img-src/"><code>img-src</code></a>), css files (<a href="/script-src/"><code>script-src</code></a>), js files (<a href="/script-src/"><code>script-src</code></a>), etc.</p>
+<p>We have set the <code>default-src</code> directive to <code>`self`</code> which means the same origin, or same domain and scheme.</p>
+<p>By adding the <a href="/img-src/"><code>img-src</code></a> directive to our policy we can override the <a href="/default-src/"><code>default-src</code></a> directive and provide a policy specific to loading images. In this case we are allowing images to be loaded from <code>'self'</code> and the domain <code>cdn.example.com</code>.</p>
 
-<h2>CSP Examples</h2>
+<p class="lead">Check out the <a href="/"><code>Content-Security-Policy</code> header reference</a> for a full list of directives.</p>
+<h2>More CSP Examples</h2>
 <ul>
 {%- for ex in collections.examples -%}
   <li><a href="{{ex.url}}">{{ ex.data.title }}</a> - {{ ex.data.description }}</li>

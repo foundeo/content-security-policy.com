@@ -11,7 +11,23 @@ tags: examples
 	<h1>CSP Inline Scripts</h1>
 	<div class="lead">When you enable CSP, it will block inline scripts, but there are some ways that you can allow inline scripts and still use Content Security Policy.</div>
 </div>
-
+<h2>Inline Scripts are Blocked by Default with Content Security Policy</h2>
+<p>When you have a <code>Content-Security-Policy</code> header defined, the browser will automatically block inline scripts (unless you implement one of the workarounds specified below), such as:</p>
+<pre>
+&lt;script&gt;
+	doSomething();
+&lt;/script&gt;
+</pre>
+<p>Or</p>
+<pre>&lt;div onclick="doSomething();"&gt;Click Me&lt;/div&gt;</pre>
+<p>You might see something like this as a result:</p>
+<blockquote>
+	content security policy: the page’s settings blocked the loading of a resource at inline (“script-src”).
+</blockquote>
+<p>Or you might see this:</p>
+<blockquote>
+	content security policy: the page’s settings blocked the loading of a resource at inline (“default-src”).
+</blockquote>
 <h2>Allow Inline Scripts using a Nonce</h2>
 
 <p>One of the easiest ways to allow inline scripts when using CSP is to use a <a href="/nonce/" title="CSP Nonce">nonce</a>. A <a href="/nonce/" title="CSP Nonce">nonce</a> is just a random, single use string value that you add to your <code>Content-Security-Policy</code> header, like so:

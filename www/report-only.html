@@ -1,0 +1,26 @@
+---
+title: The Content-Security-Policy-Report-Only Header
+description: What is the Content-Security-Policy-Report-Only http header?
+layout: layout
+date: Last Modified
+---
+
+<div class="jumbotron">
+	<h1>Content-Security-Policy-Report-Only Header</h1>
+	<div class="lead">What is the Content-Security-Policy-Report-Only header?</div>
+</div>
+<h2>Why use the Content-Security-Policy-Report-Only Header?</h2>
+<p>It is a great way to see the possible effect of implementing a <a href="/">Content-Security-Policy header</a> without actually blocking anything. When you use <code>Content-Security-Policy-Report-Only</code> it only sends reports to the developer tools console and if you have specified a <code>report-to</code> or <code>report-uri</code> directive it can post a JSON representation of the a violation to a URI endpoint that you specify.</p>
+
+<h2>Content-Security-Policy-Report-Only Browser Support</h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br>
+</div>
+<p>The <code>Content-Security-Policy-Report-Only</code> header has been supported since the first version of CSP Level 1. This means that support has existed since 2013: Chrome 25+, Firefox 23+, Safari 7+ or IE Edge 12+.</p>

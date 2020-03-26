@@ -31,16 +31,17 @@ script-src 'self' https://js.example.com;
   runInlineScript();
 &lt;/script&gt;
 </pre>
-<p>Blocked because inline scripts are blocked by default, you have to use <a href="/hash/">hashes</a> or a <a href="/nonce/" title="CSP with Nonce">nonce</a> (CSP Level 2) to get allow inline scripts to run.</p>
+<p>Blocked because inline scripts are blocked by default, you have to use <a href="/hash/">hashes</a> or a <a href="/nonce/" title="CSP with Nonce">nonce</a> (CSP Level 2) to <a href="/examples/allow-inline-script/">allow inline scripts to run</a>.</p>
 <pre>
 &lt;button onClick="runInlineScript();"&gt;
   All JS Event Handlers Blocked
 &lt;/button&gt;
 </pre>
-<p>The execution of all JS event handlers from inline HTML markup are blocked default, <code>onclick</code>, <code>onload</code>, <code>onmouseover</code>, <code>onsubmit</code>, etc.</p>
+<p>The execution of all JS event handlers from inline HTML markup are blocked default, <code>onclick</code>, <code>onload</code>, <code>onmouseover</code>, <code>onsubmit</code>, etc. You can get them to work via a <a href="/"><code>'unsafe-hashes'</code></a> source list expression, however that is only supported on CSP Level 3 browsers.</p>
 <pre>
 &lt;a href="javascript:runInlineScript();"&gt;Won't Run&lt;/a&gt;
 </pre>
+<p>There is no way to get <code>javascript:</code> to work when CSP is enabled except for <a href="/unsafe-inline/"><code>unsafe-inline</code></a>.
 <h2>Browser Support for <code>script-src</code></h2>
 <div class="bs">
 	<div class="label label-success">CSP Level 1</div>

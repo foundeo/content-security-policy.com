@@ -34,12 +34,24 @@ script-src 'nonce-r@nd0m' 'strict-dynamic';default-src 'self';
 	<li><code>'self'</code>
 	<li><code>http:</code> or <code>https:</code> host based source lists</li>
 </ul>
+<p>In fact you might see something like this in your developer tools console:</p>
+<blockquote>
+	content security policy: ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified<br>
+	content security policy: ignoring “http:” within script-src: ‘strict-dynamic’ specified<br>
+	content security policy: ignoring “https:” within script-src: ‘strict-dynamic’ specified<br>
+	content security policy: ignoring “'unsafe-eval'” within script-src: ‘strict-dynamic’ specified
+</blockquote>
 <p>So our script can be made backwards compatable by doing something like this:</p>
 <pre>script-src 'nonce-r@nd0m' 'strict-dynamic' https: 'self';default-src 'self';</pre>
 <p>Above we have added 'self' to allow loading of <code>/script-loader.js</code> and we have added <code>https:</code> to allow loading of <code>https://cdn.example.com/some-script-you-need.min.js</code></p>
 <p>You may notice that by adding <code>https:</code> we are allowing any domain to load a script, you could be more specific if you wanted to. In our example the following would be better:</p>
 <pre>script-src 'nonce-r@nd0m' 'strict-dynamic' cdn.example.com 'self';default-src 'self';</pre>
 <p>If we had an <a href="/examples/allow-inline-script/">inline script block</a> then we could consider adding <code>'unsafe-inline'</code> to the policy to allow it to load on CSP Level 1 Browsers. You'll need to balance the compexity of your policy vs the bredth of browsers that you want to support.</p>
+<p>On older browsers you may see something like this:</p>
+<blockquote>
+	the source list for content security policy directive 'script-src' contains an invalid source: ''strict-dynamic''. it will be ignored.
+</blockquote>
+<p>You can also ignore such a message.</p>
 <h2>What directives support strict-dynamic?</h2>
 <p>You can use <code>strict-dynamic</code> in a <a href="/script-src/">script-src</a> or <a href="/default-src/">default-src</a> directive. When it is in the default-src it only applies to loading of scripts.</p>
 <h2>Browser Support for strict-dynamic</h2>
