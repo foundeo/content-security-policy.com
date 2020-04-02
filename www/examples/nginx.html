@@ -1,0 +1,20 @@
+---
+title: Content-Security-Policy Headers on Nginx
+description: How to add a content security policy headers to a nginx site
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>Nginx Content-Security-Policy Headers</h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header to your Nginx site.</div>
+</div>
+<h2>Nginx Example CSP Header</h2>
+<p>Inside your nginx <code>server {}</code> block add:</p>
+<pre>add_header Content-Security-Policy "default-src 'self';";</pre>
+<p>You can also append <code>always</code> to the end to ensure that nginx sends the header reguardless of response code.</p>
+<p>In the above example we are simply setting a policy:</p>
+<pre>default-src 'self';</pre>
+<p>Chances are you will need something more complicated than that, so check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for more info.</p>

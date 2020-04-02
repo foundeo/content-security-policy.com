@@ -17,6 +17,8 @@ date: Last Modified
 <p>It is only ok to use <code>unsafe-inline</code> when it is combined with the <a href="/strict-dynamic/"><code>strict-dynamic</code> directive</a>. On browsers that support <code>strict-dynamic</code> (CSP Level 3+), the <code>unsafe-inline</code> is ignored, and provides a route to backwards compatibility on browsers that support CSP Level 2 or lower.</p>
 <p>In other words, you should only use it if you really know what you are doing!</p>
 
+<h2>Why is unsafe-inline not working?</h2>
+<p>The most common reason that unsafe inline is not working is that you forgot to wrap it with single quotes. It should be specified as: <code>'unsafe-inline'</code></p>
 
 <h2>Browser Support for <code>unsafe-inline</code></h2>
 <div class="bs">
