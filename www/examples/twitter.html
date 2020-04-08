@@ -25,7 +25,7 @@ tags: examples
 <h2>CSP Header for Twitter Follow Button</h2>
 Here's the header I'm using:
 <pre>
-Content-Security-Policy: script-src platform.twitter.com syndication.twitter.com
+Content-Security-Policy: script-src 'self' platform.twitter.com syndication.twitter.com; style-src 'self' 'sha256-5g0QXxO6NfvHJ6Uf5BK/hqQHtso8ZOdjlnbyKtYLvwc='; frame-src 'self' platform.twitter.com
 </pre>
 <h2>What else goes inside a CSP policy?</h2>
 <p>Check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for more information about CSP.</p>
