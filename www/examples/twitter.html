@@ -27,6 +27,17 @@ Here's the header I'm using:
 <pre>
 Content-Security-Policy: script-src 'self' platform.twitter.com syndication.twitter.com; style-src 'self' 'sha256-5g0QXxO6NfvHJ6Uf5BK/hqQHtso8ZOdjlnbyKtYLvwc='; frame-src 'self' platform.twitter.com
 </pre>
+<p>Let's break that down by each CSP directive:</p>
+<h4>script-src</h4>
+<pre>script-src 'self' platform.twitter.com syndication.twitter.com;</pre>
+<p>Since we have a <code>script</code> tag with <code>src</code> value of <code>https://platform.twitter.com/widgets.js</code> we need to enable <code>platform.twitter.com</code>. This script also makes calls to <code>https://syndication.twitter.com</code> so we apparently need to enable that as well.</p>
+<p>We also have the <code>'self'</code> keyword in there, that just means that scripts from our same domain or same origin are also allowed. You might not need that if you don't have any other JS files.</p>
+<h4>style-src</h4>
+<pre>style-src 'self' 'sha256-5g0QXxO6NfvHJ6Uf5BK/hqQHtso8ZOdjlnbyKtYLvwc=';</pre>
+<p>Here we've added a <a href="/hash/">sha256 hash</a> of the inline style that the twitter script is using. If twitter changes how they style this, it might break.</p>
+<h4>frame-src</h4>
+<pre>frame-src 'self' platform.twitter.com;</pre>
+<p>The twitter follow button widget embeds an iframe on our page, so we need to tell CSP to allow that by using the <code>frame-src</code> directive.</p>
 <h2>What else goes inside a CSP policy?</h2>
 <p>Check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for more information about CSP.</p>
 
