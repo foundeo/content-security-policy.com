@@ -6,9 +6,4 @@
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-    Content-Security-Policy = "default-src 'none'; script-src 'self' ssl.google-analytics.com 'sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ=' 'unsafe-hashes' 'sha256-mplq9U9bn5xLaFQjbIOde0Eu7cXsI2xaTPex2jLztp0='; style-src 'self' cdnjs.cloudflare.com fonts.googleapis.com; font-src fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' ssl.google-analytics.com;"
-  for = "/examples/twitter/"
-  [headers.values]
-  	X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    Content-Security-Policy = "default-src 'none'; script-src 'self' ssl.google-analytics.com platform.twitter.com syndication.twitter.com 'sha256-u4xzC4jS4RXIlueFC69hb9emV/cKLXyy2+qoa1QkoPo='; style-src 'self' cdnjs.cloudflare.com fonts.googleapis.com; font-src fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' ssl.google-analytics.com;"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' ssl.google-analytics.com platform.twitter.com syndication.twitter.com 'sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ=' 'unsafe-hashes' 'sha256-mplq9U9bn5xLaFQjbIOde0Eu7cXsI2xaTPex2jLztp0='; style-src 'self' cdnjs.cloudflare.com fonts.googleapis.com; font-src fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' ssl.google-analytics.com;"

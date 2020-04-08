@@ -14,18 +14,18 @@ tags: examples
 <h2>Example Twitter Follow Button</h2>
 <p>Here is my follow button:</p>
 <a href="https://twitter.com/pfreitag" class="twitter-follow-button" data-show-count="true" data-size="large">Follow @pfreitag</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<script src="https://platform.twitter.com/widgets.js"></script>
 <p>As you can see this follow button needs to use JavaScript because it will fetch the number of twitter followers I have. If you don't need the JavaScript version of the button, you can simply create your own button and not worry about adding support for CSP.</p> 
 <h2>HTML Markup Used for Button Above</h2>
 <p>I inserted the following to get that button:</p>
 <pre>
 &lt;a href="https://twitter.com/pfreitag" class="twitter-follow-button" data-show-count="true" data-size="large"&gt;Follow @pfreitag&lt;/a&gt;
-&lt;script&gt;!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");&lt;/script&gt;
+&lt;script src="https://platform.twitter.com/widgets.js"&gt;&lt;/script&gt;
 </pre>
 <h2>CSP Header for Twitter Follow Button</h2>
 Here's the header I'm using:
 <pre>
-Content-Security-Policy: script-src platform.twitter.com syndication.twitter.com 'sha256-u4xzC4jS4RXIlueFC69hb9emV/cKLXyy2+qoa1QkoPo='
+Content-Security-Policy: script-src platform.twitter.com syndication.twitter.com
 </pre>
 <h2>What else goes inside a CSP policy?</h2>
 <p>Check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for more information about CSP.</p>
