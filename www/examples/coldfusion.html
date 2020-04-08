@@ -1,0 +1,29 @@
+---
+title: Content-Security-Policy ColdFusion Examples
+description: How to add a content security policy header in a ColdFusion application.
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>CSP ColdFusion Example</h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header using ColdFusion or CFML.</div>
+</div>
+<h2>Example CSP Header using CFML</h2>
+<p>Use the <a href="https://cfdocs.org/cfheader">cfheader</a> tag to write a HTTP response header:</p>
+<pre>
+&lt;cfheader name="Content-Security-Policy" value="default-src 'self'"&lt;
+</pre>
+<p>Your policy will go inside the <code>value</code> attribute in the example above.</p>
+<p><strong>Or using CFScript</strong></p>
+<pre>
+cfheader(name="Content-Security-Policy", value="default-src 'self'");
+</pre>
+<p>The cfscript syntax above requires CF11 or above.</p>
+<h2>Using your Web Server</h2>
+<p>Instead of writing the header directly from your CFML, you can instead use your web server to write the header. For example <a href="/examples/nginx/">CSP with nginx</a> or <a href="/examples/htaccess/">CSP with Apache via htaccess</a>. In IIS you can simply add the header using Response Headers widget in the IIS manager app.</p>
+
+<h2>What is a CSP policy?</h2>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>

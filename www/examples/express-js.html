@@ -1,0 +1,31 @@
+---
+title: Content-Security-Policy Express JS Examples
+description: How to add a content security policy header in a node express.js application.
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>CSP ExpressJS Example</h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header using Express.</div>
+</div>
+<h2>Example CSP Header with Java</h2>
+<p>By using the Express API, we can use the <code>set</code> method of the Express <code>Response</code> object.</p>
+<pre>
+res.set("Content-Security-Policy", "default-src 'self'");
+</pre>
+<p>Your policy will go inside the second argument of the <code>set</code> method of the Express Response object.</p>
+<h2>Using Your Web Server</h2>
+<p>Instead of writing the header directly from your node js code, you can instead use your web server to write the header. For example <a href="/examples/nginx/">CSP with nginx</a> or <a href="/examples/htaccess/">CSP with Apache via htaccess</a>.</p>
+
+<h2>Express Middleware for CSP</h2>
+<p>As we saw above it is quite simple to set the header yourself, but if you are looking for some additional features there are some express middleware modules that support CSP:</p>
+<ul>
+	<li><a href="https://helmetjs.github.io/docs/csp/" rel="nofollow">HelmetJS</a> - helps you set Content-Security-Policy along with a bunch of other security related headers.</li>
+	<li><a href="https://github.com/frux/express-csp-header" rel="nofollow">express-csp-header</a> - express middleware for CSP.</li>
+</ul>
+
+<h2>What goes inside a CSP policy?</h2>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
