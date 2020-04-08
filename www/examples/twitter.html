@@ -1,6 +1,6 @@
 ---
-title: Content-Security-Policy Java Examples
-description: How to add a content security policy header in a Java application.
+title: Content-Security-Policy Twitter Button Example
+description: Adjusting your CSP to allow the Twitter Button to work.
 layout: layout
 date: Last Modified
 nav: examples
@@ -37,7 +37,7 @@ Content-Security-Policy: script-src 'self' platform.twitter.com syndication.twit
 <p>Here we've added a <a href="/hash/">sha256 hash</a> of the inline style that the twitter script is using. If twitter changes how they style this, it might break.</p>
 <h4>frame-src</h4>
 <pre>frame-src 'self' platform.twitter.com;</pre>
-<p>The twitter follow button widget embeds an iframe on our page, so we need to tell CSP to allow that by using the <code>frame-src</code> directive.</p>
+<p>The twitter follow button widget embeds an iframe on our page, so we need to tell CSP to allow that by using the <code>frame-src</code> directive.</p> 
 <h2>What else goes inside a CSP policy?</h2>
 <p>Check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for more information about CSP.</p>
 
