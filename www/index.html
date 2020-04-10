@@ -123,7 +123,7 @@ layout: layout
 
       <h3><code>connect-src</code></h3>
       <div class="pd">
-        <p>Applies to <code>XMLHttpRequest</code> (AJAX), <code>WebSocket</code> or <code>EventSource</code>. If not allowed the browser emulates a <code>400</code> HTTP status code.</p>
+        <p>Applies to <code>XMLHttpRequest</code> (AJAX), <code>WebSocket</code>, <code>fetch()</code>, <code>&lt;a ping&gt;</code> or <code>EventSource</code>. If not allowed the browser emulates a <code>400</code> HTTP status code.</p>
         <h5>Example connect-src Policy</h5>
         <pre>connect-src 'self';</pre>
         <span class="label label-success">CSP Level 1</span>
@@ -283,6 +283,14 @@ layout: layout
         <span class="label label-default" title="Firefox 40+ - 2015"><i class="fa fa-firefox"></i> 40+</span>
       </div>
 
+      <h3><code>prefetch-src</code></h3>
+      <div class="pd">
+        <p>Defines valid sources for request prefetch and prerendering, for example via the <code>link</code> tag with <code>rel="prefetch"</code> or <code>rel="prerender"</code>:</p>
+        <h5>Example prefetch-src Policy</h5>
+        <pre>prefetch-src 'none'</pre>
+        <span class="label label-success">CSP Level 3</span> 
+      </div>
+
       <h3><code>navigate-to</code></h3>
       <div class="pd">
         <p>Restricts the URLs that the document may navigate to by any means. For example when a link is clicked, a form is submitted, or <code>window.location</code> is invoked. If <code>form-action</code> is present then this directive is ignored for form submissions. <a href="https://www.chromestatus.com/features/6457580339593216" rel="nofollow">Implementation Status</a></p>
@@ -290,6 +298,8 @@ layout: layout
         <pre>navigate-to example.com</pre>
         <span class="label label-success">CSP Level 3</span> 
       </div>
+
+
 
       <br>
 
