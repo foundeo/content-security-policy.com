@@ -325,7 +325,7 @@ layout: layout
             <td>Prevents loading resources from any source.</td>
           </tr>
           <tr>
-            <td><code>'self'</code></td>
+            <td><a href="/self/" title="CSP self"><code>'self'</code></a></td>
             <td><code>script-src 'self'</code></td>
             <td>Allows loading resources from the same origin (same scheme, host and port).</td>
           </tr>
@@ -355,7 +355,7 @@ layout: layout
             <td>Allows loading resources only over HTTPS on any domain.</td>
           </tr>
           <tr>
-            <td><a href="/unsafe-inline/"><code>'unsafe-inline'</code></a></td>
+            <td><a href="/unsafe-inline/" title="CSP unsafe-inline"><code>'unsafe-inline'</code></a></td>
             <td><code>script-src 'unsafe-inline'</code></td>
             <td>Allows use of inline source elements such as style attribute, onclick, or script tag bodies (depends on the context of the source it is applied to) and <code>javascript:</code> URIs</td>
           </tr>
@@ -365,7 +365,7 @@ layout: layout
             <td>Allows unsafe dynamic code evaluation such as JavaScript <code>eval()</code></td>
           </tr>
           <tr>
-            <td><a href="/hash/"><code>'sha256-'</code></a></td>
+            <td><a href="/hash/" title="CSP hash"><code>'sha256-'</code></a></td>
             <td><code>script-src 'sha256-xyz...'</code></td>
             <td>Allows an inline script or CSS to execute if its hash matches the specified hash in the header. Currently supports SHA256, SHA384 or SHA512.  <span class="label label-success">CSP Level 2</span> </td>
           </tr>
@@ -375,7 +375,7 @@ layout: layout
             <td>Allows an inline script or CSS to execute if the script (eg: <code>&lt;script nonce="r@nd0m"&gt;</code>) tag contains a nonce attribute matching the nonce specifed in the CSP header. The nonce should be a secure random string, and should not be reused. <span class="label label-success">CSP Level 2</span> </td>
           </tr>
           <tr>
-            <td><a href="/strict-dynamic/"><code>'strict-dynamic'</code></a></td>
+            <td><a href="/strict-dynamic/" title="CSP strict-dynamic"><code>'strict-dynamic'</code></a></td>
             <td><code>script-src 'strict-dynamic'</code></td>
             <td>Enables an allowed script to load additional scripts via non-"parser-inserted" script elements (for example <code>document.createElement('script');</code> is allowed).  <span class="label label-success">CSP Level 3</span> </td>
           </tr>

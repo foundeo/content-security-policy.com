@@ -1,0 +1,60 @@
+---
+title: CSP ⟶ self Keyword Explained
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>The <code>self</code> Source List Keyword</h1>
+	<div class="lead">The <code>self</code> <strong>Content Security Policy</strong> (CSP) keyword is an alias for the <em>same origin</em> of the current document.</div>
+</div>
+
+<h2>What does <code>self</code> mean in a CSP Policy?</h2>
+
+<p>When you encounter the <code>self</code> keyword in a <code>Content-Security-Policy</code> header directive it is an alias for thet same origin. The same origin includes the scheme (http:// or https://) as well as the domain name. So if you type the following into the address bar of a browser:</p>
+<pre>https://app.example.com/sub-app/</pre>
+<p>The origin is: <code>https://app.example.com</code></p>
+<h2>CSP Self Example</h2>
+<p>Suppose you are setting a <code>Content-Security-Policy</code> header for the site: <code>https://app.example.com</code></p>
+<p>If you set the following header:</p>
+<pre>Content-Security-Policy: default-src 'none'; img-src 'self';</pre>
+<h4>Allows</h4>
+<p>The following are allowed by the CSP <code>'self'</code> keyword in the policy above:</p>
+<pre>
+&lt;img src="/images/logo.png"&gt;
+&lt;img src="https://app.example.com/images/logo.png"&gt;
+</pre>
+<h4>Blocks</h4>
+<p>The following would be blocked by the policy.</p>
+<pre>
+&lt;img src="https://other-app.example.com/images/logo.png"&gt;
+</pre>
+<p>If we wanted to allow images to load from <code>other-app.example.com</code>, then we need to allow it in our CSP policy:</p>
+<pre>
+Content-Security-Policy: default-src 'none'; img-src 'self' https://other-app.example.com;
+</pre>
+<p>If you're not sure what <a href="/default-src/"><code>default-src</code></a> or <a href="/img-src/"><code>img-src</code></a> are, then check out our <a href="https://content-security-policy.com/">CSP Directive Reference</a> for details.</p>
+
+<h2>Why is CSP <code>self</code> not working?</h2>
+<p>Here are some reasons why your CSP <code>self</code> keyword is not working:</p>
+<ul>
+	<li>You may be using <code>self</code> and not <code>'self'</code> the single quotes are required.</li>
+	<li>Missing a semi-colon in your policy?</li>
+	<li>Make sure you are not trying to cross schemes http / https.</li>
+</ul>
+
+<h2>Browser Support for <code>self</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+	<div class="label label-default" title="IE - Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>The CSP <code>self</code> source list keyword has been part of the Content Security Policy Specification since the first version of it (CSP Level 1).</p>
+<p>Internet Explorer 11 and below do not support the CSP <code>self</code> keyword.</p>
