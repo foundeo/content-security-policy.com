@@ -1,0 +1,57 @@
+---
+title: CSP ⟶ img-src Explained
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>The <code>img-src</code> Directive</h1>
+	<div class="lead">The <code>img-src</code> <strong>Content Security Policy</strong> (CSP) directive controls the loading of images (for example via an <code>&lt;img&gt;</code> HTML tag.</div>
+</div>
+
+<h2>Example Policy</h2>
+<p>Assume a <code>Content-Security-Policy</code> header is set with the following policy:</p>
+<pre>
+img-src 'self' https://images.example.com;
+</pre>
+<h4>Allows</h4>
+<p>With the above CSP policy, images can be loaded from the same origin (via the 'self' source list value), or via URLs starting with: <code>https://images.example.com</code>
+<pre>
+&lt;img src="/images/me.jpg"&gt;
+&lt;img src="https://images.example.com/photo.jpg"&gt;
+</pre>
+<h4>Blocks</h4>
+<p>The above policy will block any image not same origin or via <code>https://images.example.com</code>, so the following would be blocked:</p>
+<pre>
+&lt;img src="https://other.example.com/photo.jpg"&gt;
+</pre>
+
+<h2>What does 'img-src' was not explicitly set mean?</h2>
+<p>If you do not set the <code>img-src</code> CSP directive, but you do have the <a href="/default-src/"><code>default-src</code></a> CSP directive set, then that policy will be applied. You need to either make sure that your <code>img</code> <code>src</code> attribute values comply with the default-src policy, or you need to add a <code>img-src</code> directive to your CSP policy.</p>
+
+<p>Here are some example of what you might see in the console when images are blocked from loading by a CSP policy with a <code>default-src</code> policy set:</p>
+
+<blockquote>
+	refused to load the image because it violates the following content security policy directive: "default-src 'none'". note that 'img-src' was not explicitly set, so 'default-src' is used as a fallback.
+</blockquote>
+
+
+<blockquote>
+	refused to load the image 'http://localhost:8080/favicon.ico' because it violates the following content security policy directive: "default-src 'none'". note that 'img-src' was not explicitly set, so 'default-src' is used as a fallback.
+</blockquote>
+
+<h2>Browser Support for <code>img-src</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+	<div class="label label-default" title="IE - img-src Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>The CSP <code>img-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1).</p>
+<p>Internet Explorer 11 and below do not support the CSP <code>img-src</code> directive. This means that IE11 will simply ignore the policy and allow images to load from anywhere (as if a policy had not been set at all).</p>
