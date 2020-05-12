@@ -18,11 +18,11 @@ date: Last Modified
 <h2>Which directives fallback to <code>default-src</code>?</h2>
 <p>All <em>CSP fetch directives</em> fallback to the <code>default-src</code> directive. For example the following directives will fallback to <code>default-src</code>:</p>
 <ul>
-	<li><a href="/script-src/"><code>script-src</code></a></li>
-	<li><a href="/style-src/"><code>style-src</code></a></li>
-	<li><a href="/font-src/"><code>font-src</code></a></li>
-	<li><code>img-src</code></li>
-	<li><code>connect-src</code></li>
+	<li><a href="/script-src/" title="CSP script-src Directive"><code>script-src</code></a></li>
+	<li><a href="/style-src/" title="CSP style-src Directive"><code>style-src</code></a></li>
+	<li><a href="/font-src/" title="CSP font-src Directive"><code>font-src</code></a></li>
+	<li><a href="/img-src/" title="CSP img-src Directive"><code>img-src</code></a></li>
+	<li><a href="/connect-src/" title="CSP connect-src Directive"><code>connect-src</code></a></li>
 	<li><code>worker-src</code></li>
 	<li><code>object-src</code></li>
 	<li><code>media-src</code></li>
@@ -36,12 +36,12 @@ date: Last Modified
 <ul>
 	<li><code>base-uri</code></li>
 	<li><code>form-action</code></li>
-	<li><a href="/frame-ancestors/"><code>frame-ancestors</code></a></li>
+	<li><a href="/frame-ancestors/" title="CSP frame-ancestors Directive"><code>frame-ancestors</code></a></li>
 	<li><code>report-uri</code></li>
 	<li><code>sandbox</code></li>
 </ul>
 <h2>Do the directives inherit from <code>default-src</code>?</h2>
 <p>If you specify the following policy:</p>
 <pre>default-src 'self';script-src js.example.com;</pre>
-<p>The <code>script-src</code> element does not inherit <code>'self'</code> from the <code>default-src</code>, the <code>script-src</code> policy if specified overwrites the <code>default-src</code> policy for the given directive.</p>
+<p>The <code>script-src</code> element does not inherit <a href="/self/" title="CSP self meaning"><code>'self'</code></a> from the <code>default-src</code>, the <code>script-src</code> policy if specified overwrites the <code>default-src</code> policy for the given directive.</p>
 <p>The policy for <code>style-src</code>, <code>img-src</code>, etc. would still fall back to the default policy  (<code>'self'</code>).</p>

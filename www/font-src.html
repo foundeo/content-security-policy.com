@@ -14,7 +14,7 @@ date: Last Modified
 font-src 'self' https://cdn.example.com;
 </pre>
 <h4>Allows</h4>
-<p>With the above CSP policy, fonts can be loaded from the same origin (via the 'self' source list value), or via URLs starting with: <code>https://cdn.example.com</code>
+<p>With the above CSP policy, fonts can be loaded from the same origin (via the <a href="/self/" title="CSP self keyword">'self'</a> source list value), or via URLs starting with: <code>https://cdn.example.com</code>
 <pre>
 @font-face {
   font-family: 'MyLocalFont';
@@ -34,7 +34,7 @@ font-src 'self' https://cdn.example.com;
 }
 </pre>
 <h4>Inherits from default-src</h4>
-<p>If you don't specify a <code>font-src</code> but do specify a <code>default-src</code> CSP directive, then the value of <code>default-src</code> will be used as the policy for <code>font-src</code>. So for example if you had the following policy:</p>
+<p>If you don't specify a <code>font-src</code> but do specify a <a href="/default-src/" title="default-src CSP directive"><code>default-src</code></a> CSP directive, then the value of <code>default-src</code> will be used as the policy for <code>font-src</code>. So for example if you had the following policy:</p>
 <pre>default-src 'none'</pre>
 <p>When you try to load a font via a CSS <code>@font-face</code> you would get an error like this in the console:</p>
 <blockquote>

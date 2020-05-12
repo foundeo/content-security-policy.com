@@ -1,0 +1,39 @@
+---
+title: CSP ⟶ none Keyword Explained
+description: How to use the CSP none keyword within a Content Security Policy
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>The <code>none</code> Source List Keyword</h1>
+	<div class="lead">The <code>none</code> <strong>Content Security Policy</strong> (CSP) keyword is an alias for the <em>same origin</em> of the current document.</div>
+</div>
+
+<h2>What does <code>none</code> mean in a CSP Policy?</h2>
+
+<p>When you encounter the <dfn><code>none</code></dfn> keyword in a <code>Content-Security-Policy</code> header directive it means that no resources are allowed to load. So if for example you have the following policy:</p>
+<pre>Content-Security-Policy: img-src 'none'</pre>
+<p>Then images will be prevented from loading on the page.</p>
+<h2>What directives should I set to none?</h2>
+<p>It is not a bad idea to set <code>default-src 'none'</code> to block all fetch directives, and then add in other directives as needed.</p>
+<p>If you don't want to set <code>default-src</code> to none then you might be able to set directives like <code>worker-src</code> or <code>object-src</code> to <code>none</code>.</p>
+<h2>Why is CSP <code>none</code> not working?</h2>
+<p>One reason why a <code>none</code> keyword might not work, if you have defined it in a <code><a href="/default-src/">default-src</a></code> directive, but also supplied another directive to override it. For example if you have the policy:</p>
+<pre>default-src 'none'; img-src 'self';</pre>
+<p>Images would be allowed to load from <a href="/self/">the same origin (self)</a>, because the <code>img-src</code> directive overrides the value for the <code>default-src</code> directive.</p>
+<h2>Browser Support for <code>none</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+	<div class="label label-default" title="IE - Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<p>The CSP <code>none</code> source list keyword has been part of the Content Security Policy Specification since the first version of it (CSP Level 1).</p>
+<br>
+<p>Internet Explorer 11 and below do not support the CSP <code>none</code> keyword.</p>
