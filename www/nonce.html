@@ -1,5 +1,6 @@
 ---
 title: Using a nonce in CSP
+description: How to use a nonce with Content Security Policy (CSP) script-src or style-src
 layout: layout
 date: Last Modified
 ---
@@ -7,6 +8,9 @@ date: Last Modified
 	<h1>Using a <code>nonce</code> with CSP</h1>
 	<div class="lead">A <code>nonce</code> is a randomly generated token that should be used only one time. </div>
 </div>
+<h2>What is a nonce?</h2>
+<p>The word <dfn><code>nonce</code></dfn> can be defined as a word or phrase that is intended for use only once. If you were a spy, you might come up with a nonce as a code word to authenticate a rendezvous.</p>
+<p>The important things to remember for nonces with respect to (<abbr title="Content Security Policy">CSP</abbr>) is that we only use our nonce once (for one request), and they should be so random that no one could guess it.</p> 
 <h2>Example Nonce Usage</h2>
 <p>Using a <code>nonce</code> is one of the easiest ways to allow the execution of inline scripts in a Content Security Policy (CSP). Here's how one might use it with the CSP <a href="/script-src/"><code>script-src</code></a> directive:</p>
 <pre>
@@ -21,6 +25,7 @@ script-src 'nonce-r@nd0m';
 	doWhatever();
 &lt;/script&gt;
 </pre>
+
 <h2>Nonce Browser Support</h2>
 <p>The <code>nonce</code> source list directive was added to CSP Level 2. This means that support has existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
-<p>It is not supported at all in Internet Explorer, you need to use the Edge browser instead.</p>
+<p>Nonces are not supported at all in Internet Explorer, you need to use the Edge browser for nonce support instead.</p>

@@ -1,0 +1,101 @@
+---
+title: CSP ⟶ connect-src Explained
+description: The connect-src Content Security Policy (CSP) directive explained
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>The <code>connect-src</code> Directive</h1>
+	<div class="lead">The <code>connect-src</code> <strong>Content Security Policy</strong> (CSP) directive guards the several browsers mechanisms that can fetch HTTP Requests. This includes <code>XMLHttpRequest</code> (AJAX), <code>WebSocket</code>, <code>fetch()</code>, <code>&lt;a ping&gt;</code> or <code>EventSource</code>. </div>
+</div>
+
+<p>
+Web Browsers have several mechanisms to invoke HTTP requests from script, and CSP has the sovereignty to control the endpoints that can be requested.
+</p>
+<h2>What about CORS and the Same Origin Policy?</h2>
+<p>The <code>connect-src</code> CSP directive does not interfeer Cross-Origin Resource Sharing (CORS) headers, so the <em>same origin policy</em> still applies.</p> 
+
+
+<h2>XMLHttpRequests or AJAX and CSP</h2>
+<p>In most cases you will be making XMLHttpRequests to the <em>same origin</em> (the same domain and scheme), for example:</p>
+<pre>
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/api.json');
+xhr.send();
+</pre>
+<p>In that case you will only need to set the <code>connect-src</code> directive to <code><a href="/self/">'self'</a></code>:</p>
+<pre>Content-Security-Policy: connect-src 'self';</pre>
+<h2>What about requesting another domain?</h2>
+<p>If you are attempting to request a domain using XMLHttpRequest that is not the same origin, then you will need to specify that domain in the <code>connect-src</code> directive. Due to the browsers <em>Same Origin</em> policy, you will also need to ensure that the proper CORS headers have been set to allow your domain to connect to the third party domain.</p>
+<p>For example supplse we are making an XMLHttpRequest to api.example.com from app.example.com:</p>
+<pre>
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://api.example.com/api.json');
+xhr.send();
+</pre> 
+<p>First you will need to have api.example.com in your connect-src directive.</p> 
+<pre>Content-Security-Policy: connect-src 'self' https://api.example.com;</pre>
+<p>If we forgot to do this our request would fail with something like this in the developer tools console:</p>
+<blockquote>
+	<strong>Refused to connect to <code>'https://api.example.com'</code> because it violates the following content security policy directive: <code>"connect-src 'self'"</code></strong>
+</blockquote>
+<p>Next the <code>api.example.com</code> server needs to permit <code>app.example.com</code> via a CORS <code>Access-Control-Allow-Origin</code> header. For example:</p>
+<pre>Access-Control-Allow-Origin: https://app.example.com</pre>
+
+<h2>What happens when a request violates the connect-src directive?</h2>
+<p>When a resources is blocked due to <code>connect-src</code> the browser emulates a 400 HTTP status code.</p>
+
+<h2>What else does connect-src apply to?</h2>
+<p>Besides XMLHttpRequest or ajax calls, the connect-src directive also applies to the following browser mechanisms:</p>
+
+<h4>Fetch API</h4>
+<p>The <code>connect-src</code> CSP directive applies to the fetch() api.</p>
+<pre>
+var promise = fetch('https://api.example.com/api.json');
+</pre>
+	
+<h4>Beacon API</h4>
+<p>When using the Beacon API, the CSP <code>connect-src</code> directive applies.</p>
+<pre>
+navigator.sendBeacon('https://example.com/endpoint', data);
+</pre>
+	
+<h4>EventSource API</h4>
+<p>The EventSource API will also fall under the control of the <code>connect-src</code> CSP directive.</p>
+<pre>
+var es = new EventSource('https://example.com/');
+</pre>
+	
+<h4>WebSockets</h4>
+<p>The use of WebSockets is controlled by the <code>connect-src</code> directive.</p>
+<pre>
+var ws = new WebSocket('wss://ws.example.com/');
+</pre>
+	
+<h4>Anchor Tag <code>ping</code> Attribute</h4>
+<p>When using the <code>ping</code> attribute of the <code>a</code> tag, you must specify the endpoint in the <code>connect-src</code> CSP directive.</p>
+<pre>
+&lt;a href="https://example.com/" ping="https://log.example.com/ping"&gt;Go&lt;/a&gt;
+</pre>
+
+<h2>Does connect-src inherit from default-src?</h3>
+<p>If you do not specify a <code>connect-src</code> directive, but do specify a <a href="/default-src/" title="CSP default-src"><code>default-src</code> directive</a> then the value of the <code>default-src</code> directive is used.</p>
+
+<h2>Browser Support for <code>connect-src</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+	<div class="label label-default" title="IE - img-src Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>The CSP <code>connect-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1).</p>
+<p>Internet Explorer 11 and below do not support the CSP <code>connect-src</code> directive. This means that IE11 will simply ignore the policy and allow AJAX requests as long as allowed by CORS.</p>
+
+
