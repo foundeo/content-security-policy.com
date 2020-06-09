@@ -32,6 +32,7 @@ Content-Security-Policy: script-src 'self' platform.twitter.com syndication.twit
 <pre>script-src 'self' platform.twitter.com syndication.twitter.com;</pre>
 <p>Since we have a <code>script</code> tag with <code>src</code> value of <code>https://platform.twitter.com/widgets.js</code> we need to enable <code>platform.twitter.com</code>. This script also makes calls to <code>https://syndication.twitter.com</code> so we apparently need to enable that as well.</p>
 <p>We also have the <code>'self'</code> keyword in there, that just means that scripts from our same domain or same origin are also allowed. You might not need that if you don't have any other JS files.</p>
+<p>Another option here might be to use <a href="/strict-dynamic/" title="CSP strict-dynamic"><code>strict-dynamic</code></a> and a <a href="/nonce/"><code>nonce</code></a>. With this approach you don't need to allow <code>platform.twitter.com syndication.twitter.com</code>, rather you allow the script and trust that it will load resources securely. With this approach Twitter could change the hostname <code>syndication.twitter.com</code> in their JavaScript, and your CSP would not break.</p>
 <h4>style-src</h4>
 <pre>style-src 'self' 'sha256-5g0QXxO6NfvHJ6Uf5BK/hqQHtso8ZOdjlnbyKtYLvwc=';</pre>
 <p>Here we've added a <a href="/hash/">sha256 hash</a> of the inline style that the twitter script is using. If twitter changes how they style this, it might break.</p>
