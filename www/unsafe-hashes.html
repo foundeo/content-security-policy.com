@@ -1,0 +1,42 @@
+---
+title: unsafe-hashes ⟶ CSP Level 3
+description: How to use the unsafe-hashes directive in a CSP policy
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>The <code>unsafe-hashes</code> Source List Keyword</h1>
+	<div class="lead">The <strong><code>unsafe-hashes</code></strong> <strong>Content Security Policy</strong> (CSP) keyword allows the execution of inline scripts within a JavaScript event handler attribute of a HTML element.</div>
+</div>
+<h2>Warning</h2>
+<p class="lead">Whenever you see the prefix <code>unsafe</code> in a CSP keyword, that means that using this is not the most secure way to go. It is better to refactor your code to avoid using HTML event handler attributes (such as <code>onload</code>, <code>onclick</code>, <code>onmouseover</code> etc.)</p>
+
+<h2>Example using <code>unsafe-hashes</code></h2>
+<p>Suppose you have some code throughout your application like this:</p>
+<pre>&lt;button onClick="doSomething();"&gt;</pre>
+
+<p>When you enable a <a href="/"><code>Content-Security-Policy</code></a> on your site with a <a href="/script-src/"><code>script-src</code></a>, you will probably find that the above code is now in violation of your CSP policy. That is because it is considered an <a href="/examples/allow-inline-script/">inline scripts</a> and it will be blocked unless you specifically allow it.</p>
+<p>Unsafe hashes allows us to do just that, by computing a SHA-256 <a href="/hash/">hash</a> of our code, in this case: <code>doSomething();</code> we have the hashed result:</p>
+<pre>RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=</pre>
+<p>We can add the following to a <code>script-src</code> directive in our <code>Content-Security-Policy</code> header to allow this:</p>
+<pre>script-src 'unsafe-hashes' 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc='</pre>
+<p>This will allow the javascript <code>doSomething();</code> to run in our button, but it could also run in an element injected by an attacker.</p>
+<h2>What should you use instead of unsafe-hashes?</h2>
+<p>As we mentioned, the <code>unsafe-hashes</code> source list may be considered <em>unsafe</em>, so a better approach is to move the event handler logic into a JavaScript file.</p>
+<p>For example, we could rewrite the code as:</p>
+<pre>&lt;button id="doSomethingButton"&gt;</pre>
+<p>Then in our JS file, we add:</p>
+<pre>
+document.getElementById("doSomethingButton").addEventListener("click", function() {
+	doSomething();
+});
+</pre>
+<p>Or if you use jQuery, you can use something like this to your JavaScript file:</p>
+<pre>
+$('#doSomethingButton').click(function() {
+	doSomething();
+});
+</pre>
+<h2>Browser Support for <code>unsafe-hashes</code></h2>
+<p>The <code>unsafe-hashes</code> directive was added to CSP Level 3. It is currenlty only supported in Chrome 69+ or Chromium Based Edge 79+.</p>
+
