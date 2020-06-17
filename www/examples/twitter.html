@@ -39,6 +39,9 @@ Content-Security-Policy: script-src 'self' platform.twitter.com syndication.twit
 <h4>frame-src</h4>
 <pre>frame-src 'self' platform.twitter.com;</pre>
 <p>The twitter follow button widget embeds an iframe on our page, so we need to tell CSP to allow that by using the <code>frame-src</code> directive.</p> 
+<h4>img-src</h4>
+<pre>img-src 'self' syndication.twitter.com;</pre>
+<p>The twitter follow button will loads at this point, but it is also requesting to load an image from <code>syndication.twitter.com</code>. We will need to add that to our <a href="/img-src/" title="CSP img-src"><code>img-src</code> CSP directive</a> to remove the warning in the console.</p>
 <h2>What else goes inside a CSP policy?</h2>
 <p>Check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for more information about CSP.</p>
 

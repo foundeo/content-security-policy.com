@@ -1,0 +1,41 @@
+---
+title: Content-Security-Policy with jQuery
+description: How to use content security policy with jQuery
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+<div class="jumbotron">
+	<h1>jQuery  &amp; CSP</h1>
+	<div class="lead">Here's what you need to know with using jQuery with a <code>Content-Security-Policy</code> HTTP response header or meta tag.</div>
+</div>
+<h2>jQuery <code>css()</code> function</h2>
+<p>jQuery code that calls the <code>css()</code> function to set the <code>style</code> attribute of an element <em>may</em> be blocked by CSP. You should change such code to use <code>addClass</code> if possible.</p>
+
+<h2>jQuery <code>attr()</code> function</h2>
+<p>jQuery code that calls the <code>attr()</code> function to set the <code>style</code> attribute, or any javascript event handler attribute (eg onclick, onmouseover, etc) of an element will be blocked by CSP. 
+
+<p>For jQuery code that attempts to set a javascript event handler attribute, you should change such code to use jQuery's event handlers instead if possible. For example:</p>
+<h4>Don't do this:</h4>
+<pre>$(selector).attr('onclick', 'doSomething()');</pre>
+<h4>Do this instead:</h4>
+<pre>$(selector).click(doSomething);</pre>
+<p>Using the jQuery <code>click</code> or <code>on()</code> event handlers hook directly into the browser events without needing to inject HTML attributes into the DOM. CSP is cool with that.</p>
+
+<h2>jQuery 1.x CSP Issues</h2>
+<p>In Firefox you might get an error when loading a jQuery 1.x version with a Content-Security-Policy header, such as:</p>
+<blockquote>
+	Content Security Policy: The page's settings blocked the loading of a resource at inline ("script-src"). jquery-1.12.4.js:4743
+</blockquote>
+<p>If you look at that <a href="https://github.com/jquery/jquery/blob/1.12.4/dist/jquery.js#L4742-L4743" rel="nofollow">bit of code</a> in jQuery, you will see this:</p>
+<pre>
+	// Support: IE<9 (lack submit/change bubble), Firefox (lack focus(in | out) events)
+	...
+	// Beware of CSP restrictions (https://developer.mozilla.org/en/Security/CSP)
+	div.setAttribute( eventName, "t" );
+</pre>
+<p>So as you can see the jQuery authors are well aware of CSP, but are doing this to patch browser features that might be lacking.</p>
+
+<h2>Other jQuery CSP Issues</h2>
+<p>Are you aware of other issues with implementing CSP with jQuery? <a href="https://foundeo.com/contact/" rel="nofollow">Let me know</a>, so we can update this page.</p>

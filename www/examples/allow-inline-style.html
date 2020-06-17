@@ -30,7 +30,11 @@ tags: examples
 </blockquote>
 <p>Or</p>
 <blockquote>
-	refused to apply inline style because it violates the following content security policy directive
+	Refused to apply inline style because it violates the following Content Security Policy directive: "default-src 'self' ".
+</blockquote>
+<p>Or</p>
+<blockquote>
+	Refused to apply inline style because it violates the following Content Security Policy directive: "style-src 'self' ".
 </blockquote>
 
 <h2>Allow Inline Styles using a Nonce</h2>
@@ -46,15 +50,28 @@ style-src css-cdn.example.com 'nonce-r@nd0m';
 &lt;/style&gt;
 </pre>
 
-<h2>Allow Inline Scripts using a Hash</h2>
-<p>A second approach to allow inline scripts is to use a hash, with this approach you compute the hash of your JavaScript code, and put the value in our CSP policy:</p>
+<h2>Allow Inline Style using a Hash</h2>
+<p>A second approach to allow inline style is to use a hash, with this approach you compute the hash of your <code>&lt;style&gt; tag, and put the value in our CSP policy:</p>
 <pre>
 style-src css-cdn.example.com 'sha256-xyz4zkCjuC3lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ='
 </pre>
+<h2>Allow Inline Style Attribute using a hash</h2>
+<p>Next suppose you want to support something like <code>width: 100%;</code> in the <code>style</code> attribute of a HTML tag:</p>
+<pre>&lt;div style="width:100%;"&gt;</pre>
+<p>CSP Level 2 browsers may be ok with just putting the hash in your <code>style-src</code> directive. However, to allow hashes in the <code>style</code> attribute on inline CSS on browsers that support CSP Level 3, you may get an error like this: </p>
+<blockquote>
+	Refused to apply inline style because it violates the following Content Security Policy directive: "style-src 'self' 'sha256-nMxMqdZhkHxz5vAuW/PAoLvECzzsmeAxD/BNwG15HuA='". Either the 'unsafe-inline' keyword, a hash ('sha256-nMxMqdZhkHxz5vAuW/PAoLvECzzsmeAxD/BNwG15HuA='), or a nonce ('nonce-...') is required to enable inline execution.
+</blockquote>
+<p>To fix this, we either need to change our code to use a <code>class</code> or add the <a href="/unsafe-hashes/"> CSP<code>unsafe-hashes</code> keyword to our <code><a href="/style-src/" title="CSP style-src Directive">style-src</a></code> directive:</a>
+<pre>
+style-src 'self' 'unsafe-hashes' 'sha256-nMxMqdZhkHxz5vAuW/PAoLvECzzsmeAxD/BNwG15HuA=';
+</pre>
+<p>You may not actually need the <a href="/self/">CSP <code>'self'</code> keyword</a>, feel free to replace that with what ever source list is necessary to load CSS stylesheets on your page.</p>
+
 
 <h2>Other methods</h2>
 <p>The <a href="/unsafe-inline/"><code>unsafe-inline</code></a> source list keyword can be used to allow inline styles, but this also removes much of the security protection that you gain when you enable CSP.</p>
-<p>CSP Level 3 (newest browsers) support a source list value: <code>unsafe-hashes</code> which can be used to allow inline style attributes on HTML tags.</p>
+<p>CSP Level 3 (newest browsers) support a source list value: <a href="/unsafe-hashes/"><code>unsafe-hashes</code></a> which can be used to allow inline style attributes on HTML tags.</p>
 
 
 
