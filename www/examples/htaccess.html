@@ -15,7 +15,14 @@ nav: examples
 <pre>
 Header add Content-Security-Policy "default-src 'self';"
 </pre>
-<p>Your policy will go inside the double quotes in the example above.</p>
+<p>Your policy will go inside the double quotes in the example above. If everything is working you should see the following in the HTTP response headers when you make a request to your site:</p>
+<pre>Content-Security-Policy: default-src 'self';</pre>
+
+<h2>Should I add a CSP header with htaccess or my in application?</h2>
+<p>As we saw, it is not hard to add a CSP header with htaccess, it is however also possible to add a <code>Content-Security-Policy</code> header with your server side programming language (<a href="/examples/php/" title="Add CSP header with PHP">PHP</a>, <a href="/examples/java/" title="Add CSP Header with Java">Java</a>, etc.). You may have pages in your app that need a different CSP policy than other parts of your app. In such a case might be easier to use your application programming language instead of htaccess. In addition, if you plan to use a <a href="/nonce/" title="CSP nonce">CSP nonce</a>, then it is much easier to generate it, and set the <code>Content-Security-Policy</code> header from your application code instead of from htaccess.</p>
+<p>When you set the header from htaccess, the big advantage is that it will can be added to all HTTP responses (even your static assets). It may also be easier to use htaccess to add the CSP header if you have the same policy for the entire site.</p>
+<p>There are tradeoffs however you decide to add the header. As long as the <code>Content-Security-Policy</code> response header shows up in the HTTP response the browser will apply it, it doesn't care if you use htaccess or your application code.</p>
+
 <h2>What goes inside a CSP policy?</h2>
-<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
+<p>If you're not sure what <code><a href="/default-src/" title="CSP default-src">default-src</a> <a href="/self/" title="CSP self keyword">'self'</a>;</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details, or take a look at more <a href="/examples/">CSP examples</a>.</p>
 

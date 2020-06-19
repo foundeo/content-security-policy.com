@@ -9,7 +9,7 @@ tags: examples
 
 <div class="jumbotron">
 	<h1>CSP PHP Example</h1>
-	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header in PHP.</div>
+	<div class="lead">Here's how to use PHP to add a <code>Content-Security-Policy</code> HTTP response header to your site.</div>
 </div>
 <h2>Example CSP Header with PHP</h2>
 <p>By using the PHP <code>header()</code> function we can </p>
@@ -18,9 +18,14 @@ tags: examples
 	header("Content-Security-Policy: default-src 'self'");
 ?&gt;
 </pre>
+<p>The php <code>header</code> function simply takes the full value of the header we want to set <code>Header-Name: value</code>.</p>
+<p>If all is working properly, when your hit your php page, you should now have the following show up in the HTTP response headers:</p>
+<pre>Content-Security-Policy: default-src 'self'</pre>
 
 <h2>What goes inside a CSP policy?</h2>
-<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details. Or you can take a look at <a href="/examples/">more CSP examples</a>, if you prefer to learn by example.</p>
 
 <h2>Another Option for PHP</h2>
-<p>Another option is to use a web server mechanism to add a HTTP response header, such as a <a href="/examples/htaccess">htaccess</a> file.</p>
+<p>Another option is to use a web server mechanism to add a HTTP response header, such as a <a href="/examples/htaccess">htaccess</a> file. The advantage of using the web server to add the CSP header is that it can apply to all requests, not just your php files.</p>
+<p>You may however want to use PHP to set the header if you will have different policies for different php pages, or if you use certain features such as a <a href="/nonce/" title="CSP nonce">CSP nonce</a>, which require a random token to be uniquely generated for each request.</p>
+<p>The browser doesn't care if you add the <code>Content-Security-Policy</code> header with PHP, or with your web server - just make sure you add it one way or another.</p>
