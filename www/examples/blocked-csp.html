@@ -1,0 +1,46 @@
+---
+title: blocked:csp ⟶ Understanding why CSP blocks resources
+description: A guide to understand why CSP blocks resources in the browser.
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>CSP Blocked Loading of Resources</h1>
+	<div class="lead">Why does CSP block the loading of resources, and what does <code>blocked:csp</code> mean?</div>
+</div>
+<h2>What does <code>blocked:csp</code> mean?</h2>
+<p>You may be seeing <code>blocked:csp</code> in Chrome developer tools when the browser is trying to load a resource. It might show up in the status column as <code class="text-danger">(blocked:csp)</code></p>
+<p>CSP stands for <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy</a>, and it is a browser security mechanism. Developers can set CSP using either a HTTP response header, or with a HTML <a href="/examples/meta/" title="CSP Meta Example">meta</a> tag.</p>
+<h2>What does an CSP policy look like?</h2>
+<p>Here's a very simple CSP policy that uses the <code><a href="/default-src/">default-src</a></code> directive:</p>
+<pre>Content-Security-Policy: default-src 'self'</pre>
+<p>With this policy the <code><a href="/default-src/">default-src</a></code> directive is set to the source list value: <a href="/self/"><code>'self'</code></a>
+<p>The <code>default-src</code> directive controls what URLs are allowed to be used for fetching resources on the page. This includes all types of resources such as images, css files, javascript files, etc.</p>
+<p>The <code>'self'</code> value here tells CSP that the browser should only fetch resources from the <em>same origin</em> as the page that set the policy. So if we put that CSP policy on a page located at: <code>https://example.com/page.html</code> then with this policy we can load resources (images, js, css, etc) from <code>https://example.com/*</code></p>
+<p>So if we had an image loading from a url like: <code>https://images.example.com/logo.png</code></p>
+<pre>&lt;img src="https://images.example.com/logo.png"&gt;</pre>
+<p>That image would be blocked by CSP, and we may see <code>blocked:csp</code> in the Network tab of Chrome Developer tools. You would also see a message like this output in the Chrome Developer Tools Console:</p>
+<blockquote>
+	Refused to load the image 'https://images.example.com/logo.png' because it violates the following Content Security Policy directive: "default-src 'self'"
+</blockquote>
+<div>
+	<img src="/images/blocked-csp.png" alt="Screenshot of blocked:csp in Chrome Developer Tools" class="img-responsive">
+</div>
+<p>In FireFox the image request blocked by CSP doesn't show up in the Network tab, but it will output a message to the developer tool console, such as:</p>
+<blockquote>
+	Content Security Policy: The page’s settings blocked the loading of a resource at https://images.example.com/logo.png (“default-src”).
+</blockquote>
+<p>So if we wanted to load such an image, we would have to alter the policy to something like this:</p>
+<pre>Content-Security-Policy: default-src 'self'; img-src https://images.example.com 'self';</pre>
+<p>There are CSP directives for each of the types of resource you want to load (for example <a href="/img-src/"><code>img-src</code>, <a href="/script-src/"><code>script-src</code>, <a href="/style-src/"><code>style-src</code>, etc). Check out this <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">CSP reference</a> for a full list of all the directives and values you can use.</a>
+
+<p>You can see a similar example of CSP blocking an image in our <a href="/browser-test/">CSP Browser Test</a>.
+
+<h2>Why is it blocked in some browsers but not others?</h2>
+<p>Not all browsers support CSP, for example Internet Explorer doesn't support it. Firefox, Chrome and Edge all have very good support for CSP. Safari support is pretty good, but it may not support the latest features of CSP. So you may see CSP blocking a resource due to differences in implementation, or browser support as well.</p>
+
+<h2>Learning more about CSP</h2>
+<p>Check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> or take a look at more <a href="/examples/">CSP Examples</a>.</p>
