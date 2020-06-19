@@ -21,7 +21,7 @@ img-src 'self' https://images.example.com;
 &lt;img src="https://images.example.com/photo.jpg"&gt;
 </pre>
 <h4>Blocks</h4>
-<p>The above policy will block any image not same origin or via <code>https://images.example.com</code>, so the following would be blocked:</p>
+<p>The above policy will block any image not same origin or via <code>https://images.example.com</code>, so the following would be <a href="/examples/blocked-csp/">blocked by CSP</a>:</p>
 <pre>
 &lt;img src="https://other.example.com/photo.jpg"&gt;
 </pre>

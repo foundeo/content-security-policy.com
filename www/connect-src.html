@@ -43,7 +43,7 @@ xhr.send();
 <pre>Access-Control-Allow-Origin: https://app.example.com</pre>
 
 <h2>What happens when a request violates the connect-src directive?</h2>
-<p>When a resources is blocked due to <code>connect-src</code> the browser emulates a 400 HTTP status code.</p>
+<p>When a resources is <a href="/examples/blocked-csp/" title="Blocked by CSP">blocked</a> due to <code>connect-src</code> the browser emulates a 400 HTTP status code.</p>
 
 <h2>What else does connect-src apply to?</h2>
 <p>Besides XMLHttpRequest or ajax calls, the connect-src directive also applies to the following browser mechanisms:</p>
