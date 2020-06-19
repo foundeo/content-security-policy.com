@@ -14,7 +14,13 @@ tags: examples
 <h2>Nginx Example CSP Header</h2>
 <p>Inside your nginx <code>server {}</code> block add:</p>
 <pre>add_header Content-Security-Policy "default-src 'self';";</pre>
-<p>You can also append <code>always</code> to the end to ensure that nginx sends the header reguardless of response code.</p>
+<p>Let's break it down, first we are using the nginx directive or instruction: <code>add_header</code>. Next we specify the header name we would like to set, in our case it is <code>Content-Security-Policy</code>. Finally we tell it the value of the header: <code>"default-src 'self';"</code> (you'll probably need to change this value). And don't forget that all nginx configuration directives need to end with a semicolon.</p>
+<p>If all is working properly we should now see the following HTTP response header when we make a HTTP request to our nginx server:</p>
+<pre>Content-Security-Policy: default-src 'self';</pre>
+<h3>Always adding <code>Content-Security-Policy</code> in nginx</h3>
+<p>You can also append <code>always</code> to the end to ensure that nginx sends the header reguardless of response code. The nginx config would look like this:</p>
+<pre>add_header Content-Security-Policy "default-src 'self';" always;</pre>
+<h2>Dig deeper with CSP</h2>
 <p>In the above example we are simply setting a policy:</p>
 <pre>default-src 'self';</pre>
-<p>Chances are you will need something more complicated than that, so check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for more info.</p>
+<p>Chances are you will need something more complicated than that, so check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a>, or take a look at <a href="/examples/">more CSP examples</a> for more info.</p>

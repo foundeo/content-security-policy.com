@@ -1,0 +1,30 @@
+---
+title: Content-Security-Policy Headers with OpenBSD relayd
+description: How to add a content security policy headers to an openbsd relayd proxy server.
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>OpenBSD relayd Content-Security-Policy Response Headers</h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header to your OpenBSD relayd proxy server configuration.</div>
+</div>
+
+<h2>Example relayd Configuration</h2>
+<pre>
+http protocol "https_reverse_proxy" {
+
+	#other relayd config...
+
+	#Add Content-Security-Policy HTTP Response header
+	match response header set "Content-Security-Policy" value "default-src 'self'"
+}
+</pre>
+<p>Here we use <code>match response header</code> since <code>Content-Security-Policy</code> is a HTTP response header. Next we use <code>set "Content-Security-Policy"</code> to tell relayd the name of the header we want to set. Finally the header value is assigned with <code>value "default-src 'self'"</code>. With the above example, you should see the following HTTP response header in your HTTP response:</p>
+<pre>Content-Security-Policy: default-src 'self'</pre>
+<h2>Dig deeper with CSP</h2>
+<p>The <code>Content-Security-Policy</code> header value in our example was simply:</p>
+<pre>default-src 'self'</pre>
+<p>You are probably going to need a more complicated CSP header value that that, so your next steps if you are not familiar with CSP is to take a look at the <a href="/" title="CSP Reference">CSP Header Reference</a> or <a href="/examples/">more CSP examples</a>.</p>
