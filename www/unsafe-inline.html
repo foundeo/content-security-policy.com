@@ -23,7 +23,7 @@ date: Last Modified
 <pre>&lt;script&gt;
 	doSomething();
 &lt;script&gt;</pre>
-<p>That inline script will also be blocked by CSP by default. There are ways to allow it, such as <a href="/nonce/" title="CSP nonce"><code>nonce</code> and <a href="/hash/" title="CSP hash"><code>hash</code></a>. But the sledge hammer way to allow it would be to add <code>unsafe-inline</code> to your policy. Suppose we added it to our policy:</a>
+<p>That inline script will also be blocked by CSP by default. There are ways to allow it, such as <a href="/nonce/" title="CSP nonce"><code>nonce</code></a> and <a href="/hash/" title="CSP hash"><code>hash</code></a>. But the sledge hammer way to allow it would be to add <code>unsafe-inline</code> to your policy. Suppose we added it to our policy:</a>
 <pre>script-src: 'self' 'unsafe-inline'</pre>
 <p>Now, go back to our vulnerable example app and try this:</p>
 <pre>/app?name=&lt;script&gt;alert('xss');&lt;script&gt;</pre>
