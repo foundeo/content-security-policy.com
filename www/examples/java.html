@@ -17,8 +17,61 @@ tags: examples
 response.addHeader("Content-Security-Policy", "default-src 'self'");
 </pre>
 <p>Your policy will go inside the second argument of the <code>addHeader</code> method in the example above.</p>
-<h2>Another way to go</h2>
+
+<h2>Using your Web Server</h2>
 <p>Instead of writing the header directly from your Java code or JSP code, you can instead use your web server to write the header. For example <a href="/examples/nginx/">CSP with nginx</a> or <a href="/examples/htaccess/">CSP with Apache via htaccess</a>.</p>
 
+<h2>Writing a HTTP Servlet Filter</h2>
+<p>If you want to apply the same policy to all requests to your java application server you can create a simple HTTP Servlet Filter. It is usually easier to use the web server, if you have one, but if you are serving requests directly from Apache Tomcat, or another J2EE server a Servlet Filter may be a good way to go.</p>
+<p>Here is an example java servlet filter to add a CSP response header:</p>
+<pre>
+package com.content-security-policy.filters;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.FilterChain;
+import javax.servlet.http.HttpServletResponse
+
+import java.io.IOException;
+
+public class CSPFilter implements Filter {
+	
+	public static final String POLICY = "default-src 'self'";
+
+	@Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain)
+        throws IOException, ServletException {
+        if (response instanceof HttpServletResponse) {
+        	((HttpServletResponse)response).setHeader("Content-Security-Policy", CSPFilter.POLICY);
+    	}
+    }
+    }
+
+
+	@Override
+    public void init(FilterConfig filterConfig) throws ServletException { }
+
+	@Override
+    public void destroy() { }
+
+}
+</pre>
+<p>Then enable the java servlet filter in your <code>web.xml</code>:</p>
+<pre>
+&lt;filter&gt;
+  &lt;filter-name&gt;CSPFilter&lt;/filter-name&gt;
+  &lt;filter-class&gt;com.content-security-policy.filters.CSPFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+  &lt;filter-name&gt;CSPFilter&lt;/filter-name&gt;
+  &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</pre>
+
+
 <h2>What goes inside a CSP policy?</h2>
-<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details. That is just a really simple example of a policy, your policy will probably need to be more complex than that.</p>
