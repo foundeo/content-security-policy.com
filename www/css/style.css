@@ -50,7 +50,7 @@ code { white-space:nowrap; }
 	font-family: 'Pacifico', monospace;
 }
 
-.email-signup {
+#book {
 	background-color: #FFFFD5;
 	padding: 40px;
 	border-top: 6px solid yellow;
