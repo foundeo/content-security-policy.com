@@ -1,12 +1,12 @@
 ---
-title: frame-ancestors in CSP ⟶ What is it?
-description: How to use the CSP frame-ancestors directive in a Content-Security-Policy header.
+title: frame-ancestors in CSP ⟶ Allowing / Blocking iframes from Loading
+description: How to use the CSP frame-ancestors directive in a Content-Security-Policy header to allow or block the page from being loaded within frames or iframes.
 layout: layout
 date: Last Modified
 ---
 <div class="jumbotron">
 	<h1>CSP <code>frame-ancestors</code></h1>
-	<div class="lead">The <code>frame-ancestors</code> directive allows you to specify which parent URLs can frame the current resource. Using the <code>frame-ancestors</code> CSP directive we can block or allow a page from being placed within a frame.</div>
+	<div class="lead">The <code>frame-ancestors</code> directive allows you to specify which parent URLs can frame the current resource. Using the <code>frame-ancestors</code> CSP directive we can block or allow a page from being placed within a frame or iframe.</div>
 </div>
 <h2>An Example frame-ancestors Policy</h2>
 <p>The most common way to use the <code>frame-ancestors</code> directive is to block a page from being framed by other pages.</p>
@@ -14,9 +14,11 @@ date: Last Modified
 frame-ancestors 'none'
 </pre>
 <p>Using <code>frame-ancestors 'none'</code> is similar to using <code>X-Frame-Options: deny</code>. Specifically this means that the given URI cannot be framed inside a frame or iframe tag.</p>
-<p><strong>Allowing the Same Origin</strong>
-<p>Now suppose you want to allow a page to be framed, but only from the same site (same origin). In this case you can use:</p>
+<p><strong>Example: CSP the Same Origin iframe</strong>
+<p>Now suppose you want to allow a page to be framed, for example within an iframe, but only from the same site (same origin). In this case you can use:</p>
 <pre>frame-ancestors 'self'</pre>
+<p>And this would allow your iframe code:</p>
+<pre>&lt;iframe 
 <p>Using <code>frame-ancestors 'self'</code> is similar to using <code>X-Frame-Options: sameorigin</code>
 <p><strong>Specifying a URI</strong>
 <p>Now suppose we want to allow https://a.example.com and https://b.example.com to frame our page, we can specify it with <code>frame-ancestors</code> like this:</p>
@@ -36,6 +38,14 @@ frame-ancestors 'none'
 <blockquote>
 	[Error] Refused to load &lt;url&gt; because it does not appear in the frame-ancestors directive of the content security policy.
 </blockquote>
+
+<h2>How is <code>frame-ancestors</code> different from <code>frame-src</code>?</h2>
+<p>The <code>frame-src</code> directive restricts where frames can be loaded from on the page protected by the CSP policy. So for example if we had a policy for the URI <code>/apples</code> defined as this:</p>
+<pre>frame-src 'none';frame-ancestors 'self'</pre>
+<p>And now a policy for the URI <code>/oranges</code> defined as:</p>
+<pre>frame-src 'self';frame-ancestors 'none'</pre>
+<p>The page <code>/apples</code> can be framed by <code>/oranges</code>, for example with an iframe tag. But the page <code>/apples</code> cannot frame the page <code>/oranges</code> for two reasons. The policy for <code>/apples</code> does not allow it to frame any subresources: <code>frame-src 'none'</code>, and the policy for <code>/oranges</code> does not allow it to be framed by any other pages: <code>frame-ancestors 'none'</code>.</p>
+
 <h2>frame-ancestors Browser Support</h2>
 <p>The <code>frame-ancestors</code>  directive was added to CSP Level 2. This means that browser support for frame-ancestors existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
 <p>The frame-ancestors CSP directive is not supported at all in Internet Explorer, you need to use the Edge browser instead.</p>

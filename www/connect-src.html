@@ -6,7 +6,7 @@ date: Last Modified
 ---
 <div class="jumbotron">
 	<h1>The <code>connect-src</code> Directive</h1>
-	<div class="lead">The <code>connect-src</code> <strong>Content Security Policy</strong> (CSP) directive guards the several browsers mechanisms that can fetch HTTP Requests. This includes <code>XMLHttpRequest</code> (AJAX), <code>WebSocket</code>, <code>fetch()</code>, <code>&lt;a ping&gt;</code> or <code>EventSource</code>. </div>
+	<div class="lead">The <code>connect-src</code> <strong>Content Security Policy</strong> (CSP) directive guards the several browsers mechanisms that can fetch HTTP Requests. This includes <code>XMLHttpRequest</code> (XHR / AJAX), <code>WebSocket</code>, <code>fetch()</code>, <code>&lt;a ping&gt;</code> or <code>EventSource</code>. </div>
 </div>
 
 <p>
@@ -16,7 +16,7 @@ Web Browsers have several mechanisms to invoke HTTP requests from script, and CS
 <p>The <code>connect-src</code> CSP directive does not interfeer Cross-Origin Resource Sharing (CORS) headers, so the <em>same origin policy</em> still applies.</p> 
 
 
-<h2>XMLHttpRequests or AJAX and CSP</h2>
+<h2>XMLHttpRequests (XHR) or AJAX and CSP</h2>
 <p>In most cases you will be making XMLHttpRequests to the <em>same origin</em> (the same domain and scheme), for example:</p>
 <pre>
 var xhr = new XMLHttpRequest();
