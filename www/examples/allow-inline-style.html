@@ -62,7 +62,7 @@ style-src css-cdn.example.com 'sha256-xyz4zkCjuC3lZcD2UmnqDG0vurmq12W/XKM5Vd0+Ml
 <blockquote>
 	Refused to apply inline style because it violates the following Content Security Policy directive: "style-src 'self' 'sha256-nMxMqdZhkHxz5vAuW/PAoLvECzzsmeAxD/BNwG15HuA='". Either the 'unsafe-inline' keyword, a hash ('sha256-nMxMqdZhkHxz5vAuW/PAoLvECzzsmeAxD/BNwG15HuA='), or a nonce ('nonce-...') is required to enable inline execution.
 </blockquote>
-<p>To fix this, we either need to change our code to use a <code>class</code> or add the <a href="/unsafe-hashes/"> CSP<code>unsafe-hashes</code> keyword to our <code><a href="/style-src/" title="CSP style-src Directive">style-src</a></code> directive:</a>
+<p>To fix this, we either need to change our code to use a <code>class</code> or add the <a href="/unsafe-hashes/"> CSP<code>unsafe-hashes</code></a> keyword to our <code><a href="/style-src/" title="CSP style-src Directive">style-src</a></code> directive:</a>
 <pre>
 style-src 'self' 'unsafe-hashes' 'sha256-nMxMqdZhkHxz5vAuW/PAoLvECzzsmeAxD/BNwG15HuA=';
 </pre>

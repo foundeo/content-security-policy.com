@@ -9,7 +9,7 @@ date: Last Modified
 	<div class="lead">The <strong><code>unsafe-inline</code></strong> <strong>Content Security Policy</strong> (CSP) keyword allows the execution of inline scripts or styles.</div>
 </div>
 <h2>Warning</h2>
-<p class="lead">Except for one very specific case, you should avoid using the <code>unsafe-inline</code> keyword in your CSP policy. As you might guess it is generally unsafe to use <code>unsafe-inline</code>.</p>
+<p class="lead">Except for one very specific case, you should avoid using the <code>unsafe-inline</code> keyword in your CSP policy. As you might guess it is generally <em>unsafe</em> to use <code>unsafe-inline</code>.</p>
 <p>The <code>unsafe-inline</code> keyword annuls most of the security benefits that <code>Content-Security-Policy</code> provide. </p>
 <p>Let's imagine that you have an app that simply output's a name from the query string variable <code>name</code>, eg:
 <code>Hello #url.name#</code>
@@ -38,7 +38,10 @@ date: Last Modified
 </blockquote>
 <h2>What should you use instead of unsafe-inline?</h2>
 <p>When you want to <a href="/examples/allow-inline-script/">allow inline scripts or styles</a> on a page that uses CSP, there two much better options: <a href="/nonce/">nonce</a> or <a href="/hash/">hash</a>.</p>
-
+<h2>What else does unsafe-inline allow?</h2>
+<p>Besides just allowing inline <code>script</code> tags, <code>unsafe-inline</code> also allows all of the JavaScript event handlers to execute, for example code like this:</p>
+<pre>&lt;button onClick="doSomething();"&gt;Do It&lt;/button&gt;</pre>
+<p>Another way to allow such unsafe inline JavaScript code is with the <a href="/unsafe-hashes/">unsafe-hashes</a> source list keyword. While it is also considered <em>unsafe</em>, it better to use <code>unsafe-hashes</code> than it is to use <code>unsafe-inline</code>.</p> 
 <h2>When is it ok to use unsafe-inline?</h2>
 <p>It is only ok to use <code>unsafe-inline</code> when it is combined with the <a href="/strict-dynamic/"><code>strict-dynamic</code> directive</a>. On browsers that support <code>strict-dynamic</code> (CSP Level 3+), the <code>unsafe-inline</code> is ignored, and provides a route to backwards compatibility on browsers that support CSP Level 2 or lower.</p>
 <p>In other words, you should only use it if you really know what you are doing!</p>

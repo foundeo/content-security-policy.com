@@ -49,9 +49,9 @@ script-src 'nonce-r@nd0m' 'strict-dynamic';default-src 'self';
 <p>If we had an <a href="/examples/allow-inline-script/">inline script block</a> then we could consider adding <code>'unsafe-inline'</code> to the policy to allow it to load on CSP Level 1 Browsers. You'll need to balance the compexity of your policy vs the bredth of browsers that you want to support.</p>
 <p>On older browsers you may see something like this:</p>
 <blockquote>
-	the source list for content security policy directive 'script-src' contains an invalid source: ''strict-dynamic''. it will be ignored.
+	the source list for content security policy directive 'script-src' contains an invalid source: "strict-dynamic". it will be ignored.
 </blockquote>
-<p>You can also ignore such a message.</p>
+<p>This message means that the browser version does not support <code>strict-dynamic</code>. It will be ignored, and the browser will just use the remainder of the <code>script-src</code> Content Security Policy Directive without the <code>strict-dynamic</code> in the source list.</p>
 <h2>What directives support strict-dynamic?</h2>
 <p>You can use <code>strict-dynamic</code> in a <a href="/script-src/">script-src</a> or <a href="/default-src/">default-src</a> directive. When it is in the default-src it only applies to loading of scripts.</p>
 <h2>What about CSS or Images Loaded via strict-dynamic JavaScript?</h2>
