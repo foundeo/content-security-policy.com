@@ -18,7 +18,7 @@ frame-ancestors 'none'
 <p>Now suppose you want to allow a page to be framed, for example within an iframe, but only from the same site (same origin). In this case you can use:</p>
 <pre>frame-ancestors 'self'</pre>
 <p>And this would allow your iframe code:</p>
-<pre>&lt;iframe 
+<pre>&lt;iframe src="/same/site/url.html"&gt;</pre>
 <p>Using <code>frame-ancestors 'self'</code> is similar to using <code>X-Frame-Options: sameorigin</code>
 <p><strong>Specifying a URI</strong>
 <p>Now suppose we want to allow https://a.example.com and https://b.example.com to frame our page, we can specify it with <code>frame-ancestors</code> like this:</p>
