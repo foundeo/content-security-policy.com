@@ -26,6 +26,21 @@ script-src 'nonce-r@nd0m';
 &lt;/script&gt;
 </pre>
 
+<h2>What is a CSP nonce for?</h2>
+<p>So why we need a to add a csp nonce to every inline script block when we use CSP? The short answer is that when you enable CSP it will disable inline script tags, so code like the following will not execute:</p>
+<pre>
+&lt;script&gt;
+	thisWillNotExecute();
+&lt;/script&gt;
+</pre>
+<p>This is because the browser doesn't know the difference between JavaScript code that you wrote and 
+intend for the user to execute vs code that an attacker has injected into the page (for example via an XSS vulnerability). 
+These inline script blocks are dangerious, and the nonce lets the browser know that the server intended on serving this script block if and only if
+the nonce attribute in the script tag matches the nonce value in the <code>Content-Security-Policy</code> header.</p>
+<h2>What if a CSP nonce doesn't make sense?</h2>
+<p>In some situations using a nonce doesn't make sense, in those cases you can use a <a href="https://content-security-policy.com/hash/">CSP hash</a> instead of a nonce.</p>
+<p>There is one other workaround to this problem called <a href="https://content-security-policy.com/unsafe-inline/">unsafe-inline</a>, but as its name suggests it is not really a good idea to use it (except in specific conditions).</p>
 <h2>Nonce Browser Support</h2>
 <p>The <code>nonce</code> source list directive was added to CSP Level 2. This means that support has existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
 <p>Nonces are not supported at all in Internet Explorer, you need to use the Edge browser for nonce support instead.</p>
+
