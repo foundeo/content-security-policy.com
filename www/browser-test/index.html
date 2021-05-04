@@ -35,7 +35,7 @@
       <h2>JavaScript CSP Browser Test <small><span class="label label-primary">CSP Level 1</span></small></h2>
       <p>Note this test requires that you have JavaScript Enabled</p>
 
-      <div class="alert alert-success" id="jsNode"><h3><span class="glyphicon glyphicon-ok"></span> CSP Supported</h3> If you can read this, then the inline JavaScript below this line did not execute.</div>
+      <div class="alert alert-success" id="jsNode"><h3><i class="fa fa-check" aria-hidden="true"></i> CSP Supported</h3> If you can read this, then the inline JavaScript below this line did not execute.</div>
       <script>
         //if CSP is supported this will not run
         window.onload=function(){
@@ -75,7 +75,7 @@
             return;
           }
           hashNode.className='alert alert-success';
-          hashNode.innerHTML = '<h3><span class="glyphicon glyphicon-ok"></span> CSP Level 2 Inline Hash Supported</h3>';
+          hashNode.innerHTML = '<h3><i class="fa fa-check" aria-hidden="true"></i> CSP Level 2 Inline Hash Supported</h3>';
         });
       </script>
 

@@ -5,5 +5,5 @@ window.addEventListener('load', function() {
 function runUnsafeHashNode() {
 	var node = document.getElementById('unsafeHashNode');
 	node.className='alert alert-success';
-	node.innerHTML='<h3><span class="glyphicon glyphicon-ok"></span> CSP Level 3 Unsafe Hashes Supported</h3>';
+	node.innerHTML='<h3><i class="fa fa-check" aria-hidden="true"></i>	CSP Level 3 Unsafe Hashes Supported</h3>';
 }
