@@ -27,7 +27,7 @@ script-src 'nonce-r@nd0m';
 </pre>
 
 <h2>What is a CSP nonce for?</h2>
-<p>So why we need a to add a csp nonce to every inline script block when we use CSP? The short answer is that when you enable CSP it will disable inline script tags, so code like the following will not execute:</p>
+<p>So why do we need a to add a csp nonce to every inline script block when we use CSP? The short answer is that when you enable CSP it will disable inline script tags, so code like the following will not execute:</p>
 <pre>
 &lt;script&gt;
 	thisWillNotExecute();
@@ -37,6 +37,27 @@ script-src 'nonce-r@nd0m';
 intend for the user to execute vs code that an attacker has injected into the page (for example via an XSS vulnerability). 
 These inline script blocks are dangerous, and the nonce lets the browser know that the server intended on serving this script block if and only if
 the nonce attribute in the script tag matches the nonce value in the <code>Content-Security-Policy</code> header.</p>
+<h2>Avoid this common nonce mistake</h2>
+<p>If you are outputting variables inside a nonce protected <code>script</code> tag, you could cancel out the XSS protection that CSP is giving you.</p>
+<p>For example assume you have a URL such as <code>/example/?id=123</code> and you are outputting that <code>id</code> value from the URL in your script block:</p>
+<pre>
+&lt;script nonce="#request.nonce#"&gt;
+	var id = #url.id#
+&lt;/script&gt;
+</pre>
+<p>In the above example assume that the variable token <code>#url.id#</code> is the <code>id</code> value from the query string. Now an attacker could request the URL: <code>/example/?id=doSomethingBad()</code>, and your application would send back:</p>
+<pre>
+&lt;script nonce="r@nd0m"&gt;
+	var id = doSomethingBad()
+&lt;/script&gt;
+</pre>
+<p>As you can see we just threw away all the protections of CSP, here's a rule for avoiding this:</p>
+<blockquote>
+	<strong>The CSP nonce rule</strong>
+	<p>Only use <code>nonce</code> on <code>script</code> tags that do not contain any untrusted variables.</p>
+</blockquote>
+<p>If you do need to use a variable like in the above example, you need to make sure that it has been validated. In this case we could make sure it is a valid integer. In more complex cases you would need pass the variable through an encoder that would escape javascript. For example in the Java OWASP ESAPI library the <code>encodeJavaScript</code> function could be used, or in CFML the <code>encodeForJavaScript</code> function could be used. </p>
+
 <h2>What if a CSP nonce doesn't make sense?</h2>
 <p>In some situations using a nonce doesn't make sense, in those cases you can use a <a href="https://content-security-policy.com/hash/">CSP hash</a> instead of a nonce.</p>
 <p>There is one other workaround to this problem called <a href="https://content-security-policy.com/unsafe-inline/">unsafe-inline</a>, but as its name suggests it is not really a good idea to use it (except in specific conditions).</p>
