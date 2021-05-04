@@ -59,10 +59,7 @@ the nonce attribute in the script tag matches the nonce value in the <code>Conte
 	<li>The nonce should have sufficient length, aim for at least 128 bits of entropy (32 hex characters, or about 24 base64 characters).</li>
 	<li>Script tags that have a nonce attribute must not have any untrusted / unescaped variables within them.</li>
 </ul>
-<blockquote>
-	<strong>The CSP nonce rule</strong>
-	<p>Only use <code>nonce</code> on <code>script</code> tags that do not contain any untrusted variables.</p>
-</blockquote>
+
 
 <p>If you do need to use a variable like in the above example, you need to make sure that it has been validated. In this case we could make sure it is a valid integer. In more complex cases you would need pass the variable through an encoder that would escape javascript. For example in the Java OWASP ESAPI library the <code>encodeJavaScript</code> function could be used, or in CFML the <code>encodeForJavaScript</code> function could be used. </p>
 
