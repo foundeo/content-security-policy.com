@@ -14,14 +14,14 @@ date: Last Modified
 <h2>Example Nonce Usage</h2>
 <p>Using a <code>nonce</code> is one of the easiest ways to allow the execution of inline scripts in a Content Security Policy (CSP). Here's how one might use it with the CSP <a href="/script-src/"><code>script-src</code></a> directive:</p>
 <pre>
-script-src 'nonce-r@nd0m';
+script-src 'nonce-rAnd0m';
 </pre>
 <blockquote>
-	<strong>NOTE:</strong> We are using the phrase: <em>r@nd0m</em> to denote a random value. You should use a cryptographically secure random token generator to generate a nonce value. The random nonce value should only be used for a single HTTP request.
+	<strong>NOTE:</strong> We are using the phrase: <em>rAnd0m</em> to denote a random value. You should use a cryptographically secure random token generator to generate a nonce value. The random nonce value should only be used for a single HTTP request.
 </blockquote>
 <p>Now we can allow an inline <code>&lt;script&gt;</code> tag to execute by adding our random nonce value in the <code>nonce</code> attribute of the <code>script</code> tag:</p>
 <pre>
-&lt;script nonce="r@nd0m"&gt;
+&lt;script nonce="rAnd0m"&gt;
 	doWhatever();
 &lt;/script&gt;
 </pre>
@@ -47,7 +47,7 @@ the nonce attribute in the script tag matches the nonce value in the <code>Conte
 </pre>
 <p>In the above example assume that the variable token <code>#url.id#</code> is the <code>id</code> value from the query string. Now an attacker could request the URL: <code>/example/?id=doSomethingBad()</code>, and your application would send back:</p>
 <pre>
-&lt;script nonce="r@nd0m"&gt;
+&lt;script nonce="rAnd0m"&gt;
 	var id = doSomethingBad()
 &lt;/script&gt;
 </pre>
@@ -58,6 +58,7 @@ the nonce attribute in the script tag matches the nonce value in the <code>Conte
 	<li>The nonce should be generated using a cryptographically secure random generator</li>
 	<li>The nonce should have sufficient length, aim for at least 128 bits of entropy (32 hex characters, or about 24 base64 characters).</li>
 	<li>Script tags that have a nonce attribute must not have any untrusted / unescaped variables within them.</li>
+	<li>The characters that can be used in the nonce string are limited to the characters found in base64 encoding.</li>
 </ul>
 
 
