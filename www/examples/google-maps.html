@@ -29,12 +29,12 @@ tags: examples
 	<li><code>khms0.googleapis.com</code> - load satalite images for the map. We will use <code>*.googleapis.com</code> in our policy to allow all similar domains.</li>
 	<li><code>geo0.ggpht.com</code> - loads street view images, this could be from a few different similar subdomains so we will use <code>*.ggpht.com</code> in our content security policy.</li>
 </ul> 
-<pre>img-src data: maps.gstatic.com *.googleapis.com *.ggpht</pre>
+<pre>img-src data: maps.gstatic.com *.googleapis.com *.ggpht.com</pre>
 <p>Without this we might get an error in the console such as:</p>
 <blockquote>
 	Refused to load the img 'https://maps.googleapis.com/...' because it violates the following Content Security Policy directive: "img-src 'self'".
 </blockquote>
 <h2>A Minimal Google Maps CSP</h2>
 <p>A minimal <a href="/" title="Content-Security-Policy"><code>Content-Security-Policy</code> header</a> that works with Google Maps might look like this:</p>
-<pre>Content-Security-Policy: script-src maps.googleapis.com;img-src data: maps.gstatic.com *.googleapis.com *.ggpht</pre>
+<pre>Content-Security-Policy: script-src maps.googleapis.com;img-src data: maps.gstatic.com *.googleapis.com *.ggpht.com</pre>
 <p>That is the minimum to get CSP working with Google Maps. You will probably need to add in additional directives to all for the rest of your app to work.</p>
