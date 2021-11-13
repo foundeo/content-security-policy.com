@@ -19,7 +19,7 @@ tags: examples
 <h2>Does the meta tag need to be inside a head tag?</h2>
 <p>Yes, in current versions of Chrome you will get an error such as the following:</p>
 <blockquote>
-	The Content Security Policy <code>'default-src 'self''</code> was delivered via a <code>&lt;meta&ht;</code> element outside the document's <code>&lt;head&ht;</code>, which is disallowed. The policy has been ignored.
+	The Content Security Policy <code>'default-src 'self''</code> was delivered via a <code>&lt;meta&gt;</code> element outside the document's <code>&lt;head&gt;</code>, which is disallowed. The policy has been ignored.
 </blockquote>
 <h2>Why doesn't <code>report-uri</code> work in a CSP meta tag?</h2>
 <p>This is not supported, further the <code>Content-Security-Policy-Report-Only</code> header cannot be used in a <code>meta</code> tag either.</p>
