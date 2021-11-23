@@ -27,6 +27,20 @@ script-src 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';</pre>
 <p>You can also use tools such as openssl to generate it, whitespace is not ignored.</p>
 <p>Here is an example using openssl, which will be installed by default on most mac or linux systems:</p>
 <pre>echo -n 'doSomething();' | openssl sha256 -binary | openssl base64</pre>
+<h2>Why is my CSP Hash Not Working?</h2>
+<p>There are a three common reasons your CSP hash might not be working:</p>
+<ol>
+	<li>You are missing the single quotes around the hash. If your CSP Header looks like this: <code>script-src sha256-abc123;</code> you need to wrap it in single quotes, for example: <code>script-src 'sha256-abc123';</code> </li>
+	<li>The hash is not valid.<br>
+		<ul>
+			<li>You or someone changed your javascript code making the hash invalid. You have to generate a new hash for the updated script. If the script will change a lot consider if using <a href="/nonce/">a CSP nonce</a> is a better approach.</li>
+			<li>Removing or adding whitespace will cause the hash to become invalid.</li>
+			<li>Code Reformatting - causing addition of whitespace or newlines</li>
+			<li>CDN - for example CloudFlare might be optimizing your HTML removing whitespace inside your script tags causing the hash to become invalid. You can work around this by removing all the space in the script ahead of time.</li>
+		</ul>
+	</li>
+	<li>Your browser doesn't support CSP Level 2. This is becoming less common now, as browser support for CSP level 2 is more common than not. Give our <a href="/browser-test/">CSP Browser Test</a> a try to double check.</li>
+</ol>
 <h2>CSP Hash Browser Support</h2>
 <p>The <code>hash</code> source list directive was added to CSP Level 2. This means that support has existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
 <p>It is not supported at all in Internet Explorer, you need to use the Edge browser instead.</p>
