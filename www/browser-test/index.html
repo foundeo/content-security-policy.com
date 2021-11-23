@@ -8,6 +8,7 @@
     <meta name="author" content="Foundeo Inc.">
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/readable/bootstrap.min.css" integrity="sha256-M4BawzpX2gZqpVcQ1m+1u+phtpgCuUP8wgn+fDlFPR8=" crossorigin="anonymous" />
 	  <link href="../css/style.css" rel="stylesheet" />
+    <script src="../js/browser-test.js"></script>
   </head>
 
   <body onload="runUnsafeHashNode()">
@@ -65,34 +66,28 @@
       <p>If you see a gray box above then the image loading failed (presumably due to CSP, but it could also fail for other reasons such as the server being down).</p>
       
       <h2>JavaScript Hash Test <small><span class="label label-primary">CSP Level 2</span></small></h2>
-      <p>CSP Level 2 does allow execution of inline scripts if a Hash is present in the <code>script-src</code> directive.</p>
+      <p>CSP Level 2 does allow execution of inline scripts if a <a href="/hash">Hash</a> is present in the <code>script-src</code> directive.</p>
       <div class="alert alert-danger" id="hashNode"><h3>CSP Level 2 Inline Hash Not Supported</h3></div>
-      <script>
-        window.addEventListener('load', function() {
-          var hashNode = document.getElementById('hashNode');
-          var jsNode = document.getElementById("jsNode");
-          if (jsNode.className == 'alert alert-danger') {
-            return;
-          }
-          hashNode.className='alert alert-success';
-          hashNode.innerHTML = '<h3><i class="fa fa-check" aria-hidden="true"></i> CSP Level 2 Inline Hash Supported</h3>';
-        });
-      </script>
+      <!-- the following will be allowed to run via hash
+        sha256-ewTm8QMx/IkmbIFAIapvCHoCrGgIIHhn8qKC7/5Y2Ro=
+        in the Content-Security-Policy
+      -->
+      <script>runHashTest();</script>
 
 
       <h2>JavaScript Unsafe Hashes Test <small><span class="label label-primary">CSP Level 3</span></small></h2>
-      <p>CSP Level 3 unsafe-hashes within <code>script-src</code> directive.</p>
+      <p><a href="/unsafe-hashes/">CSP Level 3 unsafe-hashes</a> within <code>script-src</code> directive.</p>
       <div class="alert alert-danger" id="unsafeHashNode"><h3>CSP Level 3 Inline Hash Not Supported</h3></div>
 
 	 
 		<div class="footer">
-        <p><a href="https://foundeo.com/">&copy; Foundeo Inc.</a> 2012-2017 - <a href="https://foundeo.com/contact/" rel="nofollow">Contact Us</a></p>
+        <p><a href="https://foundeo.com/">&copy; Foundeo Inc.</a> 2012-2021 - <a href="https://foundeo.com/contact/" rel="nofollow">Contact Us</a></p>
       </div>
 
     </div> <!-- /container -->
 	
   
 	   <script src="../js/google-analytics.js"></script>
-	   <script src="../js/browser-test.js"></script>
+	   
   </body>
 </html>
