@@ -41,11 +41,11 @@ tags: examples
 
 <p>One of the easiest ways to allow style tags when using CSP is to use a <a href="/nonce/" title="CSP Nonce">nonce</a>. A <a href="/nonce/" title="CSP Nonce">nonce</a> is just a random, single use string value that you add to your <code>Content-Security-Policy</code> header, like so:
 <pre>
-style-src css-cdn.example.com 'nonce-r@nd0m';
+style-src css-cdn.example.com 'nonce-rAnd0m';
 </pre>
-<p>Assuming our nonce value is <code>r@nd0m</code> (you need to randomly generate a new nonce for every HTTP request), we can now use an inline style tag like this:</p>
+<p>Assuming our nonce value is <code>rAnd0m</code> (you need to randomly generate a new nonce for every HTTP request), we can now use an inline style tag like this:</p>
 <pre>
-&lt;style nonce="r@nd0m"&gt;
+&lt;style nonce="rAnd0m"&gt;
 	.red { color: red }
 &lt;/style&gt;
 </pre>
@@ -72,6 +72,3 @@ style-src 'self' 'unsafe-hashes' 'sha256-nMxMqdZhkHxz5vAuW/PAoLvECzzsmeAxD/BNwG1
 <h2>Other methods</h2>
 <p>The <a href="/unsafe-inline/"><code>unsafe-inline</code></a> source list keyword can be used to allow inline styles, but this also removes much of the security protection that you gain when you enable CSP.</p>
 <p>CSP Level 3 (newest browsers) support a source list value: <a href="/unsafe-hashes/"><code>unsafe-hashes</code></a> which can be used to allow inline style attributes on HTML tags.</p>
-
-
-

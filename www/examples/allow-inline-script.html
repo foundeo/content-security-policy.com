@@ -32,11 +32,11 @@ tags: examples
 
 <p>One of the easiest ways to allow inline scripts when using CSP is to use a <a href="/nonce/" title="CSP Nonce">nonce</a>. A <a href="/nonce/" title="CSP Nonce">nonce</a> is just a random, single use string value that you add to your <code>Content-Security-Policy</code> header, like so:
 <pre>
-script-src js-cdn.example.com 'nonce-r@nd0m';
+script-src js-cdn.example.com 'nonce-rAnd0m';
 </pre>
-<p>Assuming our nonce value is <code>r@nd0m</code> (you need to randomly generate a new nonce for every HTTP request), we can now use an inline script tag like this:</p>
+<p>Assuming our nonce value is <code>rAnd0m</code> (you need to randomly generate a new nonce for every HTTP request), we can now use an inline script tag like this:</p>
 <pre>
-&lt;script nonce="r@nd0m"&gt;
+&lt;script nonce="rAnd0m"&gt;
 	doSomething();
 &lt;/script&gt;
 </pre>
