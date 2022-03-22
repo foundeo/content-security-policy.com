@@ -11,11 +11,11 @@ date: Last Modified
 <h2>A strict-dynamic Example</h2>
 <p>Here is an example <code>Content-Security-Policy</code> that uses <code>strict-dynamic</code>:</p>
 <pre>
-script-src 'nonce-r@nd0m' 'strict-dynamic';default-src 'self';
+script-src 'nonce-rAnd0m' 'strict-dynamic';default-src 'self';
 </pre>
 <p>Now we can simply use a nonce to load our scripts:</p>
 <pre>
-&lt;script src="/script-loader.js" nonce="r@nd0m"&gt;&lt;/script&gt;
+&lt;script src="/script-loader.js" nonce="rAnd0m"&gt;&lt;/script&gt;
 </pre>
 <p>The key super power of <code>strict-dynamic</code> is that it will allow <code>/script-loader.js</code> to load additional scripts via <em>non-"parser-inserted"</em> script elements.</p>
 <p>So how do you create a <em>non-"parser-inserted"</em> script element? Here's an example:</p>
@@ -42,10 +42,10 @@ script-src 'nonce-r@nd0m' 'strict-dynamic';default-src 'self';
 	content security policy: ignoring “'unsafe-eval'” within script-src: ‘strict-dynamic’ specified
 </blockquote>
 <p>So our script can be made backwards compatable by doing something like this:</p>
-<pre>script-src 'nonce-r@nd0m' 'strict-dynamic' https: 'self';default-src 'self';</pre>
+<pre>script-src 'nonce-rAnd0m' 'strict-dynamic' https: 'self';default-src 'self';</pre>
 <p>Above we have added 'self' to allow loading of <code>/script-loader.js</code> and we have added <code>https:</code> to allow loading of <code>https://cdn.example.com/some-script-you-need.min.js</code></p>
 <p>You may notice that by adding <code>https:</code> we are allowing any domain to load a script, you could be more specific if you wanted to. In our example the following would be better:</p>
-<pre>script-src 'nonce-r@nd0m' 'strict-dynamic' cdn.example.com 'self';default-src 'self';</pre>
+<pre>script-src 'nonce-rAnd0m' 'strict-dynamic' cdn.example.com 'self';default-src 'self';</pre>
 <p>If we had an <a href="/examples/allow-inline-script/">inline script block</a> then we could consider adding <code>'unsafe-inline'</code> to the policy to allow it to load on CSP Level 1 Browsers. You'll need to balance the compexity of your policy vs the bredth of browsers that you want to support.</p>
 <p>On older browsers you may see something like this:</p>
 <blockquote>
