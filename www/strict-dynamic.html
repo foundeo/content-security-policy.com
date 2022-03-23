@@ -30,9 +30,9 @@ script-src 'nonce-rAnd0m' 'strict-dynamic';default-src 'self';
 <p>Thankfully the authors of CSP Level 3 considered this, and have a clever workaround. When <code>strict-dynamic</code> is used, browsers that support it will ignore the following source list expressions:</p>
 <ul>
 	<li><code><a href="/unsafe-inline/">'unsafe-inline'</a></code></li>
-	<li><code>'unsafe-eval'</code></li>
 	<li><code>'self'</code>
-	<li><code>http:</code> or <code>https:</code> host based source lists</li>
+	<li>Host based source lists</li>
+	<li>Protocol based source lists (e.g. <code>http:</code> and <code>https:</code>)</li>
 </ul>
 <p>In fact you might see something like this in your developer tools console:</p>
 <blockquote>
