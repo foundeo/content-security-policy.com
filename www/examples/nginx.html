@@ -18,7 +18,7 @@ tags: examples
 <p>If all is working properly we should now see the following HTTP response header when we make a HTTP request to our nginx server:</p>
 <pre>Content-Security-Policy: default-src 'self';</pre>
 <h3>Always adding <code>Content-Security-Policy</code> in nginx</h3>
-<p>You can also append <code>always</code> to the end to ensure that nginx sends the header reguardless of response code. The nginx config would look like this:</p>
+<p>You can also append <code>always</code> to the end to ensure that nginx sends the header regardless of response code. The nginx config would look like this:</p>
 <pre>add_header Content-Security-Policy "default-src 'self';" always;</pre>
 <h2>Should I add a CSP header with nginx or my in application?</h2>
 <p>While it is certainly easy to add a CSP header with nginx, it also possible to add a <code>Content-Security-Policy</code> header with your server side programming language (<a href="/examples/php/" title="Add CSP header with PHP">PHP</a>, <a href="/examples/express-js/" title="Add CSP Header with ExpressJS">ExpressJS</a>, etc.). There are tradeoffs to doing it either way. If you have sections of your application that may require a different CSP policy then it might be easier to use your application programming language instead. Or if you plan to use features such as a <a href="/nonce/" title="CSP nonce">CSP nonce</a>, then it is much easier to set the <code>Content-Security-Policy</code> from your application code instead of from nginx.</p>
