@@ -1,0 +1,55 @@
+---
+title: PCI DSS 4.0 and Content Security Policy (CSP)
+description: How can CSP help meet PCI DSS 4.0 Compliance Requirements
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>How can CSP help meet PCI DSS 4.0 Compliance Requirements?</h1>
+	<div class="lead">In the PCI DSS 4.0 specification, published in March 2022, section 6.4.3 sets out requirements for scripts loaded on payment pages.</div>
+</div>
+
+<p>Section 6.4.3 of PCI DSS 4.0 defines requirements for scripts (typically JavaScript or you could extrapolate that to also mean CSS files, or any other assets loaded that can cause dynamic code execution on the client, check with your PCI QSA) loaded on payment pages. Summarizing the following points:</p>
+<ul>
+    <li><strong>Script Authorization</strong> - you must have a way to ensure that only the scripts you have approved to load are loaded on the page. CSP can help with this.</li>
+    <li><strong>Script Integrity</strong> - you have to have a way verify the integrity of each script that will run on the payment page. CSP and / or Sub-resource integrity (SRI) hashes can help you meet this requirement.</li>
+    <li><strong>Script Inventory</strong> - you need to keep a list of what scripts are allowed to run and why it is needed.</li>
+</ul>
+<h3>Script Authorization</h3>
+<p>CSP or <code>Content-Security-Policy</code> was essentially designed for the purpose of authorizing scripts to run on a page. That makes CSP a great way to help meet parts of PCI Requirement 6.4.3</p>
+<p>At a very minimum you can use the <a href="/script-src/"><code>script-src</code></a> or even the <a href="/default-src/"><code>default-src</code></a> directive to control what scripts can load.</p>
+<p>A very basic Content-Security-Policy header might look like this:</p>
+<pre>Content-Security-Policy: script-src js-cdn.example.com; default-src 'self';</pre>
+<p>In this very basic example we are allowing images, css, fonts, etc to be loaded from <code>'self'</code> (the same domain as the requested document). </p>
+<p>Many CSP implementations will simply use the domain name, but we can actually be more specific and allow only a specific JS file to load: </p>
+<pre>Content-Security-Policy: script-src https://js-cdn.example.com/some-script.js;default-src 'self';</pre>
+<p>You can space seperate as many scripts as you need. Keep in mind that some servers might limit the size of your http response header.</p>
+<h3>Script Integrity</h3>
+<p>A great way to ensure integrity of scripts loaded is the <em>Subresource Integrity</em> or SRI feature. 
+    Here's an example of loading jQuery with a <code>integrity</code> attribute:</p>
+<pre>
+&lt;script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"&gt;&lt;/script&gt;
+</pre>
+<p>
+The value of the <code>integrity</code> attribute what we expect the SHA-256 hash of the <code>src</code> attribute (https://code.jquery.com/jquery-3.6.0.min.js) to be. 
+Browsers that support SRI will perform this verification before executing the script.
+</p>
+<p>This provides a great protection, because if someone were to compromise <code>code.jquery.com</code> and alter that script, it would fail to execute as long as that integrity script is present and the browser supports it.</p>
+<p>By default when you enable CSP, it will block the execution of inline JavaScript. CSP can be used to provide a hash validation of inline scripts on your page by adding a <a href="/hash/">hash</a> to the <code>script-src</code> directive.</p>
+<p>For example, if you have this inline script:</p>
+<pre>
+&lt;script&gt;doSomething();&gt;/script&gt;
+</pre>
+<p>The value of <code>doSomething();</code> has a SHA-256 hash of <code>RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=</code> and you can then allow the execution of it like this:</p>
+<pre>script-src 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';</pre>
+<h3>Script Inventory</h3>
+<p>CSP could be used to keep a list of scripts that are allowed to run, but you'll need to document why each one is required seperatly.</p>
+
+<h4>Disclaimer</h4>
+<p>This page was not written by a PCI QSA, use at your own risk. Please consult with your PCI QSA for implementation and compliance advice.</p>
