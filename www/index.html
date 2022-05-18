@@ -305,7 +305,7 @@ layout: layout
       <br>
 
       <h2 id="source_list">Source List Reference</h2>
-      <p>All of the directives that end with <code>-src</code> support similar values known as a source list. Multiple source list values can be space separated with the exception of <code>'none'</code> which should be the only value.</p>
+      <p>All of the directives that end with <code>-src</code> support similar values known as a <a href="https://w3c.github.io/webappsec-csp/#framework-directive-source-list">source list</a>. Multiple source list values can be space separated with the exception of <code>'none'</code> which should be the only value.</p>
       <table class="table table-bordered table-responsive">
         <thead>
           <tr>
@@ -354,6 +354,16 @@ layout: layout
             <td><code>https:</code></td>
             <td><code>img-src https:</code></td>
             <td>Allows loading resources only over HTTPS on any domain.</td>
+          </tr>
+          <tr>
+            <td><code>https://example.com:12/path/to/file.js</code></td>
+            <td><code>script-src https://example.com:12/path/to/file.js</code></td>
+            <td>Allows loading resources only over HTTPS and matching the given domain, port, and path.</td>
+          </tr>
+          <tr>
+            <td><code>example.com:*</code></td>
+            <td><code>script-src example.com:*</code></td>
+            <td>Allows loading resources only matching the given domain on any port.</td>
           </tr>
           <tr>
             <td><a href="/unsafe-inline/" title="CSP unsafe-inline"><code>'unsafe-inline'</code></a></td>
