@@ -44,6 +44,8 @@ xhr.send();
 
 <h2>What happens when a request violates the connect-src directive?</h2>
 <p>When a resources is <a href="/examples/blocked-csp/" title="Blocked by CSP">blocked</a> due to <code>connect-src</code> the browser emulates a 400 HTTP status code.</p>
+<p>You might see something like this in your browser's console when a connect-src policy is violated:</p>
+<pre>because it violates the following content security policy directive: "connect-src 'self'</pre>
 
 <h2>What else does connect-src apply to?</h2>
 <p>Besides XMLHttpRequest or ajax calls, the connect-src directive also applies to the following browser mechanisms:</p>

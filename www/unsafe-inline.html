@@ -43,11 +43,15 @@ date: Last Modified
 <pre>&lt;button onClick="doSomething();"&gt;Do It&lt;/button&gt;</pre>
 <p>Another way to allow such unsafe inline JavaScript code is with the <a href="/unsafe-hashes/">unsafe-hashes</a> source list keyword. While it is also considered <em>unsafe</em>, it better to use <code>unsafe-hashes</code> than it is to use <code>unsafe-inline</code>.</p> 
 <h2>When is it ok to use unsafe-inline?</h2>
-<p>It is only ok to use <code>unsafe-inline</code> when it is combined with the <a href="/strict-dynamic/"><code>strict-dynamic</code> directive</a>. On browsers that support <code>strict-dynamic</code> (CSP Level 3+), the <code>unsafe-inline</code> is ignored, and provides a route to backwards compatibility on browsers that support CSP Level 2 or lower.</p>
+<p>It is only ok to use <code>unsafe-inline</code> when it is combined with the <a href="/strict-dynamic/"><code>strict-dynamic</code> csp directive</a>. On browsers that support <code>strict-dynamic</code> (CSP Level 3+), the <code>unsafe-inline</code> is ignored, and provides a route to backwards compatibility on browsers that support CSP Level 2 or lower.</p>
 <p>In other words, you should only use it if you really know what you are doing!</p>
 
 <h2>Why is unsafe-inline not working?</h2>
 <p>The most common reason that unsafe inline is not working is that you forgot to wrap it with single quotes. It should be specified as: <code>'unsafe-inline'</code></p>
+
+<h2>Can I use unsafe-inline with frame-ancestors?</h2>
+<p>No, you cannot use <code>unsafe-inline</code> with the <a href="/frame-ancestors/">frame-ancestors csp directive</a>, you would get an error message like this:</p>
+<pre>the content-security-policy directive 'frame-ancestors' does not support the source expression ''unsafe-inline''</pre>
 
 <h2>Browser Support for <code>unsafe-inline</code></h2>
 <div class="bs">

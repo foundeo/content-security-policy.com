@@ -49,6 +49,9 @@ script-src 'self' https://js.example.com;
 <p>This error message means that you had some inline script that was blocked. It could be a script tag, or it could be a JavaScript event handler (such as onclick). You can workaround these kinds of issues by using <a href="/hash/">hashes</a> or a <a href="/nonce/" title="CSP with Nonce">nonce</a>, or by moving the script into a JS file.</p>
 <h4>refused to execute inline event handler because it violates the following content security policy directive: "script-src 'self'". either the 'unsafe-inline' keyword, a hash ('sha256-...'), or a nonce ('nonce-...') is required to enable inline execution. note that hashes do not apply to event handlers, style attributes and javascript: navigations unless the 'unsafe-hashes' keyword is present.</h4>
 <p>This error indicates that you have an <em>inline event handler</em> like <code>onclick</code> in your code that will be blocked. You might want to look at the <a href="/unsafe-hashes/">documentation for unsafe-hashes</a> keyword as well.</p>
+<h4>content security policy of your site blocks the use of 'eval' in javascript</h4>
+<p>Content-Security-Policy will block JavaScript <code>eval()</code> calls by default. You can use <code>unsafe-eval</code> to get around the error, but then you may be opening up more security holes. It is usually better to rewrite the JavaScript to avoid eval.</p>
+
 <h2>Browser Support for <code>script-src</code></h2>
 <div class="bs">
 	<div class="label label-success">CSP Level 1</div>
