@@ -6,12 +6,13 @@ date: Last Modified
 ---
 <div class="jumbotron">
 	<h1>Using a <code>nonce</code> with CSP</h1>
-	<div class="lead">A <code>nonce</code> is a randomly generated token that should be used only one time. </div>
+	<div class="lead">A <code>nonce</code> is a randomly generated token that should be used exactly one time. </div>
 </div>
 <h2>What is a nonce?</h2>
 <p>The word <dfn><code>nonce</code></dfn> can be defined as a word or phrase that is intended for use only once. If you were a spy, you might come up with a nonce as a code word to authenticate a rendezvous.</p>
-<p>The important thing to remember for nonces with respect to (<abbr title="Content Security Policy">CSP</abbr>) is that we only use our nonce once (for one request), and they should be so random that no one could guess it.</p> 
-<h2>Example Nonce Usage</h2>
+<p>In cryptography a nonce may be used to prevent replay attacks, where the attacker captures and replays a previosuly used message.</p>
+<p>The two most important things to remember when using a nonce, especially with respect to (<abbr title="Content Security Policy">CSP</abbr>), is that we only use our nonce once (for one request), and the nonce should be so random that no one could guess it.</p> 
+<h2>Example Script Nonce Usage</h2>
 <p>Using a <code>nonce</code> is one of the easiest ways to allow the execution of inline scripts in a Content Security Policy (CSP). Here's how one might use it with the CSP <a href="/script-src/"><code>script-src</code></a> directive:</p>
 <pre>
 script-src 'nonce-rAnd0m';
@@ -35,8 +36,8 @@ script-src 'nonce-rAnd0m';
 </pre>
 <p>This is because the browser doesn't know the difference between JavaScript code that you wrote and 
 intend for the user to execute vs code that an attacker has injected into the page (for example via an XSS vulnerability). 
-These inline script blocks are dangerous, and the nonce lets the browser know that the server intended on serving this script block if and only if
-the nonce attribute in the script tag matches the nonce value in the <code>Content-Security-Policy</code> header.</p>
+These inline script blocks are dangerous, and the script nonce attribute lets the browser know that the server intended on serving this script block if and only if
+the nonce attribute value in the script tag matches the nonce value in the <code>Content-Security-Policy</code> header.</p>
 <h2>Avoid this common nonce mistake</h2>
 <p>If you are outputting variables inside a nonce protected <code>script</code> tag, you could cancel out the XSS protection that CSP is giving you.</p>
 <p>For example assume you have a URL such as <code>/example/?id=123</code> and you are outputting that <code>id</code> value from the URL in your script block:</p>
@@ -52,6 +53,24 @@ the nonce attribute in the script tag matches the nonce value in the <code>Conte
 &lt;/script&gt;
 </pre>
 <p>As you can see we just threw away all of the cross site scripting protections of CSP by improperly using the nonce.</p>
+<h2>Considering Nonce vs Hash</h2>
+<p>An alternative to using a CSP nonce, is the <a href="/hash/" title="Content Security Policy (CSP) Hash">CSP hash</a>. There are pros and cons to using nonce vs using a hash, but both approaches allow you to allow inline script or inline CSS with CSP.</p>
+<h4>Pros of using a Nonce vs a Hash</h4>
+<ul>
+	<li>The nonce is smaller than the hash so the header size will be smaller</li>
+	<li>When you change the content of the script or style block you don't need to change your nonce logic, but if you are using a hash you would need to recompute the hash whenever the script or style tag inner text changes.</li>
+</ul>
+<h4>Cons of using a Nonce vs a Hash</h4>
+<ul>
+	<li>The nonce needs to be generated dynamically, and must be different for each request, so you need to generate the CSP header programatically.</li>
+	<li>When using a hash the header can be defined in the web server (since it does not change), rather than at the application level.</li>
+	<li>Since the resulting document changes every time with a nonce, it cannot be cached</li>
+</ul>
+<h2>How long should the nonce be?</h2>
+<p>One of the first questions you might ask yourself when implementing a content security policy script nonce, is how many characters should it be?</p>
+<p>In general you can use the same length you might use for a session identifier, or at least 128 bits. A 128 bit nonce would be 32 characters of a hexidecimal string, or about 24 characters of a base64 encoded string.</p>
+<h2>How can you generate a nonce value?</h2>
+
 <h2>Rules for Using a CSP Nonce</h2>
 <ul>
 	<li>The nonce must be unique for each HTTP response</li>
