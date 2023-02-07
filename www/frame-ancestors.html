@@ -38,6 +38,11 @@ frame-ancestors 'none'
 <blockquote>
 	[Error] Refused to load &lt;url&gt; because it does not appear in the frame-ancestors directive of the content security policy.
 </blockquote>
+<p>Or you may see an error like this when a frame ancestor url is not on the same origin (self), which would violate a <code>frame-ancestors 'self'</code> content security policy directive:</p>
+<blockquote>
+	Refused to load because an ancestor violates the following content security policy directive: "frame-ancestors 'self'".
+</blockquote>
+
 
 <h2>How is <code>frame-ancestors</code> different from <code>frame-src</code>?</h2>
 <p>The <code>frame-src</code> directive restricts where frames can be loaded from on the page protected by the CSP policy. So for example if we had a policy for the URI <code>/apples</code> defined as this:</p>
