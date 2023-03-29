@@ -336,6 +336,11 @@ layout: layout
             <td>Allows loading resources via the data scheme (eg Base64 encoded images).</td>
           </tr>
           <tr>
+            <td><code>'blob:'</code></td>
+            <td><code>object-src blob:</code></td>
+            <td>Allows loading and saving resources on the client's file system</td>
+          </tr>
+          <tr>
             <td><code><em><span class="hidden-xs">domain.</span>example.com</em></code></td>
             <td><code>img-src <span class="hidden-xs">domain.</span>example.com</code></td>
             <td>Allows loading resources from the specified domain name.</td>
@@ -384,7 +389,6 @@ layout: layout
             <td><a href="/unsafe-hashes/" title="CSP unsafe-hashes"><code>'unsafe-hashes'</code></a></td>
             <td><code>script-src 'unsafe-hashes' 'sha256-abc...'</code></td>
             <td>Allows you to enable scripts in event handlers (eg <code>onclick</code>). Does not apply to <code>javascript:</code> or inline <code>&lt;script&gt;</code>  <span class="label label-success">CSP Level 3</span> </td>
-
           </tr>
         </tbody>
       </table>
