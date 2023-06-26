@@ -1,0 +1,33 @@
+---
+title: What is CSP? 
+description: Learn what CSP is, and how to leverage it
+layout: layout
+date: Last Modified
+---
+
+<div class="jumbotron">
+	<h1>What is CSP?</h1>
+	<div class="lead">
+        <abbr title="Content Security Policy">CSP</abbr> is an acronym that stands for Content Security Policy. 
+        CSP is a security feature built in to modern web browsers. It is most commonly defined via the <code>Content-Security-Policy</code> HTTP response header, but it can also be defined within a meta tag.
+        With CSP developers can restrict how resources are loaded by the browser to help prevent attacks such as Cross Site Scripting (XSS) or other injection attacks.
+    </div>
+</div>
+
+<h2>Why use CSP?</h2>
+<p>The main reason CSP is deployed is to improve the security of your web sites or web applications. CSP is enforced at the browser level, so as long as your
+    users have a modern browser (one built within the last 5 years), they should have excellent support available for CSP.
+</p>
+
+<h2>What are the challanges when implementing CSP?</h2>
+<p>
+    Probably the biggest challange when implementing CSP is dealing with legacy code. This is especially problematic if there are a lot of inline javascript event handlers or inline CSS.
+    Inline code is automatically blocked by CSP, and you want to keep using inline code you need to write your code and your CSP policy to handle this properly.
+    CSP has introduced some features that help developers such as the <a href="/nonce/" title="CSP Nonce">nonce</a> or the <a href="/hash/">CSP hash</a>.
+</p>
+
+<p>If your site loads a lot of third party content, it can be complex to create policies that work well with third party services. This can be especially challanging if the third party service is has not been implemented in a way that is friendly to CSP, for example if it injects scripts dynamically or injects inline styles.</p>
+
+<h2>The benefits of CSP</h2>
+<p>CSP can be a great way to improve the security of your site, and signifantly reduce the likelihood of successful XSS attacks.</p>
+<p>CSP can also be a great assist in achieving <a href="/examples/pci-dss/">script authorization, script integrity and script inventory</a> defined in PCI version 4.</p>

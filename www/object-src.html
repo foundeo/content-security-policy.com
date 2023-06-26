@@ -1,0 +1,45 @@
+---
+title: CSP ⟶ object-src Reference
+description: The object-src Content Security Policy (CSP) directive explained
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>The <code>object-src</code> Directive</h1>
+	<div class="lead">The <code>object-src</code> <strong>Content Security Policy</strong> (CSP) directive specifies the valid sources for the &lt;object&gt; and &lt;embed&gt; elements. This includes browser plugin features such as Flash, Java, and ActiveX controls. </div>
+</div>
+
+<p>
+    The <code>object</code> or <code>embed</code> tags are used less and less in modern web applications. 
+    In many cases such tags open an hole for exploitation, for example if an attacker can exploit a bug in the 
+    flash player plugin or the java runtime environment (JRE). 
+</p>
+<p>We can use <code>Content-Security-Policy</code> to block all loading of these resources, or to only allow loading them from trusted sources.</p>
+<h2>Block loading of Flash, Java or ActiveX with CSP</h2>
+<p>The most common use of the <code>object-src</code> CSP directive is to block the loading of browser plugins such as Java, Flash or ActiveX. This can be accomplished using the <code>'none'</code> source list value, for example:</code></p>
+<pre>Content-Security-Policy: object-src 'none';</pre>
+<p>The <code>plugin-types</code> Directive</p>
+<p>The <code>plugin-types</code> directive is a non standard / deprecated directive that lets you allow a certain mime type of plugin. The use case here is if you for example wanted to allow java plugins to run, but prevent flash, and everything else.</p>
+
+<h2>Does object-src inherit from default-src?</h3>
+<p>If you do not specify a <code>object-src</code> directive, but do specify a <a href="/default-src/" title="CSP default-src"><code>default-src</code> directive</a> then the value of the <code>default-src</code> directive is used.</p>
+<p>If you specify both a <code>object-src</code> and a <code>default-src</code> directive then the <code>object-src</code> takes precedence.</p>
+
+<h2>Browser Support for <code>object-src</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> Edge 12+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+	<div class="label label-default" title="IE - img-src Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>The CSP <code>object-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1).</p>
+<p>Internet Explorer 11 and below do not support the CSP <code>object-src</code> directive. This means that IE11 will simply ignore the policy and continue to load object or embed tags including Flash, Java, ActiveX, etc.</p>
+
+
