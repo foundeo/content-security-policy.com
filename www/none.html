@@ -16,7 +16,7 @@ date: Last Modified
 <p>Then images will be prevented from loading on the page.</p>
 <h2>What directives should I set to none?</h2>
 <p>It is not a bad idea to set <code>default-src 'none'</code> to block all fetch directives, and then add in other directives as needed.</p>
-<p>If you don't want to set <code>default-src</code> to none then you might be able to set directives like <code>worker-src</code> or <code>object-src</code> to <code>none</code>.</p>
+<p>If you don't want to set <code>default-src</code> to none then you might be able to set directives like <code>worker-src</code> or <code><a href="/object-src/" title="object-src CSP Reference">object-src</a></code> to <code>none</code>.</p>
 <h2>Why is CSP <code>none</code> not working?</h2>
 <p>One reason why a <code>none</code> keyword might not work, if you have defined it in a <code><a href="/default-src/">default-src</a></code> directive, but also supplied another directive to override it. For example if you have the policy:</p>
 <pre>default-src 'none'; img-src 'self';</pre>
