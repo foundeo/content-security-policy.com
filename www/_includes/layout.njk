@@ -2,6 +2,7 @@
 title: Content-Security-Policy Header ⟶ CSP Reference & Examples
 description: Content Security Policy Header Reference Guide and Examples
 nav: reference
+canonical: empty
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,7 @@ nav: reference
     <meta name="author" content="Foundeo Inc.">
     <link rel="stylesheet" href="/css/readable-3.3.7.bootstrap.min.css" />
     <link href="/css/style.css" rel="stylesheet">
-
+    {% if canonical != "empty" %}<link rel="canonical" href="{{ canonical }}" />{% endif %}
   </head>
 
   <body>
