@@ -1,6 +1,6 @@
 ---
-title: CSP Nonce ⟶ Examples and Guide
-description: How to use a nonce with Content Security Policy (CSP) script-src or style-src
+title: CSP Nonce ⟶ Script & Style Attribute
+description: How to use a script nonce or style nonce with Content Security Policy (CSP) script-src or style-src
 layout: layout
 date: Last Modified
 canonical: https://content-security-policy.com/nonce/
@@ -9,17 +9,19 @@ canonical: https://content-security-policy.com/nonce/
 	<h1>Using a <code>nonce</code> with CSP</h1>
 	<div class="lead">A <code>nonce</code> is a randomly generated token that should be used exactly one time. </div>
 </div>
+
 <h2>What is a nonce?</h2>
 <p>The word <dfn><code>nonce</code></dfn> can be defined as a word or phrase that is intended for use only once. If you were a spy, you might come up with a nonce as a code word to authenticate a rendezvous.</p>
 <p>In cryptography a nonce may be used to prevent replay attacks, where the attacker captures and replays a previosuly used message.</p>
 <p>The two most important things to remember when using a nonce, especially with respect to (<abbr title="Content Security Policy">CSP</abbr>), is that we only use our nonce once (for one request), and the nonce should be so random that no one could guess it.</p> 
+
 <h2>Example Script Nonce Usage</h2>
-<p>Using a <code>nonce</code> is one of the easiest ways to allow the execution of inline scripts in a Content Security Policy (CSP). Here's how one might use it with the CSP <a href="/script-src/"><code>script-src</code></a> directive:</p>
+<p>Using a <code>nonce</code> is one of the easiest ways to allow the execution of inline scripts in a Content Security Policy (CSP). Here's how one might use a script nonce with the CSP <a href="/script-src/"><code>script-src</code></a> directive:</p>
 <pre>
 script-src 'nonce-rAnd0m';
 </pre>
 <blockquote>
-	<strong>NOTE:</strong> We are using the phrase: <em>rAnd0m</em> to denote a random value. You should use a cryptographically secure random token generator to generate a nonce value. The random nonce value should only be used for a single HTTP request.
+	<strong>NOTE:</strong> We are using the phrase: <em>rAnd0m</em> to denote a random nonce value. You should use a cryptographically secure random token generator to generate a nonce value. The random nonce value should only be used for a single HTTP request.
 </blockquote>
 <p>Now we can allow an inline <code>&lt;script&gt;</code> tag to execute by adding our random nonce value in the <code>nonce</code> attribute of the <code>script</code> tag:</p>
 <pre>
@@ -28,7 +30,7 @@ script-src 'nonce-rAnd0m';
 &lt;/script&gt;
 </pre>
 
-<h2>What is a CSP nonce for?</h2>
+<h2>What is a CSP script nonce for?</h2>
 <p>So why do we need a to add a csp nonce to every inline script block when we use CSP? The short answer is that when you enable CSP it will disable inline script tags, so code like the following will not execute:</p>
 <pre>
 &lt;script&gt;
@@ -39,6 +41,21 @@ script-src 'nonce-rAnd0m';
 intend for the user to execute vs code that an attacker has injected into the page (for example via an XSS vulnerability). 
 These inline script blocks are dangerous, and the script nonce attribute lets the browser know that the server intended on serving this script block if and only if
 the nonce attribute value in the script tag matches the nonce value in the <code>Content-Security-Policy</code> header.</p>
+
+<h2>What is a CSP style nonce?</h2>
+<p>The HTML <code>&lt;style&gt;</code> tag can also accept the nonce attribute. Because CSS styles can also be used to load or request resources or potentially execute client side code, inline style tags are also blocked by default once a CSP policy is enabled.</p>
+<p>In order to allow a style tag to run, we can set the style tag nonce attribute like this:</p>
+<pre>
+&lt;style nonce="rAnd0m"&gt;
+	.alert { color: red; }
+&lt;/style&gt;
+</pre>
+<p>And our Content-Security-Policy header would include the random style nonce value in the style-src directive, like this:</p>
+<pre>
+style-src 'nonce-rAnd0m';
+</pre>
+<p>In this case the inline style tag is allowed to run thanks to the style nonce provided.</p>
+
 <h2>Avoid this common nonce mistake</h2>
 <p>If you are outputting variables inside a nonce protected <code>script</code> tag, you could cancel out the XSS protection that CSP is giving you.</p>
 <p>For example assume you have a URL such as <code>/example/?id=123</code> and you are outputting that <code>id</code> value from the URL in your script block:</p>
@@ -54,19 +71,23 @@ the nonce attribute value in the script tag matches the nonce value in the <code
 &lt;/script&gt;
 </pre>
 <p>As you can see we just threw away all of the cross site scripting protections of CSP by improperly using the nonce.</p>
+
 <h2>Considering Nonce vs Hash</h2>
 <p>An alternative to using a CSP nonce, is the <a href="/hash/" title="Content Security Policy (CSP) Hash">CSP hash</a>. There are pros and cons to using nonce vs using a hash, but both approaches allow you to allow inline script or inline CSS with CSP.</p>
+
 <h4>Pros of using a Nonce vs a Hash</h4>
 <ul>
 	<li>The nonce is smaller than the hash so the header size will be smaller</li>
 	<li>When you change the content of the script or style block you don't need to change your nonce logic, but if you are using a hash you would need to recompute the hash whenever the script or style tag inner text changes.</li>
 </ul>
+
 <h4>Cons of using a Nonce vs a Hash</h4>
 <ul>
 	<li>The nonce needs to be generated dynamically, and must be different for each request, so you need to generate the CSP header programatically.</li>
 	<li>When using a hash the header can be defined in the web server (since it does not change), rather than at the application level.</li>
 	<li>Since the resulting document changes every time with a nonce, it cannot be cached</li>
 </ul>
+
 <h2>How long should the nonce be?</h2>
 <p>One of the first questions you might ask yourself when implementing a content security policy script nonce, is how many characters should it be?</p>
 <p>In general you can use the same length you might use for a session identifier, or at least 128 bits. A 128 bit nonce would be 32 characters of a hexidecimal string, or about 24 characters of a base64 encoded string.</p>
@@ -80,13 +101,13 @@ the nonce attribute value in the script tag matches the nonce value in the <code
 	<li>Script tags that have a nonce attribute must not have any untrusted / unescaped variables within them.</li>
 	<li>The characters that can be used in the nonce string are limited to the characters found in base64 encoding.</li>
 </ul>
-
-
 <p>If you do need to use a variable like in the above example, you need to make sure that it has been validated. In this case we could make sure it is a valid integer. In more complex cases you would need pass the variable through an encoder that would escape javascript. For example in the Java OWASP ESAPI library the <code>encodeJavaScript</code> function could be used, or in CFML the <code>encodeForJavaScript</code> function could be used. </p>
+
 
 <h2>What if a CSP nonce doesn't make sense?</h2>
 <p>In some situations using a nonce doesn't make sense, in those cases you can use a <a href="https://content-security-policy.com/hash/">CSP hash</a> instead of a nonce.</p>
 <p>There is one other workaround to this problem called <a href="https://content-security-policy.com/unsafe-inline/">unsafe-inline</a>, but as its name suggests it is not really a good idea to use it (except in specific conditions).</p>
+
 <h2>Nonce Browser Support</h2>
 <p>The <code>nonce</code> source list directive was added to CSP Level 2. This means that support has existed since 2015 in Chrome and Firefox, Safari 10+ or Edge 15+.</p>
 <p>Nonces are not supported at all in Internet Explorer, you need to use the Edge browser for nonce support instead.</p>
