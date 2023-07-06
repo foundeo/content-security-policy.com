@@ -1,0 +1,55 @@
+---
+title: form-action in CSP ⟶ Controlling Form Submissions
+description: How to use the CSP form-action directive in a Content-Security-Policy header to allow or block form action urls.
+layout: layout
+date: Last Modified
+---
+<div class="jumbotron">
+	<h1>CSP <code>form-action</code></h1>
+	<div class="lead">The CSP <code>form-action</code> directive allows you to specify to what location a form may POST to.</div>
+</div>
+<h2>An Example form-action Policy</h2>
+<p>The most common way to use the <code>form-action</code> directive is to only allow forms to be POST to the same origin, or same domain name. This is accomplished in CSP using the <code>self</code> source list keyword.</p>
+<pre>
+form-action 'self'
+</pre>
+<p>The above CSP policy would allow this form to continue working:</p>
+<pre>
+&lt;form action="/search"&gt;
+    &lt;input type="search" name="query"&gt;
+    &lt;input type="submit" value="Search"&gt;
+&lt;/form&gt;
+</pre>
+
+<p><strong>Allowing a different form action</strong>
+<p>Now suppose we want to allow a form action pointing to https://a.example.com and https://b.example.com we can specify these domains in <code>form-action</code> like this:</p>
+<pre>form-action https://a.example.com https://b.example.com</pre>
+<p>If we wanted to keep 'self' in there we could add that as well:</p>
+<pre>form-action 'self' https://a.example.com https://b.example.com</pre>
+<h2>Can form-action be used in a meta tag?</h2>
+<p>Yes, you can use the <code>form-action</code> directive from a <a href="/examples/meta/">Content-Security-Policy meta tag</a>. It can also be specified as part of a <code>Content-Security-Policy</code> header.</p>
+
+<h2>Is form-action covered by the default-src directive?</h2>
+<p>No, the <code>form-action</code> does not inherit from the <code>default-src</code> directive, you need to explicitly specify it in your <code>Content-Security-Policy</code> header.</p> 
+
+<h2>How can I disable all form actions</h2>
+<p>If your web application should not post forms anywhere you can enforce this in the CSP policy by using the 'none' source list keyword. For example:</p>
+<pre>form-action: 'none';</pre>
+
+<h2>What happens when <code>form-action</code> blocks something?</h2>
+<p>You might see an error message in the developer tools console such when you try to submit a form whose action is not allowed by the <code>form-action</code> policy, such as:</p>
+<blockquote>
+	[Error] Refused to load &lt;url&gt; because it does not appear in the form-action directive of the content security policy.
+</blockquote>
+<p>Or you may see an error like this when a form attempts to submit to an action url that is not on the same origin (self), which would violate a <code>form-action 'self'</code> content security policy directive:</p>
+<blockquote>
+	Refused to load because an ancestor violates the following content security policy directive: "form-action 'self'".
+</blockquote>
+
+<h2>What about Submitting a Form via AJAX?</h2>
+<p>If the form is submitted via an AJAX call such as XmlHttpRequest or via Fetch, then it would fall under the <a href="/connect-src/">connect-src</a> CSP directive.</p>
+
+
+<h2>form-action Browser Support</h2>
+<p>The <code>form-action</code>  directive was added to CSP Level 2. This means that browser support for form-action existed since 2015 in Chrome (version 40) and Firefox (version 36), Safari 10+ or Edge 15+.</p>
+<p>The form-action CSP directive is not supported at all in Internet Explorer, you need to use the Edge browser instead.</p>
