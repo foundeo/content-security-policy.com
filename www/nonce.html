@@ -91,7 +91,23 @@ style-src 'nonce-rAnd0m';
 <h2>How long should the nonce be?</h2>
 <p>One of the first questions you might ask yourself when implementing a content security policy script nonce, is how many characters should it be?</p>
 <p>In general you can use the same length you might use for a session identifier, or at least 128 bits. A 128 bit nonce would be 32 characters of a hexidecimal string, or about 24 characters of a base64 encoded string.</p>
+
 <h2>How can you generate a nonce value?</h2>
+<p>There are many ways to generate a random value for use with a csp script nonce or style nonce. Which ever option you choose make sure that you are relying on a library that uses a <em>cryptographically secure</em> random generator. Depending on what programming languge you use, here are a few common ways to do it:</p>
+<h4>Generate CSP Nonce With PHP</h4>
+<pre>
+bin2hex(openssl_random_pseudo_bytes(32))
+</pre>
+<h4>Generate CSP Nonce With Python</h4>
+<pre>
+import secrets
+nonce = secrets.token_urlsafe(32)
+</pre>
+<h4>Generate CSP Nonce in CFML / ColdFusion</h4>
+<pre>
+generateSecretKey('aes')
+</pre>
+
 
 <h2>Rules for Using a CSP Nonce</h2>
 <ul>

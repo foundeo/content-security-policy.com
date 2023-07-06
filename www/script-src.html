@@ -46,7 +46,7 @@ script-src 'self' https://js.example.com;
 <p>There is no way to get <code>javascript:</code> to work when CSP is enabled except for <a href="/unsafe-inline/"><code>unsafe-inline</code></a>.
 <h2>Common Error Messages</h2>
 <p>When the browser blocks execution of your JavaScript due to a <code>Content-Security-Policy</code> header in place with a <code>script-src</code> directive you can find the reason in the browser developer tools console. Here are some examples:</p>
-<h4>content security policy: the page’s settings blocked the loading of a resource at inline ("script-src").</h4>
+<h4>content security policy: the page's settings blocked the loading of a resource at inline ("script-src").</h4>
 <p>
 	This error message means that the loading of inline script was blocked by the content security policy. 
 	The <em>resource at inline</em> could be a script tag with JavaScript inside it. Or the <em>resource at inline</em> could be an inline JavaScript event handler (such as onclick). 
