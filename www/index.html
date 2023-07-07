@@ -247,6 +247,26 @@ canonical: https://content-security-policy.com/
         <span class="label label-success"><del>CSP Level 3</del></span>
       </div>
 
+      <h3><code>upgrade-insecure-requests</code></h3>
+      <div class="pd">
+        <p>Automatically Converts urls from http to https for links, images, javascript, css, etc.</p>
+        <h5>Example upgrade-insecure-requests Policy</h5>
+        <pre>upgrade-insecure-requests</pre>
+        <span class="label label-default"><i class="fa fa-chrome"></i> 43+</span>
+        <span class="label label-default"><i class="fa fa-firefox"></i> 42+</span>
+        <span class="label label-default"><i class="fa fa-safari"></i> 10.1+</span>
+        <span class="label label-default"><i class="fa fa-edge"></i> 17+</span>
+        <em>Not technically part of the CSP spec.</em>
+      </div>
+
+      <h3><code>block-all-mixed-content</code></h3>
+      <div class="pd">
+        <p>Blocks requests to non secure http urls.</p>
+        <h5>Example block-all-mixed-content Policy</h5>
+        <pre>block-all-mixed-content</pre>
+        <em>Not technically part of the CSP spec, may be removed in the future.</em>
+      </div>
+
 
 
       <br>
