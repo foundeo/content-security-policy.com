@@ -6,22 +6,22 @@ date: Last Modified
 canonical: https://content-security-policy.com/nonce/
 ---
 <div class="jumbotron">
-	<h1>Using a <code>nonce</code> with CSP</h1>
-	<div class="lead">A <code>nonce</code> is a randomly generated token that should be used exactly one time. </div>
+	<h1>The CSP <code>nonce</code> Guide</h1>
+	<div class="lead">Learn how to use a CSP nonce to allow the loading and execution of a script or style tag when a <code>Content-Security-Policy</code> is enabled.</div>
 </div>
 
 <h2>What is a nonce?</h2>
 <p>The word <dfn><code>nonce</code></dfn> can be defined as a word or phrase that is intended for use only once. If you were a spy, you might come up with a nonce as a code word to authenticate a rendezvous.</p>
 <p>In cryptography a nonce may be used to prevent replay attacks, where the attacker captures and replays a previosuly used message.</p>
 <p>The two most important things to remember when using a nonce, especially with respect to (<abbr title="Content Security Policy">CSP</abbr>), is that we only use our nonce once (for one request), and the nonce should be so random that no one could guess it.</p> 
-
+<p>A CSP <code>nonce</code> will be a randomly generated token that we use exactly one time.</p>
 <h2>Example Script Nonce Usage</h2>
 <p>Using a <code>nonce</code> is one of the easiest ways to allow the execution of inline scripts in a Content Security Policy (CSP). Here's how one might use a script nonce with the CSP <a href="/script-src/"><code>script-src</code></a> directive:</p>
 <pre>
 script-src 'nonce-rAnd0m';
 </pre>
 <blockquote>
-	<strong>NOTE:</strong> We are using the phrase: <em>rAnd0m</em> to denote a random nonce value. You should use a cryptographically secure random token generator to generate a nonce value. The random nonce value should only be used for a single HTTP request.
+	<strong>NOTE:</strong> We are using the phrase: <em>rAnd0m</em> to denote a random nonce value. You should use a cryptographically secure random token generator to generate a CSP nonce value. The random nonce value should only be used for a single HTTP request.
 </blockquote>
 <p>Now we can allow an inline <code>&lt;script&gt;</code> tag to execute by adding our random nonce value in the <code>nonce</code> attribute of the <code>script</code> tag:</p>
 <pre>
@@ -42,7 +42,7 @@ intend for the user to execute vs code that an attacker has injected into the pa
 These inline script blocks are dangerous, and the script nonce attribute lets the browser know that the server intended on serving this script block if and only if
 the nonce attribute value in the script tag matches the nonce value in the <code>Content-Security-Policy</code> header.</p>
 
-<h2>What is a CSP style nonce?</h2>
+<h2 id="style">What is a CSP style nonce?</h2>
 <p>The HTML <code>&lt;style&gt;</code> tag can also accept the nonce attribute. Because CSS styles can also be used to load or request resources or potentially execute client side code, inline style tags are also blocked by default once a CSP policy is enabled.</p>
 <p>In order to allow a style tag to run, we can set the style tag nonce attribute like this:</p>
 <pre>

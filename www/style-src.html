@@ -5,7 +5,7 @@ date: Last Modified
 canonical: https://content-security-policy.com/style-src/
 ---
 <div class="jumbotron">
-	<h1>The <code>style-src</code> Directive</h1>
+	<h1>The CSP <code>style-src</code> Directive</h1>
 	<div class="lead">The <code>style-src</code> <strong>Content Security Policy</strong> (CSP) directive guards the loading and execution of CSS styles and stylesheets.</div>
 </div>
 <h2>Example Policy</h2>
@@ -32,7 +32,7 @@ style-src 'self' https://css.example.com;
   .red { color:red; }
 &lt;/style&gt;
 </pre>
-<p>Blocked because inline scripts are blocked by default, you have to use <a href="/hash/">hashes</a> or a <a href="/nonce/" title="CSP with Nonce">nonce</a> (CSP Level 2) to get allow inline scripts to run.</p>
+<p>Blocked because inline styles are blocked by default, you have to use a <a href="/hash/" title="CSP hash">CSP hash</a> or a <a href="/nonce/#style" title="CSP style nonce">CSP nonce</a> (CSP Level 2) to allow inline style tags to run.</p>
 <pre>
 &lt;div style="color:red"&gt;
   All Inline style CSS is blocked by default

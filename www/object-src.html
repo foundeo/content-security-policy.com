@@ -6,7 +6,7 @@ date: Last Modified
 canonical: https://content-security-policy.com/object-src/
 ---
 <div class="jumbotron">
-	<h1>The <code>object-src</code> Directive</h1>
+	<h1>The CSP <code>object-src</code> Directive</h1>
 	<div class="lead">The <code>object-src</code> <strong>Content Security Policy</strong> (CSP) directive specifies the valid sources for the &lt;object&gt; and &lt;embed&gt; elements. This includes browser plugin features such as Flash, Java, and ActiveX controls. </div>
 </div>
 
@@ -26,6 +26,10 @@ canonical: https://content-security-policy.com/object-src/
 <p>If you do not specify a <code>object-src</code> directive, but do specify a <a href="/default-src/" title="CSP default-src"><code>default-src</code> directive</a> then the value of the <code>default-src</code> directive is used.</p>
 <p>If you specify both a <code>object-src</code> and a <code>default-src</code> directive then the <code>object-src</code> takes precedence.</p>
 
+<h2>What is the difference between object-src and script-src in CSP?</h2>
+<p>The CSP <a href="/script-src/">script-src</a> controls the loading of scripts, such as javascript or the script tag, while the object-src directive pertains only to tags such as &lt;object&gt; and &lt;embed&gt;.</p>
+
+<hr>
 <h2>Browser Support for <code>object-src</code></h2>
 <div class="bs">
 	<div class="label label-success">CSP Level 1</div>

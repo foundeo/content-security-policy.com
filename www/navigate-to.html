@@ -1,0 +1,47 @@
+---
+title: CSP ⟶ navigate-to Reference
+description: The navigate-to Content Security Policy (CSP) directive explained
+layout: layout
+date: Last Modified
+canonical: https://content-security-policy.com/navigate-to/
+---
+<div class="jumbotron">
+	<h1>The CSP <code>navigate-to</code> Directive</h1>
+	<div class="lead">The <code>navigate-to</code> <strong>Content Security Policy</strong> (CSP) directive specifies the allowed locations that the page can navigate to. </div>
+</div>
+
+<div class="alert alert-danger">
+    <h3>Unimplimented Feature</h3>
+    <p>Note that <code>navigate-to</code> is not currently implemented in browsers, and although it was part of the CSP 3 spec, it has since been removed.</p>
+</div>
+
+<h2>What browser navigation events are covered?</h2>
+<p>When the browser navigates away from one page url to a different page url, this is generally a navigation event. Some ways that this might occurr:</p>
+<ul>
+    <li><strong><code>&lt;a href="..."&gt;</code></strong> - When the user clicks on an anchor tag, to go to a different url specified in the href attribute.</li>
+    <li><strong><code></code>&lt;form action="..."&gt;</code></strong> - When the user submits a form, they are taken to the form action page url.</li>
+    <li><strong><code></code>window.location = '...';&gt;</code></strong> - When javascript <code>window.location</code> variable is set, a navigation event is triggered.</li>
+    <li><strong><code></code>window.open('...');&gt;</code></strong> - When the javascript <code>window.open</code> function is called a navigation event is triggered.</li>
+</ul>
+
+<h2>An example navigate-to CSP policy</h2>
+<p>Suppose you only want to allow navigation on the same domain or same origin as your web application. The CSP self keyword allows you to do just that:</p>
+<pre>navigate-to: 'self';</pre>
+<h4>Allowing navigation to external domains</h4>
+<p>Now suppose you wanted to also allow a link to an external domain, you can add each external domain that is allowed as well:</p>
+<pre>navigate-to: 'self' pdf.example.com;</pre>
+<p>You can also use wildcards like <code>*.example.com</code>, or even specify the full url. Take a look at the <a href="/#source_list">CSP Source List Reference</a> for other options.</p>
+<h2>Can navigate-to be used in a meta tag?</h2>
+<p>Yes, you can use the <code>navigate-to</code> directive from a <a href="/examples/meta/">Content-Security-Policy meta tag</a>. It can also be specified as part of a <code>Content-Security-Policy</code> header.</p>
+
+<h2>Is navigate-to covered by the default-src directive?</h2>
+<p>No, the <code>navigate-to</code> does not inherit from the <code>default-src</code> directive, you need to explicitly specify it in your <code>Content-Security-Policy</code> header for it to take effect.</p> 
+
+<h2>How can I disable all navigation</h2>
+<p>If your web application is a single page app, that should not allow any navigation away from the page, you can enforce this in the CSP policy by using the 'none' source list keyword. For example:</p>
+<pre>navigate-to: 'none';</pre>
+
+
+<h2>Browser Support for <code>navigate-to</code></h2>
+
+<p>No browsers currently support <code>navigate-to</code></p>

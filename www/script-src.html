@@ -44,6 +44,13 @@ script-src 'self' https://js.example.com;
 &lt;a href="javascript:runInlineScript();"&gt;Won't Run&lt;/a&gt;
 </pre>
 <p>There is no way to get <code>javascript:</code> to work when CSP is enabled except for <a href="/unsafe-inline/"><code>unsafe-inline</code></a>.
+<h2>The <code>script-src-elem</code> and <code>script-src-attr</code> Directives</h2>
+<p>The CSP Level 3 specification added support for two new directives that are a subset of <code>script-src</code></p>
+<ul>
+	<li><strong><code>script-src-elem</code></strong> - Applies only to <code>script</code> tags and blocks, it does not apply to inline event handlers like <code>onclick</code></li>
+	<li><strong><code>script-src-attr</code></strong> - Applies only to script attribute such as <code>onclick</code>, <code>onmouseover</code>, etc.</li>
+</ul>
+<p>The <code>script-src-elem</code> and <code>script-src-attr</code> directives are supported on Chrome and Firefox, but not yet supported on Safari. For that reason it is recommended to use <code>script-src</code> instead when possible.</p>
 <h2>Common Error Messages</h2>
 <p>When the browser blocks execution of your JavaScript due to a <code>Content-Security-Policy</code> header in place with a <code>script-src</code> directive you can find the reason in the browser developer tools console. Here are some examples:</p>
 <h4>content security policy: the page's settings blocked the loading of a resource at inline ("script-src").</h4>
