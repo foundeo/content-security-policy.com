@@ -14,58 +14,7 @@ canonical: https://content-security-policy.com/
       <p><dfn>Content-Security-Policy</dfn> is the name of a HTTP response header that modern browsers use to enhance the security of the document (or web page). The Content-Security-Policy header allows you to restrict which resources (such as JavaScript, CSS, Images, etc.) can be loaded, and the URLs that they can be loaded from.</p>
       <p>Although it is primarily used as a HTTP response header, you can also apply it via a <a href="/examples/meta/">meta tag</a>.</p>
       <p>The term Content Security Policy is often abbreviated as <abbr title="Content Security Policy">CSP</abbr>.</p>
-      <h2>What types of attacks does Content-Security-Policy help mitigate?</h2>
       <p >CSP was first designed to reduce the attack surface of Cross Site Scripting (XSS) attacks, later versions of the spec also protect against other forms of attack such as Click Jacking.</p>
-
-
-      <div class="marketing">
-        <h2>CSP Browser Support</h2>
-        <div>Content Security Policy is supported by all the major modern browsers, and has been for many years. It is not supported in Internet Explorer.</div>
-
-        <h3><i class="fa fa-chrome"></i> Chrome</h3>
-        <div class="pd">
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 3</span> - Chrome 59+ <small>Partial Support</small><br>
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Chrome 40+ <small>Full Support Since January 2015</small><br>
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Chrome 25+<br>
-          <code>X-Webkit-CSP</code> <span class="label label-warning">Deprecated</span> - Chrome 14-24
-        </div>
-
-        <h3><i class="fa fa-firefox"></i> Firefox</h3>
-        <div class="pd">
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 3</span> - Firefox 58+ <small>Partial Support</small><br>
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Firefox 31+ <small title="45+ is missing the plugin-types directive"><em>Partial Support</em> since July 2014</small><br>
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Firefox 23+ <small>Full Support</small><br>
-          <code>X-Content-Security-Policy</code> <span class="label label-warning">Deprecated</span> - Firefox 4-22
-        </div>
-
-        <h3><i class="fa fa-safari"></i> Safari</h3>
-        <div class="pd">
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 3</span> - Safari 15.4+ <small>Partial Support</small><br>
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Safari 10+<br>
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Safari 7+<br>
-          <code>X-Webkit-CSP</code> <span class="label label-warning">Deprecated</span> - Safari 6
-        </div>
-
-        <h3><i class="fa fa-edge"></i> Edge</h3>
-        <div class="pd">
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 3</span> - Edge 79+ <small>Partial Support</small><br>
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Edge 15+ Partial, 76+ Full<br>
-          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Edge 12+<br>
-        </div>
-
-        <h3><i class="fa fa-internet-explorer"></i> Internet Explorer</h3>
-        <div class="pd">
-          <code>X-Content-Security-Policy</code> <span class="label label-warning">Deprecated</span> - IE 10-11 support <code>sandbox</code> only
-        </div>
-
-        <br>
-
-
-        <p>Try our <a href="browser-test/">CSP Browser Test</a> to test your browser.</p>
-        <p>Note: It is known that having both <code>Content-Security-Policy</code> and <code>X-Content-Security-Policy</code> or <code>X-Webkit-CSP</code> causes unexpected behaviours on certain versions of browsers. Please avoid using deprecated <code>X-*</code> headers.</p>
-      </div>
-
-
 
       <h2 id="directive">CSP Directive Reference</h2>
       <p>The <code>Content-Security-Policy</code> header value is made up of one or more directives (defined below), multiple directives are separated with a semicolon <code>;</code></p>
@@ -430,3 +379,53 @@ canonical: https://content-security-policy.com/
     &lt;/customHeaders&gt;</strong>
   &lt;/httpProtocol&gt;
 &lt;/system.webServer&gt;</pre>
+
+
+      <div class="marketing">
+        <h2>CSP Browser Support</h2>
+        <div>Content Security Policy is supported by all the major modern browsers, and has been for many years. It is not supported in Internet Explorer.</div>
+
+        <h3><i class="fa fa-chrome"></i> Chrome</h3>
+        <div class="pd">
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 3</span> - Chrome 59+ <small>Partial Support</small><br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Chrome 40+ <small>Full Support Since January 2015</small><br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Chrome 25+<br>
+          <code>X-Webkit-CSP</code> <span class="label label-warning">Deprecated</span> - Chrome 14-24
+        </div>
+
+        <h3><i class="fa fa-firefox"></i> Firefox</h3>
+        <div class="pd">
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 3</span> - Firefox 58+ <small>Partial Support</small><br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Firefox 31+ <small title="45+ is missing the plugin-types directive"><em>Partial Support</em> since July 2014</small><br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Firefox 23+ <small>Full Support</small><br>
+          <code>X-Content-Security-Policy</code> <span class="label label-warning">Deprecated</span> - Firefox 4-22
+        </div>
+
+        <h3><i class="fa fa-safari"></i> Safari</h3>
+        <div class="pd">
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 3</span> - Safari 15.4+ <small>Partial Support</small><br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Safari 10+<br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Safari 7+<br>
+          <code>X-Webkit-CSP</code> <span class="label label-warning">Deprecated</span> - Safari 6
+        </div>
+
+        <h3><i class="fa fa-edge"></i> Edge</h3>
+        <div class="pd">
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 3</span> - Edge 79+ <small>Partial Support</small><br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP Level 2</span> - Edge 15+ Partial, 76+ Full<br>
+          <code>Content-Security-Policy</code> <span class="label label-success">CSP 1.0</span> - Edge 12+<br>
+        </div>
+
+        <h3><i class="fa fa-internet-explorer"></i> Internet Explorer</h3>
+        <div class="pd">
+          <code>X-Content-Security-Policy</code> <span class="label label-warning">Deprecated</span> - IE 10-11 support <code>sandbox</code> only
+        </div>
+
+        <br>
+
+
+        <p>Try our <a href="browser-test/">CSP Browser Test</a> to test your browser.</p>
+        <p>Note: It is known that having both <code>Content-Security-Policy</code> and <code>X-Content-Security-Policy</code> or <code>X-Webkit-CSP</code> causes unexpected behaviours on certain versions of browsers. Please avoid using deprecated <code>X-*</code> headers.</p>
+      </div>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css" integrity="sha256-CCsHNqNAiVDlD9ZaCQkhAD/oPYnsbjCEVJoB1d+p6FQ=" crossorigin="anonymous" />
