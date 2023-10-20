@@ -15,7 +15,7 @@ canonical: https://content-security-policy.com/default-src/
 <p>You will often see <code>default-src</code> referred to as a <em>fallback</em> for other directives. For example, if you <em>DO</em> specify a <code>default-src</code>, but <em>DO NOT</em> specify a <a href="/style-src/"><code>style-src</code></a> directive, then the value you specified for <code>default-src</code> will be used for as the <code>style-src</code> policy.</p>
 <p>For example if your Content-Security-Policy is specified as:</p>
 <pre>default-src 'self' cdn.example.com</pre>
-<p>Then the <code>script-src</code> policy will implicitly be <code>'self' cdn.example.com</code>
+<p>Then the <code>script-src</code> and <code>style-src</code> policy will implicitly be <code>'self' cdn.example.com</code>
 <h2>Which directives fallback to <code>default-src</code>?</h2>
 <p>All <em>CSP fetch directives</em> fallback to the <code>default-src</code> directive. For example the following directives will fallback to <code>default-src</code>:</p>
 <ul>
@@ -28,7 +28,7 @@ canonical: https://content-security-policy.com/default-src/
 	<li><a href="/object-src/" title="CSP object-src Reference"><code>object-src</code></a></li>
 	<li><code>media-src</code></li>
 	<li><code>manifest-src</code></li>
-	<li><code>frame-src</code></li>
+	<li><a href="/frame-src/" title="CSP frame-src Reference"><code>frame-src</code></a></li>
 	<li><code>prefetch-src</code></li>
 	<li><code>child-src</code></li>
 </ul>
@@ -46,3 +46,4 @@ canonical: https://content-security-policy.com/default-src/
 <pre>default-src 'self';script-src js.example.com;</pre>
 <p>The <code>script-src</code> element does not inherit <a href="/self/" title="CSP self meaning"><code>'self'</code></a> from the <code>default-src</code>, the <code>script-src</code> policy if specified overwrites the <code>default-src</code> policy for the given directive.</p>
 <p>The policy for <code>style-src</code>, <code>img-src</code>, etc. would still fall back to the default policy  (<code>'self'</code>).</p>
+<p>Therefor when you specifiy one of the CSP fetch directives, it doesn't inherit values from <code>default-src</code>, whatever you specify overrides <code>default-src</code> and becomes the policy for that directive.</p>

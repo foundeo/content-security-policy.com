@@ -43,6 +43,16 @@ form-action 'self'
 <p>If your web application should not post forms anywhere you can enforce this in the CSP policy by using the 'none' source list keyword. For example:</p>
 <pre>form-action: 'none';</pre>
 
+<h2>Can the form-action redirect to another url?</h2>
+<p>This question is currently debated, and as a result browser vendors have different implementations reguarding what happens when a form is redirected to a different url.</p>
+<p>Form data can be sent to the redirected url if the HTTP status code is <code>307</code> or <code>308</code>, which makes the redirect potentially sensitive.</p>
+<p>Currently Firefox allows the redirect, while Chrome and Safari will block them.</p>
+<p>In Chrome, if I have a CSP policy of <code>form-action 'self'</code> and I submit a form to /redirect, which does a 302 redirect to a different domain, I would see an error like this:</p>
+<blockquote>
+    Refused to send form data to '&lt;URL&gt;' because it violates the following Content Security Policy directive: "form-action 'self'".
+</blockquote>
+<p>To resolve this you need to make sure any URI that is redirected to is included in <code>form-action</code> directive.</p>
+
 <h2>What happens when <code>form-action</code> blocks something?</h2>
 <p>You might see an error message in the developer tools console such when you try to submit a form whose action is not allowed by the <code>form-action</code> policy, such as:</p>
 <blockquote>

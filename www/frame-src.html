@@ -1,0 +1,73 @@
+---
+title: CSP ⟶ frame-src Guide
+description: The frame-src Content Security Policy (CSP) directive explained
+layout: layout
+date: Last Modified
+canonical: https://content-security-policy.com/frame-src/
+---
+<div class="jumbotron">
+	<h1>The CSP <code>frame-src</code> Directive</h1>
+	<div class="lead">The <code>frame-src</code> <strong>Content Security Policy</strong> (CSP) directive controls the loading of frames (for example via an <code>&lt;iframe&gt;</code> HTML tag) within a HTML document.</div>
+</div>
+
+<h2>Example Policy</h2>
+<p>Assume a <code>Content-Security-Policy</code> header is set with the following policy:</p>
+<pre>
+frame-src 'self' allowed-site.example.com
+</pre>
+<h4>Allows</h4>
+<p>With the above CSP policy, frames can be loaded via the same origin (via the 'self' source list value), or via URLs on the domain: <code>allowed-site.example.com</code> using the same scheme as the parent document (eg https).
+<pre>
+&lt;iframe src="/folder/example.html"&gt;&lt;/iframe&gt;
+&lt;iframe src="https://allowed-site.example.com/frame.html"&gt;&lt;/iframe&gt;
+</pre>
+<h4>Blocks</h4>
+<p>The above policy will block any frame from loading that was not same origin or under the <code>allowed-site.example.com</code> domain, so the following would be <a href="/examples/blocked-csp/">blocked by CSP</a>:</p>
+<pre>
+&lt;iframe src="https://other.example.com/"&gt;&lt;/iframe&gt;
+</pre>
+
+<h2>Does CSP frame-src apply to <code>frame</code> and <code>frameset</code> tags?</h2>
+<p>Yes, the CSP frame-src directive does apply to the <code>frame</code> and <code>frameset</code> tags, however these tags are deprecated.</p>
+
+<h2>What does 'frame-src' was not explicitly set mean?</h2>
+<p>If you do not set the <code>frame-src</code> CSP directive, but you do have the <a href="/default-src/"><code>default-src</code></a> CSP directive set, then that policy will be applied. You need to either make sure that your <code>iframe</code> <code>src</code> attribute values comply with the default-src policy, or you need to add a <code>frame-src</code> directive to your CSP policy.</p>
+
+<p>Here are some example of what you might see in the console when images are blocked from loading by a CSP policy with a <code>default-src</code> policy set:</p>
+
+<blockquote>
+	refused to load the image because it violates the following content security policy directive: "default-src 'none'". note that 'frame-src' was not explicitly set, so 'default-src' is used as a fallback.
+</blockquote>
+
+
+<blockquote>
+	refused to load the image 'http://localhost:8080/favicon.ico' because it violates the following content security policy directive: "default-src 'none'". note that 'frame-src' was not explicitly set, so 'default-src' is used as a fallback.
+</blockquote>
+
+<h2>How can I prevent my page from using frames</h2>
+<p>If you specify a content security policy with: <code>frame-src 'none'</code>, this essentially prevents the iframe, frame, and frameset tags from functioning.</p>
+
+<h2>What is the difference between <code>frame-src</code> and <code>frame-ancestors</code>?</h2>
+
+<p>The <a href="/frame-ancestors/">CSP <code>frame-ancestors</code> directive</a> prevents a page from being loaded inside a frame, and the <code>frame-src</code> controls which urls can be placed inside an frame on the current page.</p>
+
+
+
+
+<h2>Browser Support for <code>frame-src</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<div class="label label-default" title="IE Edge 14+"><i class="fa fa-edge"></i> Edge 14+ (2015)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+	<div class="label label-default" title="IE - frame-src Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>The CSP <code>frame-src</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1).</p>
+<p>The <code>frame-src</code> directive was deprecated in CSP Version 2 in favor of <code>child-src</code>, but was then undeprecated in CSP Level 3 (the latest version)</p>
+<p>Internet Explorer 11 and below do not support the CSP <code>frame-src</code> directive. This means that IE11 will simply ignore the policy and allow frames to load from anywhere (as if a policy had not been set at all).</p>

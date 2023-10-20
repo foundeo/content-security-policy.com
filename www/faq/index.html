@@ -10,7 +10,12 @@ nav: faq
         <h1>Content Security Policy FAQ</h1>
       </div>
 
-      <h3>Why is my script hash not working.</h3>
+      <h3>What is a CSP directive?</h3>
+      <p>A CSP directive is an instruction in the <code>Content-Security-Policy</code> header. For example <a href="/default-src/">default-src</a> and <a href="/script-src/">script-src</a> are both CSP directives.</p>
+      </p>
+
+
+      <h3>Why is my script hash not working?</h3>
       <p>First make sure your browser supports CSP Level 2, you can use our <a href="../browser-test/">CSP Browser Test</a> to check.</p>
       <p>One common problem is that you forgot to wrap the hash in single quotes. So this header would fail:</p>
       <pre>Content-Security-Policy: script-src js.example.com sha256-xzi4zkCjuC8lZcD2UmnqDG0vurmq12W/XKM5Vd0+MlQ=;</pre>

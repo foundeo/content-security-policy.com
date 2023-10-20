@@ -46,7 +46,7 @@ frame-ancestors 'none'
 
 
 <h2>How is <code>frame-ancestors</code> different from <code>frame-src</code>?</h2>
-<p>The <code>frame-src</code> directive restricts where frames can be loaded from on the page protected by the CSP policy. So for example if we had a policy for the URI <code>/apples</code> defined as this:</p>
+<p>The <a href="/frame-src/">CSP <code>frame-src</code> directive</a> restricts where frames can be loaded from on the page protected by the CSP policy. So for example if we had a policy for the URI <code>/apples</code> defined as this:</p>
 <pre>frame-src 'none';frame-ancestors 'self'</pre>
 <p>And now a policy for the URI <code>/oranges</code> defined as:</p>
 <pre>frame-src 'self';frame-ancestors 'none'</pre>
