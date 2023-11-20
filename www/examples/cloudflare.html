@@ -1,0 +1,52 @@
+---
+title: CloudFlare Content-Security-Policy Example
+description: How to add a content security policy headers to a CloudFlare site
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>CloudFlare Example</h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header to any site through CloudFlare.</div>
+</div>
+<h2>CloudFlare Example CSP Header</h2>
+<p>The easiest way to add a <code>Content-Security-Policy</code> response header to your CloudFlare site is to create a <em>Modify Response Header</em> rule, under <em>Transform Rules</em>. From the CloudFlare Dashboard:</p>
+<ol>
+    <li>Login to CloudFlare</li>
+    <li>Select your site</li>
+    <li>Expend the <strong><em>Rules</em></strong> menu in the left nav</li>
+    <li>Click on <strong><em>Transform Rules</em></strong></li>
+    <li>Select <strong><em>Modify Response Header</em></strong></li>
+    <li>Click the <strong><em>Create Rule</em></strong> button</li>
+</ol>
+<h3>Creating a CloudFlare Respone Header Transform Rule for CSP</h3>
+<ol>
+    <li>Give the rule a name, for example: CSP</li>
+    <li>If you want to add the header to all pages on your site select <strong><em>All incoming requests</em></strong>. Otherwise you can create a <em>Custom filter expression</em> and match certain URIs, etc.</li>
+    <li>Under the <em>Then</em> section, select <em>Add</em> to add a new CSP header to the HTTP response.</li>
+    <li>Under <em>Header name</em> enter: <code>Content-Security-Policy</code> or <a href="/report-only/">Content-Security-Policy-Report-Only</a> if you don't want to block anything yet.</li>
+    <li>Under <em>Value</em> enter your CSP policy, a quick easy one to start with is: <code>default-src 'self'</code>, which will allow only scripts, images, etc from the same origin.</li>
+</ol>
+
+<p>In the above example we are simply setting a policy:</p>
+<pre>default-src 'self';</pre>
+<p>Chances are you will need something more involved than that</p>
+<h2>What goes inside a Content Security Policy?</h2>
+<p>If you're not sure what <code>default-src 'self';</code> means, then check out the <a href="https://content-security-policy.com/" title="CSP / Content Security Policy Reference">Content Security Policy reference</a> for details.</p>
+
+<h2>Using _headers with CloudFlare Pages</h2>
+<p>If you are using CloudFlare Pages another way to add a HTTP response header is to place a file named <code>_headers</code> in the publish directory of your site. The syntax for that file might look like this:</p>
+<pre>
+/*
+  Content-Security-Policy: default-src 'self';
+</pre>
+<p>You can create different polices for different URI paths using the <code>_headers</code> file if you want to as well.</p>
+
+<h2>Using CloudFlare Analytics with CSP</h2>
+<p>If You have CloudFlare Analytics enabled for your site you will need to make sure you allow their script to load. The script that is injected looks something like this:</p>
+<pre>&lt;script defer src="https://static.cloudflareinsights.com/beacon.min.js/v123" integrity="sha512-yadayada" data-cf-beacon='{"rayId":"1","r":1,"version":"2023.10.0","token":"2"}' crossorigin="anonymous"&gt;&lt;/script&gt;</pre>
+<p>Then you would need a policy like this:</p>
+<pre>default-src 'self';script-src 'self' static.cloudflareinsights.com</pre>
+<p>Note that cloudflare will also post an XHR request to <code>/cdn-cgi/rum</code> under your same domain, this is covered by our <code>default-src 'self'</code> policy</p>, but more specifically it the XHR fetch request requires that you have <a href="/connect-src/"><code>connect-src 'self'</code></a> or similar policy.</p>
