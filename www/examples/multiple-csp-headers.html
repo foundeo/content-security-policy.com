@@ -1,0 +1,39 @@
+---
+title: Multiple Content-Security-Policy Headers
+description: How to add a content security policy headers to a Netlify site
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>Multiple CSP Headers</h1>
+	<div class="lead">It is possible to have multiple <code>Content-Security-Policy</code> HTTP response headers, however additional policies can only make the policy more strict.</div>
+</div>
+<h2>Can you have multiple CSP headers?</h2>
+<p>Muliple CSP headers are allowed, however it may not work as you might expect. When multiple CSP policies are given, the browsers CSP engine will always select the most restrictive policy for the given directive.</p>
+<pre>
+Content-Security-Policy: img-src 'self';
+Content-Security-Policy: img-src 'self' img.example.com;
+</pre>
+<p>In this example the second CSP policy does not overwrite the first one, the first policy is used because it is more restrictive. In the above example we would not be able to load images from <code>img.example.com</code> on the page.</p>
+
+<h2>How does default-src work with multiple policies?</h2>
+<p>Now, what if we don't specify <code>img-src</code> in the first policy, but use <code>default-src</code> instead?</p>
+<pre>
+Content-Security-Policy: default-src 'self';
+Content-Security-Policy: img-src 'self' img.example.com;
+</pre>
+<p>The result here is the same, because img-src falls back to default-src, the first policy is effectivly the same as <code>img-src 'self'</code>. In this example you would also not be able to load images from <code>img.example.com</code>.</p>
+
+<h2>Does order matter?</h2>
+<p>The order in which the <code>Content-Security-Policy</code> HTTP response headers are returned does not matter. The browser only looks at which policy is most restrictive and uses that.</p>
+
+<h2>What about ambigious polices?</h2>
+<p>If you have a case where it is not clear which policy is more restrictive (for example two urls), then the policy becomes effectivly <code>'none'</code>. Take a look at this example:</p>
+<pre>
+Content-Security-Policy: img-src img.example.com;
+Content-Security-Policy: img-src more-images.example.com;
+</pre>
+<p>With the above policy images from both domains would fail to load, making it equivilent to <a href="/none/"><code>img-src 'none'</code></a>.</p>
