@@ -1,0 +1,41 @@
+---
+title: CSP Policy for Google Analytics GA4
+description: Using Google Analytics GA4 with a content security policy header.
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+
+<div class="jumbotron">
+	<h1>Using Google Analytics GA4 with CSP</h1>
+	<div class="lead">Don't forget to update your <code>Content-Security-Policy</code> HTTP response header when using Google Analytics.</div>
+</div>
+<h2>Step 1 - Create JS File</h2>
+<p>Create a JS file: <code>/js/google-analytics.js</code> to store the contents of the Google Analytics Script:</p>
+<pre>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'ABC12345');    
+</pre>
+<p>Note that you will need to change <code>ABC12345</code> to match your google analytics tag.</p>
+<p>If you really want to use the inline script tag then you will have to implement a <a href="/nonce/">CSP Nonce</a> or a <a href="/hash/">CSP Hash</a> to allow it to execute it.</p>
+<h2>Step 2 - Create a CSP Policy</h2>
+<p>Here's a minimal policy to allow google analytics 4:</p>
+<pre>default-src 'none';script-src 'self' www.googletagmanager.com/gtag/js; connect-src www.google-analytics.com;</pre>
+<h2>Step 3 - Update your HTML</p>
+<p>Now you can insert something like this in your HTML:</p>
+<pre>
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-ABC12345"&gt;&lt;/script&gt;
+&lt;script src="/js/google-analytics.js"&gt;&lt;/script&gt;
+</pre>
+<p>Again make sure you update the <code>ABC12345</code> value to match your google analytics tag id.</p>
+<h2>How it works</h2>
+<p>Let's break down how our policy works:</p>
+<ul>
+    <li><code>default-src 'none';</code> - this is setting our <a href="/default-src/">default CSP policy</a> to block everything. You'll find the CSS and images will not load with this policy, you may want to loosen the policy and set it to <code>'self'</code>.</p>
+    <li><code>script-src 'self' www.googletagmanager.com;</code> - The <a href="/script-src/">script-src directive</a> allows the <code>/js/google-analytics.js</code> script to load via the <code>'self'</code> keyword. The policy also allows any script to scripts to load on the www.googletagmanager.com domain. We could make that more restrictive by specifying the full script URL in the policy.</li>
+    <li><code>connect-src www.google-analytics.com;</code> - The <a href="/connect-src/">connect-src policy</a> allows google analytics to make a XHR (XMLHttpRequest, aka AJAX request) under the domain www.google-analytics.com in order to send the analytics data. We could also make this more restrictive by using the full url: <code>https://www.google-analytics.com/g/collect</code> in the policy. The risk in using the full url is that if Google ever changes the endpoint url, we would need to update our policy.</li>
+</ul>
+<p>As you can see it is not terribly difficult to create a CSP policy that works with Google Analytics 4.</p>
