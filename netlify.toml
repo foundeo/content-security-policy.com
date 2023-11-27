@@ -6,4 +6,4 @@
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-    Content-Security-Policy = "default-src 'none'; script-src 'self' www.googletagmanager.com platform.twitter.com syndication.twitter.com 'sha256-ewTm8QMx/IkmbIFAIapvCHoCrGgIIHhn8qKC7/5Y2Ro=' 'unsafe-hashes' 'sha256-mplq9U9bn5xLaFQjbIOde0Eu7cXsI2xaTPex2jLztp0='; style-src 'self' cdnjs.cloudflare.com fonts.googleapis.com 'sha256-5g0QXxO6NfvHJ6Uf5BK/hqQHtso8ZOdjlnbyKtYLvwc='; font-src fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' www.googletagmanager.com syndication.twitter.com; frame-src platform.twitter.com"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' www.googletagmanager.com platform.twitter.com syndication.twitter.com 'sha256-ewTm8QMx/IkmbIFAIapvCHoCrGgIIHhn8qKC7/5Y2Ro=' 'unsafe-hashes' 'sha256-mplq9U9bn5xLaFQjbIOde0Eu7cXsI2xaTPex2jLztp0='; style-src 'self' cdnjs.cloudflare.com fonts.googleapis.com 'sha256-5g0QXxO6NfvHJ6Uf5BK/hqQHtso8ZOdjlnbyKtYLvwc='; font-src fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' www.googletagmanager.com syndication.twitter.com; frame-src platform.twitter.com; connect-src www.google-analytics.com"
