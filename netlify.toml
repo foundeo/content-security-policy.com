@@ -32,3 +32,13 @@
   from = "/en-us*"
   to = "/"
   status = 301
+
+[[redirects]]
+  from = "/blog*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/en/*"
+  to = "/"
+  status = 301
