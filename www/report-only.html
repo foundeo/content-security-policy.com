@@ -8,10 +8,35 @@ canonical: https://content-security-policy.com/report-only/
 
 <div class="jumbotron">
 	<h1>Content-Security-Policy-Report-Only Header</h1>
-	<div class="lead">What is the Content-Security-Policy-Report-Only header, and why would you use it?</div>
+	<div class="lead">What is the <code>Content-Security-Policy-Report-Only</code> header, and why would you use it?</div>
 </div>
 <h2>Why use the Content-Security-Policy-Report-Only Header?</h2>
 <p>It is a great way to see the possible effect of implementing a <a href="/">Content-Security-Policy header</a> without actually blocking anything. When you use <code>Content-Security-Policy-Report-Only</code> it only sends reports to the developer tools console and if you have specified a <code>report-to</code> or <code>report-uri</code> directive it can post a JSON representation of the a violation to a URI endpoint that you specify.</p>
+<h2>Create a simple policy</h2>
+<p>The first thing we need to do in order to use the <code>Content-Security-Policy-Report-Only</code> header is to come up with a simple policy. We're going to start by using the <code>default-src</code> CSP directive and setting it to the value <code>'self'</code>:</p>
+<pre>Content-Security-Policy-Report-Only: default-src 'self';</pre>
+<p>Now we've set our report only policy to <code>default-src 'self'</code>, which tells the browser to only load resources from the <em>same origin</em> as the document that sent the header. So if we have a page <code>example.html</code> 
+<pre>
+GET /example.html
+Host: example.com
+Content-Security-Policy-Report-Only: default-src 'self';
+
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+  	&lt;h1&gt;Hello World&lt;/h1&gt;
+
+	&lt;img src="/images/hello.png"&gt;
+
+	&lt;script src="/js/script.js"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>The above will work just fine with this policy, but if we add a third party image like this:</p>
+<pre>&lt;img src="https://unsplash.it/200/200"&gt;</pre>
+<p>Now the Content-Security-Policy would block this image from loading, however with <code>Content-Security-Policy-Report-Only</code> it will not block the image, but instead will print an error in the browsers developer tools console.</p>
+<p>The report only mode of CSP is a great way to start testing the implementation of your site without breaking anything.</p>
+
 
 <h2>Content-Security-Policy-Report-Only Browser Support</h2>
 <div class="bs">
