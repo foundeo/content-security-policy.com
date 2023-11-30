@@ -45,11 +45,13 @@ public class CSPFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain)
         throws IOException, ServletException {
+        
         if (response instanceof HttpServletResponse) {
         	((HttpServletResponse)response).setHeader("Content-Security-Policy", CSPFilter.POLICY);
-    	}
+    	  }
+        chain.doFilter(request, response);
     }
-    }
+    
 
 
 	@Override
