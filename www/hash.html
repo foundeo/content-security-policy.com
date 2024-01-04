@@ -28,6 +28,20 @@ script-src 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';</pre>
 <p>You can also use tools such as openssl to generate it, whitespace is not ignored.</p>
 <p>Here is an example using openssl, which will be installed by default on most mac or linux systems:</p>
 <pre>echo -n 'doSomething();' | openssl sha256 -binary | openssl base64</pre>
+
+<h2>Using a Hash on External Scripts</h2>
+<p>You can use a CSP hash on external scripts or stylesheets to allow them to execute. For example if we have a CSP policy similar to the following:</p>
+<pre>Content-Security-Policy: default-src 'none';script-src 'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo='</pre>
+<p>Now we can load jquery-3.7.1.min.js based on it's hash alone, without adding code.jquery.com to the CSP policy.</p>
+<pre>
+&lt;script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+	crossorigin="anonymous"&gt;&lt;/script&gt;
+</pre>
+<p>Note that the above example is also using subresource integrity or SRI to enforce the hash. You might find it duplicative to have it in both places, but it can serve as a good way to document which hash is for which script.</p>
+<p>On the topic of SRI, it is worth noting that CSP did implement a directive called <code>require-sri-for</code>, which could be used to enforce SRI for script tags like this: <code>require-sri-for script</code>. This feature was experimental and was removed for a few different reasons. One of the reasons it was not as useful as it sounds is that it also required CORS access in order to verify the the integrity from the policy. The <code>require-sri-for</code> directive was implemented in Chrome and Firefox around 2017-2019</code></p>
+
+
 <h2>Why is my CSP Hash Not Working?</h2>
 <p>There are a three common reasons your CSP hash might not be working:</p>
 <ol>

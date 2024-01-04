@@ -12,7 +12,7 @@ canonical: https://content-security-policy.com/nonce/
 
 <h2>What is a nonce?</h2>
 <p>The word <dfn><code>nonce</code></dfn> can be defined as a word or phrase that is intended for use only once. If you were a spy, you might come up with a nonce as a code word to authenticate a rendezvous.</p>
-<p>In cryptography a nonce may be used to prevent replay attacks, where the attacker captures and replays a previosuly used message.</p>
+<p>In cryptography a nonce may be used to prevent replay attacks, where the attacker captures and replays a previously used message.</p>
 <p>The two most important things to remember when using a nonce, especially with respect to (<abbr title="Content Security Policy">CSP</abbr>), is that we only use our nonce once (for one request), and the nonce should be so random that no one could guess it.</p> 
 <p>A CSP <code>nonce</code> will be a randomly generated token that we use exactly one time.</p>
 <h2>Example Script Nonce Usage</h2>
@@ -55,6 +55,18 @@ the nonce attribute value in the script tag matches the nonce value in the <code
 style-src 'nonce-rAnd0m';
 </pre>
 <p>In this case the inline style tag is allowed to run thanks to the style nonce provided.</p>
+
+<h2>Using a Nonce on External Scripts</h2>
+<p>You can use a CSP nonce on external scripts or stylesheets to allow them to execute. For example if we have a CSP policy similar to the following:</p>
+<pre>Content-Security-Policy: default-src 'none';script-src 'nonce-rAnd0m'</pre>
+<p>You can then add the nonce attribute to the script tag to allow jQuery to load without adding code.jquery.com to the CSP policy.</p>
+<pre>
+&lt;script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+	<strong>nonce="rAnd0m"</strong>
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+	crossorigin="anonymous"&gt;&lt;/script&gt;
+</pre>
+
 
 <h2>Avoid this common nonce mistake</h2>
 <p>If you are outputting variables inside a nonce protected <code>script</code> tag, you could cancel out the XSS protection that CSP is giving you.</p>
