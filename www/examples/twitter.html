@@ -1,6 +1,6 @@
 ---
-title: Content-Security-Policy Twitter Button Example
-description: Adjusting your CSP to allow the Twitter Button to work.
+title: Content-Security-Policy Twitter Button / Pixel Example
+description: Adjusting your CSP to allow the Twitter Button or a Twitter Pixel to work.
 layout: layout
 date: Last Modified
 nav: examples
@@ -8,8 +8,8 @@ tags: examples
 ---
 
 <div class="jumbotron">
-	<h1>CSP Twitter Follow Button Example</h1>
-	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header for a Twitter Follow Button.</div>
+	<h1>CSP Twitter Follow Button / Pixel Code Examples</h1>
+	<div class="lead">Here's how to add a <code>Content-Security-Policy</code> HTTP response header for a Twitter Follow Button, or the Twitter Pixel Code.</div>
 </div>
 <h2>Example Twitter Follow Button</h2>
 <p>Here is my follow button:</p>
@@ -34,7 +34,7 @@ Content-Security-Policy: script-src 'self' platform.twitter.com syndication.twit
 <p>We also have the <code>'self'</code> keyword in there, that just means that scripts from our same domain or same origin are also allowed. You might not need that if you don't have any other JS files.</p>
 <p>Another option here might be to use <a href="/strict-dynamic/" title="CSP strict-dynamic"><code>strict-dynamic</code></a> and a <a href="/nonce/"><code>nonce</code></a>. With this approach you don't need to allow <code>platform.twitter.com syndication.twitter.com</code>, rather you allow the script and trust that it will load resources securely. With this approach Twitter could change the hostname <code>syndication.twitter.com</code> in their JavaScript, and your CSP would not break.</p>
 <h4>style-src</h4>
-<pre>style-src 'self' 'sha256-5g0QXxO6NfvHJ6Uf5BK/hqQHtso8ZOdjlnbyKtYLvwc=';</pre>
+<pre>style-src 'self' 'sha256-akbuxUDobAg86+TiT5p8TENoFqlhtGWtEqHedhVNujw=';</pre>
 <p>Here we've added a <a href="/hash/">sha256 hash</a> of the inline style that the twitter script is using. If twitter changes how they style this, it might break.</p>
 <h4>frame-src</h4>
 <pre>frame-src 'self' platform.twitter.com;</pre>
