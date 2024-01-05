@@ -46,11 +46,13 @@ Content-Security-Policy: script-src 'self' platform.twitter.com syndication.twit
 <h2>CSP Policy for Twitter Pixel Code</h2>
 <p>If you need to use the Twitter pixel code (or X pixel code) for ad audience building and conversion tracking, then you'll need to add the following to your <code>script-src</code> CSP directive:</code></p>
 <pre>
-	script-src static.ads-twitter.com
+	script-src static.ads-twitter.com;img-src t.co analytics.twitter.com
 </pre>
 <p>That is assuming you are already running on HTTPS, otherwise you'll need to add https:// to the twitter url.</p>
+
 <p>Here's what the tracking code looks like:</p>
 <pre>
+
 &lt;!-- Twitter conversion tracking base code -->
 &lt;script>
 	!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
