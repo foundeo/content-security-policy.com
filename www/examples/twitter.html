@@ -44,9 +44,9 @@ Content-Security-Policy: script-src 'self' platform.twitter.com syndication.twit
 <p>The twitter follow button will loads at this point, but it is also requesting to load an image from <code>syndication.twitter.com</code>. We will need to add that to our <a href="/img-src/" title="CSP img-src"><code>img-src</code> CSP directive</a> to remove the warning in the console.</p>
 
 <h2>CSP Policy for Twitter Pixel Code</h2>
-<p>If you need to use the Twitter pixel code (or X pixel code) for ad audience building and conversion tracking, then you'll need to add the following to your <code>script-src</code> CSP directive:</code></p>
+<p>If you need to use the Twitter pixel code (or X pixel code) for ad audience building and conversion tracking, then you'll need to add the following to your <code>script-src</code> and <code>img-src</code> CSP directive:</code></p>
 <pre>
-	script-src static.ads-twitter.com;img-src t.co analytics.twitter.com
+script-src static.ads-twitter.com;img-src t.co analytics.twitter.com
 </pre>
 <p>That is assuming you are already running on HTTPS, otherwise you'll need to add https:// to the twitter url.</p>
 

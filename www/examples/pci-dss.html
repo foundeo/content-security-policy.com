@@ -26,7 +26,7 @@ tags: examples
 <p>In this very basic example we are allowing images, css, fonts, etc to be loaded from <code>'self'</code> (the same domain as the requested document). </p>
 <p>Many CSP implementations will simply use the domain name, but we can actually be more specific and allow only a specific JS file to load: </p>
 <pre>Content-Security-Policy: script-src https://js-cdn.example.com/some-script.js;default-src 'self';</pre>
-<p>You can space seperate as many scripts as you need. Keep in mind that some servers might limit the size of your http response header.</p>
+<p>You can space separate as many scripts as you need. Keep in mind that some servers might limit the size of your http response header.</p>
 <h3>Script Integrity</h3>
 <p>A great way to ensure integrity of scripts loaded is the <em>Subresource Integrity</em> or SRI feature. 
     Here's an example of loading jQuery with a <code>integrity</code> attribute:</p>
@@ -49,7 +49,7 @@ Browsers that support SRI will perform this verification before executing the sc
 <p>The value of <code>doSomething();</code> has a SHA-256 hash of <code>RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=</code> and you can then allow the execution of it like this:</p>
 <pre>script-src 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';</pre>
 <h3>Script Inventory</h3>
-<p>CSP could be used to keep a list of scripts that are allowed to run, but you'll need to document why each one is required seperatly.</p>
+<p>CSP could be used to keep a list of scripts that are allowed to run, but you'll need to document why each one is required separately.</p>
 
 <h4>Disclaimer</h4>
 <p>This page was not written by a PCI QSA, use at your own risk. Please consult with your PCI QSA for implementation and compliance advice.</p>

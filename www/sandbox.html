@@ -1,0 +1,61 @@
+---
+title: Content-Security-Policy sandbox Directive Explained
+layout: layout
+date: Last Modified
+canonical: https://content-security-policy.com/style-src/
+---
+<div class="jumbotron">
+	<h1>The CSP <code>sandbox</code> Directive</h1>
+	<div class="lead">The <code>sandbox</code> <strong>Content Security Policy</strong> (CSP) directive can be used to tell the browser to disable several features unless explicitly enabled.</em></div>
+</div>
+<h2>Example Policy</h2>
+<p>Assume a <code>Content-Security-Policy</code> header is set with the following policy:</p>
+<pre>
+Content-Security-Policy: sandbox;
+</pre>
+<p>The <code>sandbox</code> directive would prevent the following from working:</p>
+<ul>
+    <li>JavaScript Execution</li>
+    <li>Form Submissions</li>
+    <li>Popups</li>
+    <li>Downloads</li>
+    <li>And more - see the sandbox flags for details</li>
+</ul>
+<p>The sandbox CSP directive is not the only way to block script execution. You can also use the <a href="/script-src/"><code>script-src</code></a> CSP directive to block JavaScript execution by setting it to: <code>script-src 'none'</code></p>
+<p>You can also block form submissions by using the <a href="/form-action/" title="CSP form-action"><code>form-action</code></a> CSP directive. To block all forms you would use: <code>form-action 'none';</code></p>
+<p>Both <code>form-action</code> and <code>script-src</code> are quite a bit more flexible than using the sandbox because you can enable scripts or form actions on the same origin only, or from certain trusted sources only.</p>
+
+<h2>Sandbox flags</h2>
+
+<ul>
+    <li><code>allow-scripts</code>: Permits script execution.</li>
+    <li><code>allow-forms</code>: Permits form submission within the sandbox.</li>
+    <li><code>allow-modals</code>: Allows creation of modal windows.</li>
+    <li><code>allow-orientation-lock</code>: Permits locking screen orientation.</li>
+    <li><code>allow-pointer-lock</code>: Allows obtaining a mouse pointer lock (<code>requestPointerLock()</code>) which captures mouse events beyond the browser or screen boundaries.</li>
+    <li><code>allow-popups</code>: Allows opening popup windows (<code>window.open()</code>, <code>window.showModalDialog</code>, or <code>target="_blank"</code>).</li>
+    <li><code>allow-popups-to-escape-sandbox</code>: Allows popups to break out of the sandbox.</li>
+    <li><code>allow-presentation</code>: Allows screen presentation features (<code>PresentationRequest</code>).</li>
+    <li><code>allow-top-navigation</code>: Allows top-level navigation (<code>_top</code>).</li>
+    <li><code>allow-downloads</code>: Allows downloading files.</li>
+    <li><code>allow-same-origin</code>: The sandboxed resource runs under a special context where the same origin policy check always fails unless this flag is present.</li>
+
+</ul>
+
+<h2>Meta Support</h2>
+<p>The <code>sandbox</code> CSP directive must be set via a HTTP response header. It is ignored when included in a <a href="/examples/meta/">meta</a> tag.</p>
+
+<h2>Browser Support for <code>sandbox</code></h2>
+<div class="bs">
+	<div class="label label-success">CSP Level 1</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 25+ - February 2013"><i class="fa fa-chrome"></i> Chrome 25+ (2013)</div>
+	<div class="label label-default" title="Firefox 23+ - August 2013"><i class="fa fa-firefox"></i> Firefox 23+ (2013)</div>
+	<div class="label label-default" title="Safari 7+ - October 2013"><i class="fa fa-safari"></i> Safari 7+ (2013)</div>
+	<span class="label label-default" title="IE Edge 12.10240+ - July 2015"><i class="fa fa-edge"></i> 12+</span>
+	<br><br>
+	
+</div>
+<br>
+<p>The CSP <code>sandbox</code> directive has been part of the Content Security Policy Specification since the first version of it (CSP Level 1). It is the only CSP feature that was supported in Internet Explorer 11 CSP implementation, via the now discouraged <code>X-Content-Security-Policy</code> header (don't use the <code>X-</code> prefix anymore).</p>

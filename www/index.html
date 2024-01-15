@@ -120,15 +120,15 @@ canonical: https://content-security-policy.com/
       <h3><a href="/frame-src/"><code>frame-src</code></a></h3>
       <div class="pd">
         <p>Defines valid sources for loading frames. In CSP Level 2 <code>frame-src</code> was deprecated in favor of the <code>child-src</code> directive. CSP Level 3, has <em>undeprecated</em> <code>frame-src</code> and it will continue to defer to <code>child-src</code> if not present.</p>
-        <h5>Exapmle frame-src Policy</h5>
+        <h5>Example frame-src Policy</h5>
         <pre>frame-src 'self';</pre>
         <span class="label label-success">CSP Level 1</span>
       </div>
 
-      <h3><code>sandbox</code></h3>
+      <h3><a href="/sandbox/"><code>sandbox</code></a></h3>
       <div class="pd">
         <p>Enables a sandbox for the requested resource similar to the <code>iframe</code> <code>sandbox</code> attribute. The sandbox applies a same origin policy, prevents popups, plugins and script execution is blocked.
-            You can keep the sandbox value empty to keep all restrictions in place, or add values: <code>allow-forms</code> <code>allow-same-origin</code> <code>allow-scripts</code> <code>allow-popups</code>, <code>allow-modals</code>, <code>allow-orientation-lock</code>, <code>allow-pointer-lock</code>, <code>allow-presentation</code>, <code>allow-popups-to-escape-sandbox</code>, and <code>allow-top-navigation</code></p>
+            You can keep the sandbox value empty to keep all restrictions in place, or add flags: <code>allow-forms</code> <code>allow-same-origin</code> <code>allow-scripts</code> <code>allow-popups</code>, <code>allow-modals</code>, <code>allow-orientation-lock</code>, <code>allow-pointer-lock</code>, <code>allow-presentation</code>, <code>allow-popups-to-escape-sandbox</code>, and <code>allow-top-navigation</code></p>
         <h5>Example sandbox Policy</h5>
         <pre>sandbox allow-forms allow-scripts;</pre>
         <span class="label label-success">CSP Level 1</span>
@@ -340,7 +340,7 @@ canonical: https://content-security-policy.com/
           <tr>
             <td><a href="/nonce/" title="Nonce Support in CSP"><code>'nonce-'</code></a></td>
             <td><code>script-src 'nonce-rAnd0m'</code></td>
-            <td>Allows an inline script or CSS to execute if the script (eg: <code>&lt;script nonce="rAnd0m"&gt;</code>) tag contains a nonce attribute matching the nonce specifed in the CSP header. The nonce should be a secure random string, and should not be reused. <span class="label label-success">CSP Level 2</span> </td>
+            <td>Allows an inline script or CSS to execute if the script (eg: <code>&lt;script nonce="rAnd0m"&gt;</code>) tag contains a nonce attribute matching the nonce specified in the CSP header. The nonce should be a secure random string, and should not be reused. <span class="label label-success">CSP Level 2</span> </td>
           </tr>
           <tr>
             <td><a href="/strict-dynamic/" title="CSP strict-dynamic"><code>'strict-dynamic'</code></a></td>
@@ -445,7 +445,7 @@ canonical: https://content-security-policy.com/
 
 
         <p>Try our <a href="browser-test/">CSP Browser Test</a> to test your browser.</p>
-        <p>Note: It is known that having both <code>Content-Security-Policy</code> and <code>X-Content-Security-Policy</code> or <code>X-Webkit-CSP</code> causes unexpected behaviours on certain versions of browsers. Please avoid using deprecated <code>X-*</code> headers.</p>
+        <p>Note: It is known that having both <code>Content-Security-Policy</code> and <code>X-Content-Security-Policy</code> or <code>X-Webkit-CSP</code> causes unexpected behaviors on certain versions of browsers. Please avoid using deprecated <code>X-*</code> headers.</p>
       </div>
 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css" integrity="sha256-CCsHNqNAiVDlD9ZaCQkhAD/oPYnsbjCEVJoB1d+p6FQ=" crossorigin="anonymous" />

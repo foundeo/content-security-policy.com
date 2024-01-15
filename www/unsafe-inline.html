@@ -19,7 +19,7 @@ canonical: https://content-security-policy.com/unsafe-inline/
 <p>When someone requests that URL the <code>bad-stuff.js</code> will execute.</p>
 <p>We can prevent our app from loading JS from <code>bad-guy.example.com</code> using CSP. If we have the following policy:</p>
 <pre>script-src: 'self'</pre>
-<p>Now becuase we specified <a href="/self/" title="CSP self"><code>'self'</code></a> in the <a href="/script-src/"><code>script-src</code></a> directive we can only load JS from the same origin as our app, the request to load a script from <code>bad-guy.example.com</code> will be blocked by CSP!</p>
+<p>Now because we specified <a href="/self/" title="CSP self"><code>'self'</code></a> in the <a href="/script-src/"><code>script-src</code></a> directive we can only load JS from the same origin as our app, the request to load a script from <code>bad-guy.example.com</code> will be blocked by CSP!</p>
 <p>CSP will also <a href="/examples/allow-inline-script/">prevent inline scripts from loading</a>, so if you have some legit JavaScript on your site, like this:
 <pre>&lt;script&gt;
 	doSomething();

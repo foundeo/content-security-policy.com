@@ -20,15 +20,15 @@ canonical: https://content-security-policy.com/csp/
     users have a modern browser (one built within the last 5 years), they should have excellent support available for CSP.
 </p>
 
-<h2>What are the challanges when implementing CSP?</h2>
+<h2>What are the challenges when implementing CSP?</h2>
 <p>
-    Probably the biggest challange when implementing CSP is dealing with legacy code. This is especially problematic if there are a lot of inline javascript event handlers or inline CSS.
+    Probably the biggest challenge when implementing CSP is dealing with legacy code. This is especially problematic if there are a lot of inline javascript event handlers or inline CSS.
     Inline code is automatically blocked by CSP, and you want to keep using inline code you need to write your code and your CSP policy to handle this properly.
     CSP has introduced some features that help developers such as the <a href="/nonce/" title="CSP Nonce">nonce</a> or the <a href="/hash/">CSP hash</a>.
 </p>
 
-<p>If your site loads a lot of third party content, it can be complex to create policies that work well with third party services. This can be especially challanging if the third party service is has not been implemented in a way that is friendly to CSP, for example if it injects scripts dynamically or injects inline styles.</p>
+<p>If your site loads a lot of third party content, it can be complex to create policies that work well with third party services. This can be especially challenging if the third party service is has not been implemented in a way that is friendly to CSP, for example if it injects scripts dynamically or injects inline styles.</p>
 
 <h2>The benefits of CSP</h2>
-<p>CSP can be a great way to improve the security of your site, and signifantly reduce the likelihood of successful XSS attacks.</p>
+<p>CSP can be a great way to improve the security of your site, and significantly reduce the likelihood of successful XSS attacks.</p>
 <p>CSP can also be a great assist in achieving <a href="/examples/pci-dss/">script authorization, script integrity and script inventory</a> defined in PCI version 4.</p>

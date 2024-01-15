@@ -14,7 +14,7 @@ canonical: https://content-security-policy.com/connect-src/
 Web Browsers have several mechanisms to invoke HTTP requests from script, and CSP has the sovereignty to control the endpoints that can be requested.
 </p>
 <h2>What about CORS and the Same Origin Policy?</h2>
-<p>The <code>connect-src</code> CSP directive does not interfeer Cross-Origin Resource Sharing (CORS) headers, so the <em>same origin policy</em> still applies.</p> 
+<p>The <code>connect-src</code> CSP directive does not interfere Cross-Origin Resource Sharing (CORS) headers, so the <em>same origin policy</em> still applies.</p> 
 
 
 <h2>XMLHttpRequests (XHR) or AJAX and CSP</h2>
@@ -28,7 +28,7 @@ xhr.send();
 <pre>Content-Security-Policy: connect-src 'self';</pre>
 <h2>What about requesting another domain?</h2>
 <p>If you are attempting to request a domain using XMLHttpRequest that is not the same origin, then you will need to specify that domain in the <code>connect-src</code> directive. Due to the browsers <em>Same Origin</em> policy, you will also need to ensure that the proper CORS headers have been set to allow your domain to connect to the third party domain.</p>
-<p>For example supplse we are making an XMLHttpRequest to api.example.com from app.example.com:</p>
+<p>For example suppose we are making an XMLHttpRequest to api.example.com from app.example.com:</p>
 <pre>
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://api.example.com/api.json');

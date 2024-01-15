@@ -46,4 +46,4 @@ canonical: https://content-security-policy.com/default-src/
 <pre>default-src 'self';script-src js.example.com;</pre>
 <p>The <code>script-src</code> element does not inherit <a href="/self/" title="CSP self meaning"><code>'self'</code></a> from the <code>default-src</code>, the <code>script-src</code> policy if specified overwrites the <code>default-src</code> policy for the given directive.</p>
 <p>The policy for <code>style-src</code>, <code>img-src</code>, etc. would still fall back to the default policy  (<code>'self'</code>).</p>
-<p>Therefor when you specifiy one of the CSP fetch directives, it doesn't inherit values from <code>default-src</code>, whatever you specify overrides <code>default-src</code> and becomes the policy for that directive.</p>
+<p>Therefor when you specify one of the CSP fetch directives, it doesn't inherit values from <code>default-src</code>, whatever you specify overrides <code>default-src</code> and becomes the policy for that directive.</p>

@@ -21,12 +21,12 @@ tags: examples
 	Content Security Policy: The page's settings blocked the loading of a resource at <em>https://maps.googleapis.com/maps/api/js?key=...</em> ("script-src")
 </blockquote>
 <h2>The img-src directive</h2>
-<p>You will notice that the images loaded may differ depening on what type of google map you are using. You may see something like this in your network log:</p>
+<p>You will notice that the images loaded may differ depending on what type of google map you are using. You may see something like this in your network log:</p>
 <ul>
-	<li><code>maps.gstatic.com</code> - loads various img assets for the map such as cross hair curors, a plain marker, the google logo, etc.</li>
+	<li><code>maps.gstatic.com</code> - loads various img assets for the map such as cross hair cursors, a plain marker, the google logo, etc.</li>
 	<li><code>maps.googleapis.com</code> - loads tiles of the map</li>
 	<li><code>data:image/svg+xml</code> - several resources are loaded as SVG using data URIs</li>
-	<li><code>khms0.googleapis.com</code> - load satalite images for the map. We will use <code>*.googleapis.com</code> in our policy to allow all similar domains.</li>
+	<li><code>khms0.googleapis.com</code> - load satellite images for the map. We will use <code>*.googleapis.com</code> in our policy to allow all similar domains.</li>
 	<li><code>geo0.ggpht.com</code> - loads street view images, this could be from a few different similar subdomains so we will use <code>*.ggpht.com</code> in our content security policy.</li>
 </ul> 
 <pre>img-src data: maps.gstatic.com *.googleapis.com *.ggpht.com</pre>

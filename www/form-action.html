@@ -44,7 +44,7 @@ form-action 'self'
 <pre>form-action: 'none';</pre>
 
 <h2>Can the form-action redirect to another url?</h2>
-<p>This question is currently debated, and as a result browser vendors have different implementations reguarding what happens when a form is redirected to a different url.</p>
+<p>This question is currently debated, and as a result browser vendors have different implementations regarding what happens when a form is redirected to a different url.</p>
 <p>Form data can be sent to the redirected url if the HTTP status code is <code>307</code> or <code>308</code>, which makes the redirect potentially sensitive.</p>
 <p>Currently Firefox allows the redirect, while Chrome and Safari will block them.</p>
 <p>In Chrome, if I have a CSP policy of <code>form-action 'self'</code> and I submit a form to /redirect, which does a 302 redirect to a different domain, I would see an error like this:</p>
