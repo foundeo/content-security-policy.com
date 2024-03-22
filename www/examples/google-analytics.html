@@ -39,3 +39,6 @@ tags: examples
     <li><code>connect-src www.google-analytics.com;</code> - The <a href="/connect-src/">connect-src policy</a> allows google analytics to make a XHR (XMLHttpRequest, aka AJAX request) under the domain www.google-analytics.com in order to send the analytics data. We could also make this more restrictive by using the full url: <code>https://www.google-analytics.com/g/collect</code> in the policy. The risk in using the full url is that if Google ever changes the endpoint url, we would need to update our policy.</li>
 </ul>
 <p>As you can see it is not terribly difficult to create a CSP policy that works with Google Analytics 4.</p>
+<h2>Google Analytics in Different Regions</h2>
+<p>We have found that in the EU region, google analytics may use a different endpoint, such as region1.google-analytics.com</p>
+<p>In that case you may need to add region1.google-analytics.com to your <code>connect-src</code> policy, or you could potentially use <code>*.google-analytics.com</code> instead.</p>

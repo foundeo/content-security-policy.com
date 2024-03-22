@@ -37,10 +37,11 @@ script-src 'nonce-rAnd0m' 'strict-dynamic';default-src 'self';
 </ul>
 <p>In fact you might see something like this in your developer tools console:</p>
 <blockquote>
-	content security policy: ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified<br>
-	content security policy: ignoring “http:” within script-src: ‘strict-dynamic’ specified<br>
-	content security policy: ignoring “https:” within script-src: ‘strict-dynamic’ specified<br>
-	content security policy: ignoring “'unsafe-eval'” within script-src: ‘strict-dynamic’ specified
+	content security policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified<br>
+	content security policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified<br>
+	content security policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified<br>
+	content security policy: Ignoring “'unsafe-eval'” within script-src: ‘strict-dynamic’ specified<br>
+	content security policy: Ignoring “'report-sample'” within script-src: ‘strict-dynamic’ specified
 </blockquote>
 <p>So our script can be made backwards compatible by doing something like this:</p>
 <pre>script-src 'nonce-rAnd0m' 'strict-dynamic' https: 'self';default-src 'self';</pre>
