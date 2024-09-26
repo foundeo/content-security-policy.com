@@ -22,7 +22,7 @@ frame-src 'self' allowed-site.example.com
 &lt;iframe src="https://allowed-site.example.com/frame.html"&gt;&lt;/iframe&gt;
 </pre>
 <h4>Blocks</h4>
-<p>The above policy will block any frame from loading that was not same origin or under the <code>allowed-site.example.com</code> domain, so the following would be <a href="/examples/blocked-csp/">blocked by CSP</a>:</p>
+<p>The above policy will block any frame from loading with a <code>src</code> attribute value that was not same origin or under the <code>allowed-site.example.com</code> domain, so the following would be <a href="/examples/blocked-csp/">blocked by CSP</a>:</p>
 <pre>
 &lt;iframe src="https://other.example.com/"&gt;&lt;/iframe&gt;
 </pre>
@@ -45,7 +45,7 @@ frame-src 'self' allowed-site.example.com
 </blockquote>
 
 <h2>How can I prevent my page from using frames</h2>
-<p>If you specify a content security policy with: <code>frame-src 'none'</code>, this essentially prevents the iframe, frame, and frameset tags from functioning.</p>
+<p>If you specify a content security policy with: <code>frame-src 'none'</code>, this will prevents the iframe, frame, and frameset tags from loading via the <code>src</code> attribute. However, it is still possible to load a frame using the <code>srcdoc</code> attribute with a <code>frame-src: 'none'</code>.</p>
 
 <h2>What is the difference between <code>frame-src</code> and <code>frame-ancestors</code>?</h2>
 
