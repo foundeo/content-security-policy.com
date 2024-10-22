@@ -19,7 +19,7 @@ canonical: https://content-security-policy.com/require-trusted-types-for/
 <p>Here's our old unsafe code:</p>
 <pre>
 untrusted_data = "123";
-unsafe_html = '<div class="wrapper">' + untrusted_data + '</div>';
+unsafe_html = '&lt;div class="wrapper"&gt;' + untrusted_data + '&lt;/div&gt;';
 element = document.getElementById('content');
 element.innerHTML = untrusted_data;
 </pre>
@@ -51,7 +51,7 @@ element.innerHTML = myPolicy.createHTML(untrusted_data);
 untrusted_data = "123";
 myUnsafePolicy = trustedTypes.createPolicy("myUnsafePolicy", {
     createHTML: function(input) {
-        return '<div class="wrapper">' + input + '</div>';
+        return '&lt;div class="wrapper"&gt;' + input + '&lt;/div&gt;';
     }
 });
 element = document.getElementById('content');
