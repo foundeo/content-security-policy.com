@@ -247,6 +247,26 @@ canonical: https://content-security-policy.com/
         <span class="label label-success"><del>CSP Level 3</del></span>
       </div>
 
+      <h3><a href="/require-trusted-types-for/"><code>require-trusted-types-for</code></a></h3>
+      <div class="pd">
+        <p>Requires the use of the <code>trustedTypes</code> API.</p>
+        <h5>Example require-trusted-types-for Policy</h5>
+        <pre>require-trusted-types-for 'script'</pre>
+        <span class="label label-default"><i class="fa fa-chrome"></i> 83+</span>
+        <span class="label label-default"><i class="fa fa-edge"></i> 83+</span>
+        <em>Not technically part of the CSP spec, W3C working draft.</em>
+      </div>
+
+      <h3><a href="/trusted-types/"><code>trusted-types</code></a></h3>
+      <div class="pd">
+        <p>Limits the names of policies which can be created using <code>trustedTypes</code></p>
+        <h5>Example require-trusted-types-for Policy</h5>
+        <pre>require-trusted-types-for 'script'</pre>
+        <span class="label label-default"><i class="fa fa-chrome"></i> 83+</span>
+        <span class="label label-default"><i class="fa fa-edge"></i> 83+</span>
+        <em>Not technically part of the CSP spec, W3C working draft.</em>
+      </div>
+
       <h3><code>upgrade-insecure-requests</code></h3>
       <div class="pd">
         <p>Automatically Converts urls from http to https for links, images, javascript, css, etc.</p>

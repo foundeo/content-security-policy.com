@@ -1,0 +1,95 @@
+---
+title: CSP and trusted-types
+description: Examples and usage of the trusted-types Content Security Policy (CSP) directive
+layout: layout
+date: Last Modified
+canonical: https://content-security-policy.com/require-trusted-types-for/
+---
+<div class="jumbotron">
+	<h1>The CSP <code>trusted-types</code> Directive</h1>
+	<div class="lead">The <code>trusted-types</code> <strong>Content Security Policy</strong> (CSP) directive is typically used in conjunction with the <a href="/require-trusted-types-for/"><code>require-trusted-types-for</code></a> CSP directive to instructs the browser to require the use of <code>trustedTypes</code> when passing a string to an unsafe DOM sink (such as <code>innerHTML</code>).</div>
+</div>
+
+<p>
+    The <code>trustedTypes</code> JavaScript api was implemented in Chrome &amp; Edge in 2020 which lets developers mark HTML as <em>trusted</em> before passing it to a dangerous sink within the DOM api, such as <code>innerHTML</code> or <code>document.write</code>. The <a href="/require-trusted-types-for/"><code>require-trusted-types-for</code></a> CSP directive requires that the trustedTypes API is used, while the <code>trusted-types</code> directive limits the names of the policies in use. 
+    HTML is marked as <code>TrustedHTML</code> via the <code>createHTML</code> function of the policy. You can also use <code>createScriptURL()</code> to create a <code>TrustedScriptURL</code> object, or <code>createScript()</code> to create a <code>TrustedScript</code> object.
+</p>
+
+<h2>Example of Trusted Types</h2>
+<p>Here's our old unsafe code:</p>
+<pre>
+untrusted_data = "123";
+unsafe_html = '<div class="wrapper">' + untrusted_data + '</div>';
+element = document.getElementById('content');
+element.innerHTML = untrusted_data;
+</pre>
+
+<p>Now here's how we might rewrite this in a way that is safe (by using innerText), and also marking it as <em>TrustedHTML</em>:</p>
+<pre>
+untrusted_data = "123";
+myPolicy = trustedTypes.createPolicy("myPolicy", {
+    createHTML: function(input) {
+        var div = document.createElement("div");
+        div.classList.add('wrapper');
+        if (input.match(/^[0-9]+$/)) {
+            div.innerText = input;
+        } else {
+            div.innerText = "0";
+        }
+        return div.outerHTML;
+    }
+});
+element = document.getElementById('content');
+element.innerHTML = myPolicy.createHTML(untrusted_data);
+</pre>
+<p>In this example the call to <code>myPolicy.createHTML(untrusted_data)</code> returns a <code>TrustedHTML</code> object.</p>
+
+
+<h2>Example of an Unsafe Policy</h2>
+<p>It is certainly possible to create policies that are not actually safe, here we can take our old code and create an unsafe policy. We didn't improve security in this example, we are only bypassing the CSP restriction.</p>
+<pre>
+untrusted_data = "123";
+myUnsafePolicy = trustedTypes.createPolicy("myUnsafePolicy", {
+    createHTML: function(input) {
+        return '<div class="wrapper">' + input + '</div>';
+    }
+});
+element = document.getElementById('content');
+element.innerHTML = mySanitizerPolicy.createHTML(untrusted_data);
+</pre>
+
+
+<h2>Example trusted-types CSP Directive</h2>
+<p>The <code>trusted-types</code> directive is used along with the <code>require-trusted-types-for</code> directive.</p>
+<pre>Content-Security-Policy: require-trusted-types-for 'script';trusted-types myPolicy</pre>
+<p>In this example we are requiring the use of trusted types via the <code>require-trusted-types-for</code> directive, and then limiting the list of allowed trusted type policies with the <code>trusted-types</code> directive.</p>
+<p>In this example only <code>myPolicy</code> may be used, even if we attempt to define <code>myUnsafePolicy</code> it will not be allowed.</p>
+<p>In fact, we will actually get two errors now:</p>
+<blockquote>
+    Refused to create a TrustedTypePolicy named 'myUnsafePolicy' because it violates the following Content Security Policy directive: "trusted-types myPolicy"
+</blockquote>
+<p>And we will get this error caused by the <code>trustedTypes.createPolicy("myUnsafePolicy", ...)</code> line.</p>
+<blockquote>
+    Uncaught TypeError: Failed to execute 'createPolicy' on 'TrustedTypePolicyFactory': Policy "myUnsafePolicy" disallowed
+</blockquote>
+
+<h2>Why limit trusted type policies by name?</h2>
+<p>It is possible that a malicious script could create its own unsafe policies, so by listing the policies you are denoting these policies as safe and trusted within your application to sanitize HTML, create scripts or create script urls.</p>
+
+<hr>
+<h2>Browser Support for <code>trusted-types</code></h2>
+<div class="bs">
+	<div class="label label-success">W3C Working Draft</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 83+ - 2020"><i class="fa fa-chrome"></i> Chrome 83+ (2020)</div>
+	<div class="label label-default" title="Edge 83+ - 2020"><i class="fa fa-edge"></i> Edge 83+ (2020)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+    <div class="label label-default" title="Firefox"><i class="fa fa-firefox"></i> <span class="text text-danger">Not Yet Supported</span></div>
+	<div class="label label-default" title="Safari"><i class="fa fa-safari"></i>  <span class="text text-danger">Not Yet Supported</span></div>
+	<div class="label label-default" title="IE - img-src Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>Note, a trustedTypes polyfill is available from the w3c, but the <a href="/require-trusted-types-for/"><code>require-trusted-types-for</code></a> directive and the <code>trusted-types</code> directive will still be ignored. </p>
+

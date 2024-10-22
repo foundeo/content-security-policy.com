@@ -1,0 +1,72 @@
+---
+title: CSP ⟶ require-trusted-types-for
+description: Examples and usage of the require-trusted-types-for Content Security Policy (CSP) directive
+layout: layout
+date: Last Modified
+canonical: https://content-security-policy.com/require-trusted-types-for/
+---
+<div class="jumbotron">
+	<h1>The CSP <code>require-trusted-types-for</code> Directive</h1>
+	<div class="lead">The <code>require-trusted-types-for</code> <strong>Content Security Policy</strong> (CSP) directive instructs the browser to require the use of <code>trustedTypes</code> when passing a string to an unsafe DOM sink (such as <code>innerHTML</code>).</div>
+</div>
+
+<p>
+    The <code>trustedTypes</code> JavaScript api was implemented in Chrome &amp; Edge in 2020. This api allows developers to mark HTML as <em>trusted</em> before passing it to a dangerous sink within the DOM api, such as <code>innerHTML</code>.
+	HTML is marked as <code>TrustedHTML</code> via the <code>createHTML</code> function of the policy. You can also use <code>createScriptURL()</code> to create a <code>TrustedScriptURL</code> object, or <code>createScript()</code> to create a <code>TrustedScript</code> object.
+</p>
+
+<h2>Example of Unsafe Code</h2>
+<p>The following JavaScript sets the <code>innerHTML</code> property of an element</p>
+<pre>
+untrusted_data = "anything, could be result of an api fetch";
+element = document.getElementById('content');
+element.innerHTML = untrusted_data;
+</pre>
+<h2>Example require-trusted-types-for CSP Directive</h2>
+<p>The <code>require-trusted-types-for</code> directive only has one additional argument, which is the <em>realm</em> for which trusted types are required. Currently <code>'script'</code> is the only supported value for the realm. As a result the <code>require-trusted-types-for</code> header or <a href="/meta/" title="CSP Meta Tag Example">meta tag</a> will look like this:</p>
+<pre>Content-Security-Policy: require-trusted-types-for 'script';</pre>
+
+<p>When we enable such a CSP policy, the above code which attempts to unsafely set the <code>innerHTML</code> property of a DOM element, will now fail with an error that looks like this:</p>
+<blockquote>
+    Uncaught TypeError: Failed to set the 'innerHTML' property on 'Element': This document requires 'TrustedHTML' assignment.
+</blockquote>
+
+<p>If we were to use <code>document.write(untrusted_data)</code>, then you'd hit an error like this:</p>
+<blockquote>
+	Uncaught TypeError: Failed to execute 'write' on 'Document': This document requires 'TrustedHTML' assignment.
+</blockquote>
+<p>When you see <strong>This document requires 'TrustedHTML' assignment.</strong>, then you can be pretty sure it is due to the <code>require-trusted-types-for</code> and / or <a href="/trusted-types/"><code>trusted-types</code></a> CSP directives.</p>
+
+<h2>What is a TrustedHTML assignment?</h2>
+<p>The <code>trustedTypes</code> API allows you to create a sanitizer policy which can sanitize the HTML input (among other things). When you use the trusted types API you pass in a string of untrusted data, and are returned an object of type <code>TrustedHTML</code>. So when the trusted types api is in use you would pass a <code>TrustedHTML</code> object instead of a string into the <code>innerHTML</code>, or <code>document.write</code> or any of the other unsafe DOM sinks.</code></p>
+
+<h2>Example trustedTypes Default Policy</h2>
+<pre>
+if (window.trustedTypes && trustedTypes.createPolicy) { // Feature testing
+    trustedTypes.createPolicy('default', {
+        createHTML: (input) => DOMPurify.sanitize(input, {RETURN_TRUSTED_TYPE: true})
+    });
+}
+</pre>
+<p>This default policy runs everything through DOMPurify (a third party library designed to sanitize HTML to mitigate XSS potential).</p>
+<h2>Couldn't malicious code just create its own trustedType policy?</h2>
+<p>Malicious code could certainly create its own policy, or even use a policy defined by another library for a different purpose. </p>
+<p>By using the <a href="/trusted-types/"><code>trusted-types</code></a> CSP directive you can actually specify which named policies you allow.</p>
+
+<hr>
+<h2>Browser Support for <code>require-trusted-types</code></h2>
+<div class="bs">
+	<div class="label label-success">W3C Working Draft</div>
+	<br><br>
+	<h4>Supported On:</h4><br>
+	<div class="label label-default" title="Chrome 83+ - 2020"><i class="fa fa-chrome"></i> Chrome 83+ (2020)</div>
+	<div class="label label-default" title="Edge 83+ - 2020"><i class="fa fa-edge"></i> Edge 83+ (2020)</div>
+	<br><br>
+	<h4>Not Supported On:</h4><br>
+    <div class="label label-default" title="Firefox"><i class="fa fa-firefox"></i> <span class="text text-danger">Not Yet Supported</span></div>
+	<div class="label label-default" title="Safari"><i class="fa fa-safari"></i>  <span class="text text-danger">Not Yet Supported</span></div>
+	<div class="label label-default" title="IE - img-src Not Supported"><i class="fa fa-edge"></i> Internet Explorer</div>
+</div>
+<br>
+<p>Note, a trustedTypes polyfill is available from the w3c, but the <code>require-trusted-types-for</code> directive will still be ignored. </p>
+
