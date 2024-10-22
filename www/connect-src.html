@@ -1,6 +1,6 @@
 ---
 title: CSP ⟶ connect-src Explained
-description: The connect-src Content Security Policy (CSP) directive explained
+description: The connect-src Content Security Policy (CSP) directive limits where the browser can fetch data from.
 layout: layout
 date: Last Modified
 canonical: https://content-security-policy.com/connect-src/
@@ -12,9 +12,13 @@ canonical: https://content-security-policy.com/connect-src/
 
 <p>
 Web Browsers have several mechanisms to invoke HTTP requests from script, and CSP has the sovereignty to control the endpoints that can be requested.
+The <code>connect-src</code> csp directive can restrict which URLs are allowed to be passed to fetch(), XMLHttpRequest, WebSocket, anchor ping's or EventSources. 
 </p>
 <h2>What about CORS and the Same Origin Policy?</h2>
-<p>The <code>connect-src</code> CSP directive does not interfere Cross-Origin Resource Sharing (CORS) headers, so the <em>same origin policy</em> still applies.</p> 
+<p>
+	The <code>connect-src</code> CSP directive does not interfere Cross-Origin Resource Sharing (CORS) headers, so the <em>same origin policy</em> still applies.
+	This means that you cannot use the <code>connect-src</code> CSP directive to bypass CORS, the Cross-Origin resource still needs to supply the correct CORS headers. The CSP <code>connect-src</code> directive can however restrict the URLs which could potentially make a cross origin request via one of the covered methods.
+</p> 
 
 
 <h2>XMLHttpRequests (XHR) or AJAX and CSP</h2>
