@@ -42,13 +42,13 @@ element.innerHTML = untrusted_data;
 
 <h2>Example trustedTypes Default Policy</h2>
 <pre>
-if (window.trustedTypes && trustedTypes.createPolicy) { // Feature testing
-    trustedTypes.createPolicy('default', {
+if (window.trustedTypes && trustedTypes.createPolicy && DOMPurify) {
+    trustedTypes.createPolicy("default", {
         createHTML: (input) => DOMPurify.sanitize(input, {RETURN_TRUSTED_TYPE: true})
     });
 }
 </pre>
-<p>This default policy runs everything through DOMPurify (a third party library designed to sanitize HTML to mitigate XSS potential).</p>
+<p>This default policy runs everything through DOMPurify (a third party library designed to sanitize HTML to mitigate XSS potential). You'll need to load in that library before running the above script or it will be skipped.</p>
 <h2>Couldn't malicious code just create its own trustedType policy?</h2>
 <p>Malicious code could certainly create its own policy, or even use a policy defined by another library for a different purpose. </p>
 <p>By using the <a href="/trusted-types/"><code>trusted-types</code></a> CSP directive you can actually specify which named policies you allow.</p>
