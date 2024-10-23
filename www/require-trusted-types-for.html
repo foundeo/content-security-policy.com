@@ -44,7 +44,7 @@ element.innerHTML = untrusted_data;
 <pre>
 if (window.trustedTypes && trustedTypes.createPolicy && DOMPurify) {
     trustedTypes.createPolicy("default", {
-        createHTML: (input) => DOMPurify.sanitize(input, {RETURN_TRUSTED_TYPE: true})
+        createHTML: (input) => DOMPurify.sanitize(input, {RETURN_TRUSTED_TYPE: false})
     });
 }
 </pre>

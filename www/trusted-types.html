@@ -76,6 +76,27 @@ element.innerHTML = mySanitizerPolicy.createHTML(untrusted_data);
 <h2>Why limit trusted type policies by name?</h2>
 <p>It is possible that a malicious script could create its own unsafe policies, so by listing the policies you are denoting these policies as safe and trusted within your application to sanitize HTML, create scripts or create script urls.</p>
 
+<h2>JavaScript Framework Support for Trusted Types</h2>
+<p>Some JavaScript Frameworks provide built-in support for Trusted Types.</p>
+<h3>Angular trusted-types</h3>
+<p>Angular has had built-in support for Trusted Types since Angular 11. If you use Angular or you'll need to add the trusted type named <code>angular</code> to your CSP <code>trusted-types</code> directive when using the <a href="/require-trusted-types-for/"><code>require-trusted-types-for 'script'</code></a> directive.</p>
+
+<p>In addition to the <code>angular</code> type there are a few other built-in trusted type policies. If your Angular Application uses any of the bypassSecurity functions such as <code>bypassSecurityTrustHtml</code> then you'll need to add <code>angular#unsafe-bypass</code> to your <code>trusted-types</code> list. Additionally angular may define the policies: <code>angular#bundler</code>, <code>angular#unsafe-jit</code> and <code>angular#unsafe-upgrade</code> depending on features used.</p>
+<h3>DOMPurify Trusted Types Support</h3>
+<p>The DOMPurify HTML sanitizer library can return TrustedHTML objects by passing <code>RETURN_TRUSTED_TYPE: true</code> into the sanitize function. For example:</p>
+<pre>DOMPurify.sanitize(input, {RETURN_TRUSTED_TYPE: true})</pre>
+<p>DOMPurify will create a policy named <code>dompurify</code> by default. You can customize this policy name by adding the attribute <code>data-tt-policy-suffix</code> to the Script element used to load DOMPurify. If you had <code>data-tt-policy-suffix="mysuffix"</code> then the policy would be named <code>dompurify#mysuffix</code></p>
+<p>You could also create your own trusted types policy that uses DOMPurify like this:</p>
+<pre>
+if (window.trustedTypes && trustedTypes.createPolicy && DOMPurify) {
+    trustedTypes.createPolicy("default", {
+        createHTML: (input) => DOMPurify.sanitize(input, {RETURN_TRUSTED_TYPE: false})
+    });
+}
+</pre>
+<p>In the above example the name of the trusted types policy created is called <code>default</code>.</p>
+
+
 <hr>
 <h2>Browser Support for <code>trusted-types</code></h2>
 <div class="bs">
