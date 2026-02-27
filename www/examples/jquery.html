@@ -94,8 +94,6 @@ $.ajaxSetup({
 <p>You can see that the jQuery authors are well aware of CSP, but are trying to patch browser features that might be lacking.</p>
 
 
-<h3>jQuery Plugins</h3>
-<p>Many jQuery plugins inject inline <code>&lt;style&gt;</code> blocks, use the <code>eval()</code> function, or Load resources from third-party CDNs. Review your plugins to ensure that they are CSP compatible.</p>
 
 <h3>jQuery Migrate</h3>
 <p>jquery-migrate is meant to be a development tool. In production, it can introduce security risks and loosen your CSP requirements.</p>
@@ -109,6 +107,19 @@ $.ajaxSetup({
 <p>However, jQuery UI ThemeRoller CSS should be loaded from an allowed origin in <code>style-src</code>.</p>
 <p>jQuery UI versions below 1.13.0 are less CSP friendly (injects <code>style</code> tags for example), upgrading is recommended.</p>
 
+<h3>Loading jQuery from a CDN</h3>
+<p>If you are loading jQuery from a CDN, you'll need to either use a nonce, hash or add the CDN to the script-src directive.</p>
+<p>
+	Not all CDN's have the same risk level. For example allowing the domain <code>code.jquery.com</code> is considerably less risky than allowing the entire <code>cdn.jsdelivr.net</code> domain. 
+	The jquery CDN only serves jquery, but cdn.jsdelivr.net can serve any file in any github repository (https://cdn.jsdelivr.net/gh/user/repo@version/file). 
+	So if you allow the entire domain, you are allowing all of github, and it nullifies the benefit of CSP. If you want serve scripts from a public CDN using a <a href="/nonce/">CSP nonce</a> is a much better approach. 
+</p>
+<p>Additionally ensure that you are adding the SRI <code>integrity</code> attribute to the script tag when loading from third party domains, to protect against compromise of the third party.</p>
+
+<h3>jQuery Plugins</h3>
+<p>Many jQuery plugins inject inline <code>&lt;style&gt;</code> blocks, use the <code>eval()</code> function, or Load resources from third-party CDNs. Review your plugins to ensure that they are CSP compatible.</p>
+
+<p>Using Bootstrap? some versions of Bootstrap require jQuery, we have a <a href="/examples/bootstrap/">Bootstrap CSP guide</a> as well.</p>
 
 <h2>Other jQuery CSP Issues</h2>
 <p>Are you aware of other issues with implementing CSP with jQuery? <a href="https://foundeo.com/contact/" rel="nofollow">Let me know</a>, so we can update this page.</p>

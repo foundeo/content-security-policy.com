@@ -1,0 +1,111 @@
+---
+title: Content-Security-Policy with Bootstrap
+description: How to use content security policy with Bootstrap
+layout: layout
+date: Last Modified
+nav: examples
+tags: examples
+---
+<div class="jumbotron">
+	<h1>Bootstrap &amp; CSP Guide</h1>
+	<div class="lead">Here's what you need to know when using Bootstrap with a <code>Content-Security-Policy</code> HTTP response header or meta tag. Bottom line: upgrade to Bootstrap 5.x if you can.</div>
+</div>
+
+<h2>CSP Gotchas with Bootstrap</h2>
+
+<h3><code>javascript:void(0)</code> in <code>href</code> Attributes</h3>
+<p><strong>Bootstrap 3.0.0 - 3.4.1</strong> and <strong>Bootstrap 4.0.0 - 4.6.2</strong> use <code>href="javascript:void(0)"</code> or <code>href="javascript:"</code> in several components. 
+	These are blocked by CSP <code>script-src</code> unless <code>'unsafe-inline'</code> is allowed.</p>
+<p>Affected components:</p>
+<ul>
+	<li><strong>Carousel controls</strong> - previous/next links use <code>href="javascript:void(0)"</code> (v3) or <code>href="javascript:"</code> (v4)</li>
+	<li><strong>Pagination</strong> - disabled page links</li>
+	<li><strong>Tabs / Pills</strong> - <code>&lt;a&gt;</code> elements with <code>data-toggle="tab"</code> or <code>data-toggle="pill"</code></li>
+	<li><strong>Dropdown toggles</strong> - <code>&lt;a&gt;</code> elements with <code>data-toggle="dropdown"</code></li>
+</ul>
+<p><strong>Bootstrap 5.0.0+</strong> replaced all <code>javascript:</code> URIs with <code>&lt;button&gt;</code> elements or <code>href="#"</code>.</p>
+
+<h3>Inline Styles Injected by JavaScript Components</h3>
+
+<p>
+All Bootstrap versions (3.x through 5.x) inject inline <code>style</code> attributes via JavaScript for component positioning and animation. 
+These are applied via the DOM API (<code>element.style.property = value</code>) and are CSP compatible - they do not require <code>'unsafe-inline'</code> in <code>style-src</code>.</p>
+
+<p>However, <strong>Popper.js before 1.15.0</strong> (used by Bootstrap 4.0.0+ for dropdowns, tooltips, and popovers) used <code>new Function()</code> to parse modifiers, causing <code>'unsafe-eval'</code> CSP violations.</p>
+
+<p>Popper.js v1 &gt;= 1.15.0 removed this call. Popper.js v2 (bundled with Bootstrap 5.0.0+) does not use <code>new Function()</code>.</p>
+
+<h3>Inline Style Overrides Injected by Apps</h3>
+
+<p>Developers may inject styles by appending raw CSS strings to <code>document.head</code> (e.g., via <code>innerHTML</code>):</p>
+
+<pre>
+document.head.innerHTML += '&lt;style&gt;:root { --bs-body-bg: #000; }&lt;/style&gt;'
+</pre>
+
+<p>Instead, use <code>element.style.setProperty()</code> to modify CSS variables or component styles in your code.</p>
+
+<p><strong>Audit step:</strong> Search for <code>--bs-</code> combined with <code>.innerHTML</code> or <code>.insertAdjacentHTML</code> within js files or inside <code>&lt;script&gt;</code> tags.</p>
+
+
+<h3>Tooltip and Popover HTML Content</h3>
+<p>When tooltips or popovers are configured with <code>html: true</code>, Bootstrap injects user-provided HTML into the DOM. Bootstrap includes a built-in sanitizer that strips dangerous elements and attributes by default.</p>
+<p>However, if the sanitizer is disabled (<code>sanitize: false</code>) or the <code>allowList</code> is extended to permit <code>&lt;script&gt;</code>, <code>&lt;style&gt;</code>, or event handler attributes, this will cause a CSP violation.</p>
+
+<h3>Bootstrap 3 and 4 jQuery Dependency</h3>
+<p>Bootstrap 3.x, and 4.x require jQuery. See the <a href="/examples/jquery/">jQuery CSP Guide</a> for jQuery-specific CSP concerns (<code>globalEval</code>, <code>getScript</code>, plugins, etc.).</p>
+<p>Bootstrap 5.0.0+ removed the jQuery dependency.</p>
+
+<h2>Version Summary</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Version</th>
+			<th><code>javascript:</code> URIs</th>
+			<th>jQuery Required</th>
+			<th>Popper Required</th>
+			<th>CSP Issues</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>3.0.0&ndash;3.4.1</td>
+			<td>Yes</td>
+			<td>Yes</td>
+			<td>No</td>
+			<td><code>javascript:void(0)</code> in multiple components</td>
+		</tr>
+		<tr>
+			<td>4.0.0&ndash;4.6.2</td>
+			<td>Yes (some)</td>
+			<td>Yes</td>
+			<td>Yes (v1)</td>
+			<td><code>javascript:</code> URIs + jQuery eval concerns + Popper v1 &lt; 1.15.0 causes unsafe-eval</td>
+		</tr>
+		<tr>
+			<td>5.0.0&ndash;5.2.x</td>
+			<td>No</td>
+			<td>No</td>
+			<td>Bundled (v2)</td>
+			<td>Minimal - inline styles are DOM API based</td>
+		</tr>
+		<tr>
+			<td>5.3.0+</td>
+			<td>No</td>
+			<td>No</td>
+			<td>Bundled (v2)</td>
+			<td>Minimal - improved CSP compatibility</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Recommendations</h2>
+<ol>
+	<li><strong>Upgrade to Bootstrap 5.x</strong> if possible (may be a significant undertaking)</li>
+	<li><strong>For v3/v4:</strong> Search for <code>javascript:void(0)</code> and <code>javascript:</code> in HTML/templates. Replace with <code>href="#"</code> + <code>event.preventDefault()</code> or convert to <code>&lt;button&gt;</code> elements.</li>
+	<li><strong>tooltip/popover usage:</strong> Flag any <code>html: true</code> with <code>sanitize: false</code>.</li>
+	<li><strong>Check jQuery plugins:</strong> If using Bootstrap 3 or 4, audit jQuery and any Bootstrap-adjacent plugins per the <a href="/examples/jquery/">jQuery CSP Guide</a>.</li>
+</ol>
+
+<h2>Other Bootstrap CSP Issues</h2>
+<p>Are you aware of other issues with implementing CSP with Bootstrap? <a href="https://foundeo.com/contact/" rel="nofollow">Let me know</a>, so we can update this page.</p>
