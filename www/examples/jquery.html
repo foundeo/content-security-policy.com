@@ -7,11 +7,24 @@ nav: examples
 tags: examples
 ---
 <div class="jumbotron">
-	<h1>jQuery  &amp; CSP</h1>
-	<div class="lead">Here's what you need to know with using jQuery with a <code>Content-Security-Policy</code> HTTP response header or meta tag.</div>
+	<h1>jQuery  &amp; CSP Guide</h1>
+	<div class="lead">Here's what you need to know with using jQuery with a <code>Content-Security-Policy</code> HTTP response header or meta tag. Bottom line: make sure you are on jQuery 3+ before getting too deep.</div>
 </div>
 <h2>jQuery <code>css()</code> function</h2>
-<p>jQuery code that calls the <code>css()</code> function to set the <code>style</code> attribute of an element <em>may</em> be blocked by CSP. You should change such code to use <code>addClass</code> if possible.</p>
+<p>
+	The <code>jQuery.css</code> function uses the CSSOM (element.style.property=value) javascript api internally. 
+	Calls to jQuery's <code>css()</code> function to modify an element's 
+	inline styles <em>may</em> trigger CSP violations in older versions of jQuery 
+	(&lt;3.0.0). Not because of the style assignment itself, but due to other 
+	internal jQuery operations (such as injecting <code>&lt;style&gt;</code> 
+	elements to compute default display values) that the call may invoke.
+</p>
+
+<p>
+	In jQuery 3.0+, these internal CSP issues were resolved. Where upgrading isn't possible,
+	using <code>addClass</code> with predefined CSS classes instead of setting inline styles
+	with <code>css()</code> can help avoid some CSP conflicts.
+</p>
 
 <h2>jQuery <code>attr()</code> function</h2>
 <p>jQuery code that calls the <code>attr()</code> function to set the <code>style</code> attribute, or any javascript event handler attribute (eg onclick, onmouseover, etc) of an element will be blocked by CSP. 
@@ -23,19 +36,79 @@ tags: examples
 <pre>$(selector).click(doSomething);</pre>
 <p>Using the jQuery <code>click</code> or <code>on()</code> event handlers hook directly into the browser events without needing to inject HTML attributes into the DOM. CSP is cool with that.</p>
 
-<h2>jQuery 1.x CSP Issues</h2>
-<p>In Firefox you might get an error when loading a jQuery 1.x version with a Content-Security-Policy header, such as:</p>
+
+
+<h2>CSP Gotchas with jQuery</h2>
+
+<h3>Potential <code>'unsafe-eval'</code> in <code>jQuery.globalEval</code></h3>
+<p><code>jQuery.globalEval()</code> calls <code>eval()</code> internally. Any code path that uses it will require <code>'unsafe-eval'</code> in <code>script-src</code> - or the code must be refactored.</p>
+<p>Common triggers:</p>
+<ul>
+	<li><strong><code>$.globalEval()</code></strong> - direct eval wrapper</li>
+	<li><strong><code>$.getScript()</code></strong> - fetches a script and evaluates it (in older jQuery &lt; 2.2.0; modern versions append a <code>&lt;script&gt;</code> tag instead, but for same-origin scripts they inject the code as text, which still triggers <code>'unsafe-eval'</code>)</li>
+	<li><strong><code>$.ajax()</code> with <code>dataType: "script"</code></strong> - same as <code>$.getScript()</code></li>
+	<li><strong>jQuery &lt; 1.9 JSON parsing</strong> &mdash; falls back to <code>eval()</code> when <code>JSON.parse</code> is unavailable (not an issue on modern browsers)</li>
+</ul>
+
+
+<h3>Inline Event Handlers in jQuery-Generated HTML</h3>
+<p>jQuery's <code>.html()</code>, <code>.append()</code>, <code>.prepend()</code>, <code>.after()</code>, <code>.before()</code>, <code>.replaceWith()</code> can inject HTML containing inline event handlers (e.g., <code>onclick</code>). These are subject to CSP just like static HTML.</p>
+<p>If jQuery sees a <code>&lt;script&gt;</code> tag inside a string passed to one of these functions, it will strip it out and try to execute it via <code>globalEval</code> (triggering <code>'unsafe-eval'</code>).</p>
+<p><strong>Audit step:</strong> Search for <code>.html(</code>, <code>.append(</code> where the argument contains <code>onclick=</code>, <code>onload=</code>, <code>&lt;script</code>, etc.</p>
+
+<h3><code>getScript</code> Eval Issue</h3>
+<p>jQuery executes same-origin scripts by injecting their content into a <code>script</code> tag's <code>.text</code> property, which browsers block under the <code>unsafe-eval</code> policy.</p>
+<p>For relative path requests like <code>$.getScript("/x.js")</code>, jQuery treats it as same-origin, fetches the text via XHR, and calls <code>globalEval</code>. In jQuery before 1.12.0 and 2.2.0 this process was used for all scripts, not just same-origin scripts.</p>
+<p>You can rewrite as:</p>
+<pre>
+$.ajax({
+  url: "/x.js",
+  dataType: "script",
+  crossDomain: true // Forces jQuery to use a &lt;script&gt; tag instead of eval even for same-domain
+});
+</pre>
+<p>If only modern browsers need to be supported, use <code>import("/x.js")</code> instead of <code>$.getScript()</code>. It is natively CSP-compatible and doesn't require the <code>crossDomain</code> hack. Check that the application relies on modern browser features to see if this is a good choice, otherwise use the safer <code>crossDomain</code> option.</p>
+<p><strong>Audit step:</strong> Search for <code>.getScript</code> or <code>dataType: "script"</code> with local/relative paths.</p>
+
+<h3>Nonce Support in <code>ajaxSetup</code></h3>
+<p>If using a nonce it can be passed to <code>ajaxSetup</code> (requires jQuery 3.4.0 or greater):</p>
+<pre>
+$.ajaxSetup({
+    nonce: 'your-nonce'
+});
+</pre>
+<p>Note: With cross-origin <code>src</code> attributes, jQuery does not automatically attach the nonce attribute to the tag. Developers must rely on allow listing the domain in <code>script-src</code>.</p>
+
+<h3>jQuery 1.x CSP Issues</h3>
+<p>In Firefox you may get an error when loading a jQuery 1.x version with a Content-Security-Policy header. The error might look like this:</p>
 <blockquote>
 	Content Security Policy: The page's settings blocked the loading of a resource at inline ("script-src"). jquery-1.12.4.js:4743
 </blockquote>
 <p>If you look at that <a href="https://github.com/jquery/jquery/blob/1.12.4/dist/jquery.js#L4742-L4743" rel="nofollow">bit of code</a> in jQuery, you will see this:</p>
 <pre>
-	// Support: IE<9 (lack submit/change bubble), Firefox (lack focus(in | out) events)
+	// Support: IE&lt;9 (lack submit/change bubble), Firefox (lack focus(in | out) events)
 	...
 	// Beware of CSP restrictions (https://developer.mozilla.org/en/Security/CSP)
 	div.setAttribute( eventName, "t" );
 </pre>
-<p>So as you can see the jQuery authors are well aware of CSP, but are doing this to patch browser features that might be lacking.</p>
+<p>You can see that the jQuery authors are well aware of CSP, but are trying to patch browser features that might be lacking.</p>
+
+
+<h3>jQuery Plugins</h3>
+<p>Many jQuery plugins inject inline <code>&lt;style&gt;</code> blocks, use the <code>eval()</code> function, or Load resources from third-party CDNs. Review your plugins to ensure that they are CSP compatible.</p>
+
+<h3>jQuery Migrate</h3>
+<p>jquery-migrate is meant to be a development tool. In production, it can introduce security risks and loosen your CSP requirements.</p>
+<ul>
+	<li>Versions 1.x: Used with jQuery 1.12/2.x. Restores many legacy behaviors that rely on string-to-code evaluation.</li>
+	<li>Versions 3.x / 4.x: Used with jQuery 3.0+. Generally safer, but can still trigger violations if it forces jQuery to use legacy script-loading paths.</li>
+</ul>
+
+<h3>jQuery UI</h3>
+<p>jQuery UI widgets often inject inline styles via <code>.css()</code> calls. These are applied via the DOM API (not style attributes in HTML) and are <strong>CSP-compatible</strong> &mdash; they do not require <code>'unsafe-inline'</code> in <code>style-src</code>.</p>
+<p>However, jQuery UI ThemeRoller CSS should be loaded from an allowed origin in <code>style-src</code>.</p>
+<p>jQuery UI versions below 1.13.0 are less CSP friendly (injects <code>style</code> tags for example), upgrading is recommended.</p>
+
 
 <h2>Other jQuery CSP Issues</h2>
 <p>Are you aware of other issues with implementing CSP with jQuery? <a href="https://foundeo.com/contact/" rel="nofollow">Let me know</a>, so we can update this page.</p>
