@@ -270,6 +270,10 @@ i.icon-safari { background-image: url(/images/icons/browser-safari.svg); }
 i.icon-edge { background-image: url(/images/icons/browser-edge.svg); }
 i.icon-check { background-image: url(/images/icons/check.svg); }
 
+.stack-list { list-style: none; padding-left: 0; }
+.stack-list li { padding: 4px 0; font-size: 15px; }
+.stack-list i { font-size: 20px; width: 28px; text-align: center; vertical-align: middle; margin-right: 6px; }
+
 /* Responsive utilities */
 @media (max-width: 575px) {
   .hidden-xs { display: none; }
