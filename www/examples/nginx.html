@@ -24,7 +24,7 @@ canonical: https://content-security-policy.com/examples/nginx/
 <h2>Should I add a CSP header with nginx or my in application?</h2>
 <p>While it is certainly easy to add a CSP header with nginx using <code>add_header</code>, it also possible to add a <code>Content-Security-Policy</code> header with your server side programming language (<a href="/examples/php/" title="Add CSP header with PHP">PHP</a>, <a href="/examples/express-js/" title="Add CSP Header with ExpressJS">ExpressJS</a>, etc.). There are tradeoffs to doing it either way. If you have sections of your application that may require a different CSP policy then it might be easier to use your application programming language instead. Or if you plan to use features such as a <a href="/nonce/" title="CSP nonce">CSP nonce</a>, then it is much easier to set the <code>Content-Security-Policy</code> header from your application code instead of from nginx.</p>
 <p>When you set the CSP header from nginx, the big advantage is that it will be added to all HTTP responses (even your static assets). It is also perhaps simpler to use nginx to add the CSP header if you have one simple content security policy for the entire site.</p>
-<p>The choice is yours, there is no wrong way to do it, as long as the <code>Content-Security-Policy</code> header shows up in the HTTP response it will protect your web application.</p>
+<p>The choice is yours, as long as the <code>Content-Security-Policy</code> header shows up in the HTTP response it will protect your web application.</p>
 <h2>Dig deeper with CSP</h2>
 <p>In the above example we are simply setting a CSP policy:</p>
 <pre>default-src 'self';</pre>

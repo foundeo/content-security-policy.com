@@ -12,7 +12,8 @@ canonical: empty
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ description }}">
     <meta name="author" content="Foundeo Inc.">
-    <link rel="stylesheet" href="/css/readable-3.3.7.bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="/css/readable-3.3.7.bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="/css/main.css" />
     <link href="/css/style.css" rel="stylesheet">
     {% if canonical != "empty" %}<link rel="canonical" href="{{ canonical }}" />{% endif %}
   </head>
@@ -23,7 +24,7 @@ canonical: empty
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li {% if nav === "reference" %} class="active"{% endif %}><a href="/" title="CSP Header Reference">CSP Reference</a></li>
-          <li {% if nav === "training" %} class="active"{% endif %}><a href="/training/" title="CSP Training">Training</a></li>
+          <li {% if nav === "skill" %} class="active"{% endif %}><a href="/skill/" title="CSP Agent Skill for Claude Code">Agent Skill</a></li>
           <li{% if nav === "test" %} class="active"{% endif %}><a href="/browser-test/" title="CSP Browser Test">Browser Test</a></li>
           <li{% if nav === "examples" %} class="active"{% endif %}><a href="/examples/" title="CSP Examples">Examples</a></li>
         </ul>
@@ -61,7 +62,7 @@ canonical: empty
 
       <hr>
       <div class="footer">
-        <p><a href="https://foundeo.com/">&copy; Foundeo Inc.</a> 2012-2023 - <a href="https://foundeo.com/contact/" rel="nofollow">Contact Us</a></p>
+        <p><a href="https://foundeo.com/">&copy; Foundeo Inc.</a> 2012-2026 - <a href="https://foundeo.com/contact/" rel="nofollow">Contact Us</a></p>
       </div>
     </div> <!-- /container -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3GD6TMCQ54"></script>

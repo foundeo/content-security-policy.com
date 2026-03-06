@@ -1,0 +1,211 @@
+---
+title: CSP Agent Skill for Claude Code
+description: Claude Code agent SKILL.md for Content-Security-Policy audit and implementation.
+layout: layout
+date: Last Modified
+nav: skill
+canonical: https://content-security-policy.com/connect-src/
+---
+<div class="jumbotron">
+            <h1>CSP Agent Skill for Claude Code</h1>
+            <div class="lead">Audit your web application and generate a Content-Security-Policy header &mdash; directly from your terminal. This Claude Code skill scans your codebase, identifies every inline script, style, and external resource, then recommends (or implements) a strict CSP tailored to your stack.</div>
+            <p class="mt-2">
+                <a class="btn btn-primary btn-lg" href="#pricing">Get the Skill &mdash; Starting at $99</a>
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>What It Does</h2>
+                <p>Run <code>/csp</code> in Claude Code and the skill will:</p>
+                <ol>
+                    <li><strong>Detect your tech stack</strong></li>
+                    <li><strong>Audit every CSP-relevant resource</strong> </li>
+                    <li><strong>Catalog inline code</strong></li>
+                    <li><strong>Recommend the optimal fix for each</strong></li>
+                    <li><strong>Generate a complete CSP header</strong></li>
+                </ol>
+                <p>Run <code>/csp implement</code> and it will apply the policy to your project &mdash; adding the header, wiring up nonce generation, and refactoring inline event handlers where needed.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Features</h2>
+                
+                <ol>
+                    <li><strong>Builtin Reference Files</strong> - the skill comes with dozens of reference files providing unique guidance that you won't get with a one shot attempt.</li>
+                    <li><strong>Create Strong Policies</strong> - there are plenty of ways to build a weak CSP policy, the skill guides towards stronger more secure policy implementations.</li>
+                    <li><strong>Eliminate <code>'unsafe-inline'</code></strong> - The single biggest CSP weakness is <code>'unsafe-inline'</code> in <code>script-src</code>. This skill is specifically designed to help you remove it</li>
+                    <li><strong>Sensible Defaults</strong> - The implement skill defaults to <code>Content-Security-Policy-Report-Only</code> so you can monitor violations before enforcing.</li>
+                    <li><strong>SKILL.md</strong> - a SKILL.md file designed to work with claude code.</li>
+                </ol>
+                
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Supported Stacks</h2>
+                <p>The skill includes implementation references for 35+ technologies with ready-to-use code for adding CSP headers and wiring up nonce generation:</p>
+            </div>
+        </div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/devicon/2.17.0/devicon.min.css" integrity="sha512-6/05LVs+grXBAu5XzdiMFB64yCVF9FL70zWrTKcaTEKygrO7fC5LqfL/SKPpuRpimL2aE0D7Hw/NoED+7+7/VQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+        <style>
+            .stack-list { list-style: none; padding-left: 0; }
+            .stack-list li { padding: 4px 0; font-size: 15px; }
+            .stack-list i { font-size: 20px; width: 28px; text-align: center; vertical-align: middle; margin-right: 6px; }
+        </style>
+
+        <h3 class="text-center">Frontend, Backend, and More</h3>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <ul class="stack-list">
+                    <li><i class="devicon-nextjs-plain"></i> Next.js</li>
+                    <li><i class="devicon-nuxtjs-plain colored"></i> Nuxt</li>
+                    <li><i class="devicon-svelte-plain colored"></i> SvelteKit</li>
+                    <li><i class="devicon-remix-original"></i> Remix</li>
+                    <li><i class="devicon-astro-plain"></i> Astro</li>
+                    <li><i class="devicon-angular-plain"></i> Angular</li>
+                    <li><i class="devicon-jquery-plain colored"></i> jQuery</li>
+                    <li><i class="devicon-bootstrap-plain colored"></i> Bootstrap</li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <ul class="stack-list">
+                    <li><i class="devicon-php-plain colored"></i> PHP</li>
+                    <li><i class="devicon-rails-plain colored"></i> Rails</li>
+                    <li><i class="devicon-spring-original colored"></i> Spring Boot</li>
+                    <li><i class="devicon-django-plain colored"></i> Django</li>
+                    <li><i class="devicon-go-original-wordmark colored"></i> Go</li>
+                    <li><i class="devicon-rust-original"></i> Rust</li>
+                    <li><i class="devicon-denojs-original colored"></i> Deno / Fresh</li>
+                    <li><i class="devicon-laravel-original colored"></i> Laravel</li>
+                    <li><i class="devicon-symfony-original"></i> Symfony</li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <ul class="stack-list">
+                    <li><i class="devicon-flask-original"></i> Flask</li>
+                    <li><i class="devicon-fastapi-plain colored"></i> FastAPI</li>
+                    <li><i class="devicon-dot-net-plain colored"></i> ASP.NET</li>
+                    <li><i class="devicon-express-original"></i> Express</li>
+                    <li><i class="devicon-fastify-plain"></i> Fastify</li>
+                    <li><i class="devicon-nestjs-original colored"></i> NestJS</li>
+                    <li><i class="devicon-htmx-plain"></i> CFML (ColdFusion / Lucee)</li>
+                    <li><i class="devicon-javascript-plain"></i>Hono</li>
+                    <li><i class="devicon-azuresqldatabase-plain"></i>Classic ASP</li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <ul class="stack-list">
+                    <li><i class="devicon-wordpress-plain"></i> WordPress</li>
+                    <li><i class="devicon-nginx-original colored"></i> Nginx</li>
+                    <li><i class="devicon-apache-plain colored"></i> Apache</li>
+                    <li><i class="devicon-vercel-original"></i> Vercel</li>
+                    <li><i class="devicon-netlify-plain colored"></i> Netlify</li>
+                    <li><i class="devicon-cloudflare-plain colored"></i> Cloudflare</li>
+                    <li><i class="devicon-firebase-plain colored"></i> Firebase Hosting</li>
+                    <li><i class="devicon-goland-plain"></i>Caddy</li>
+                    <li><i class="devicon-html5-plain"></i>Static HTML</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row" id="pricing">
+            <div class="col-lg-12">
+                <h2>Pricing</h2>
+            </div>
+        </div>
+        <div class="row" id="product_options">
+            <div class="col-lg-4">
+                <div class="well text-center p-3">
+                    <h3>Individual</h3>
+                    <p class="price">$99</p>
+                    <p class="text-muted">One-time purchase &middot; 1 developer</p>
+                    <ul class="text-left my-2 mx-auto">
+                        <li>Full CSP audit and implementation skill</li>
+                        <li>35+ framework and platform references</li>
+                        <li>Inline code remediation engine</li>
+                        <li>Use on unlimited projects by 1 developer</li>
+                        
+                    </ul>
+                    <a class="btn btn-primary btn-lg mt-1" href="https://foundeo.gumroad.com/l/csp-agent-skill">Buy Now</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="well text-center p-3">
+                    <h3>Team</h3>
+                    <p class="price">$999</p>
+                    <p class="text-muted">One-time purchase &middot; Up to 12 developers</p>
+                    <ul class="text-left my-2 mx-auto">
+                        <li>Everything in Individual</li>
+                        <li>Licensed for up to 10 developers</li>
+                        <li>Share across your team's projects</li>
+                    </ul>
+                    <a class="btn btn-primary btn-lg mt-1" href="https://foundeo.gumroad.com/l/csp-agent-skill">Buy Now</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="well text-center p-3">
+                    <h3>Enterprise</h3>
+                    <p class="price">Custom</p>
+                    <p class="text-muted">Unlimited developers &middot; Organization-wide</p>
+                    <ul class="text-left my-2 mx-auto">
+                        <li>Everything in Team</li>
+                        <li>Unlimited developers</li>
+                        <li>Organization-wide deployment</li>
+                        <li>Optional integration support</li>
+                    </ul>
+                    <a class="btn btn-primary btn-lg mt-1" href="https://foundeo.com/contact/quote/?product=csp-skill">Request a Quote</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Usage</h2>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><code>/csp</code> or <code>/csp audit</code></td>
+                            <td>Audit the project and generate a recommended CSP header. No files are modified.</td>
+                        </tr>
+                        <tr>
+                            <td><code>/csp implement</code></td>
+                            <td>Audit the project, then apply the CSP to the appropriate config files, wire up nonce generation, and refactor inline event handlers where needed.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>The skill defaults to <code>Content-Security-Policy-Report-Only</code> so you can monitor violations before enforcing.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>What You Get</h2>
+                <p>The audit report includes:</p>
+                <ul>
+                    <li><strong>Detected stack</strong> &mdash; frameworks, servers, and hosting platforms identified in your project.</li>
+                    <li><strong>Resource origins table</strong> &mdash; every external origin discovered per directive (<code>script-src</code>, <code>style-src</code>, <code>img-src</code>, etc.) with file references.</li>
+                    <li><strong>Inline code inventory</strong> &mdash; deduplicated table of every inline script, style, and event handler with occurrence counts, server-variable detection, and the recommended remediation for each.</li>
+                    <li><strong>Recommended CSP header</strong> &mdash; the full policy in both multi-line and single-line format, ready to deploy.</li>
+                    <li><strong>Warnings</strong> &mdash; flags for <code>'unsafe-eval'</code>, wildcards, assumptions made, and browser support considerations.</li>
+                    <li><strong>Next steps</strong> &mdash; how to deploy with <code>Report-Only</code>, monitor violations, and switch to enforcing mode.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 text-center py-4">
+                <h2>Start Securing Your Application Today</h2>
+                <p class="lead">Add a Content-Security-Policy to your project with a single command.</p>
+                <a class="btn btn-primary btn-lg" href="https://foundeo.gumroad.com/l/csp-agent-skill">Individual &mdash; $99</a>
+                &nbsp;
+                <a class="btn btn-primary btn-lg" href="https://foundeo.gumroad.com/l/csp-agent-skill">Team &mdash; $999</a>
+                &nbsp;
+                <a class="btn btn-primary btn-lg" href="https://foundeo.com/contact/quote/?product=csp-skill">Enterprise &mdash; Request a Quote</a>
+            </div>
+        </div>

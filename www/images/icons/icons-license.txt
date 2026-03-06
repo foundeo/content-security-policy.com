@@ -1,0 +1,3 @@
+Icon Sources:
+
+- Bootstrap Icons: MIT License - https://github.com/twbs/icons/blob/v1.13.1/LICENSE

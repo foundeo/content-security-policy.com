@@ -14,8 +14,8 @@ tags: examples
 <h2>CSP Gotchas with Bootstrap</h2>
 
 <h3><code>javascript:void(0)</code> in <code>href</code> Attributes</h3>
-<p><strong>Bootstrap 3.0.0 - 3.4.1</strong> and <strong>Bootstrap 4.0.0 - 4.6.2</strong> use <code>href="javascript:void(0)"</code> or <code>href="javascript:"</code> in several components. 
-	These are blocked by CSP <code>script-src</code> unless <code>'unsafe-inline'</code> is allowed.</p>
+<p><strong>Bootstrap 3.0.0 - 3.4.1</strong> and <strong>Bootstrap 4.0.0 - 4.6.2</strong> used <code>href="javascript:void(0)"</code> or <code>href="javascript:"</code> in several components. 
+	These are blocked by CSP <code>script-src</code> unless <code>'unsafe-inline'</code> is allowed (not recommended).</p>
 <p>Affected components:</p>
 <ul>
 	<li><strong>Carousel controls</strong> - previous/next links use <code>href="javascript:void(0)"</code> (v3) or <code>href="javascript:"</code> (v4)</li>
